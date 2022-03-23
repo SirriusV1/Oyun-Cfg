@@ -5,9 +5,9 @@
 
 # Bind Command
 
-Z;`Oto koşma`, C;`Oto Çökme`, J;`Bandaj basar`, F2;`Combatlog`, F3;`Kill`, 
-O;`Oyun Sesi Kısar`, P;`Oyun Sesini Açar`, K;`Konuşma Sesini Kısar`, L;`Konuşma Sesini Açar`, 
-CTRL+NUM1;`/home ev`, CTRL+NUM2;`/home ev1`,  CTRL+NUM4;`/outpost`, CTRL+NUM5;`/bandit`, CTRL+";`/tpc`, CTRL+NUM7;`Metal Door`, CTRL+NUM8;`Code Lock`, CTRL+NUM9; `Tool Cupboard`, 8;`/mymini`, 9;`/nomini`
+`Z`;Oto koşma, `C`;Oto Çökme, `J`;Bandaj basar, `F2`;Combatlog, `F3`;Kill, 
+`O`;Oyun Sesi Kısar, `P`;Oyun Sesini Açar, `K`;Konuşma Sesini Kısar, `L`;Konuşma Sesini Açar, 
+`CTRL+NUM1`;/home ev, `CTRL+NUM2`;/home ev1,  `CTRL+NUM4`;/outpost, `CTRL+NUM5`;/bandit, `CTRL+"`;/tpc, `CTRL+NUM7`;Metal Door, `CTRL+NUM8`;Code Lock, `CTRL+NUM9`; Tool Cupboard, `8`;/mymini, `9`;/nomini
 
 # In addition
 left hand code: `graphics.vm_horizontal_flip true`
@@ -18,9 +18,9 @@ left hand code: `graphics.vm_horizontal_flip true`
 
 Change “maxMem” to your system RAM:
 
-4GB RAM = 4096
-8GB RAM = 8192
-16GB RAM = 16384
+`4GB RAM = 4096`
+`8GB RAM = 8192`
+`16GB RAM = 16384`
 
 
 

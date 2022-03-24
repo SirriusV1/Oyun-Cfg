@@ -5,9 +5,9 @@
 
 # Bind Command
 
-`Z`; Auto running, `C`; Auto squatting, `J`; Bandage craft, `F2`; Combatlog, `F3`; Kill, 
-`O`; Turns down the Game Volume, `P`; Turns Up the Game Sound, `K`; Turns down the volume of speech, `L`; Turns On the Speech Volume, `CTRL+NUM1`; /home ev, 
-`CTRL+NUM2`; /home ev1,  `CTRL+NUM4`; /outpost, `CTRL+NUM5`; /bandit, `CTRL+"`; /tpc, `CTRL+NUM7`; Metal Door, `CTRL+NUM8`; Code Lock, `CTRL+NUM9`; Tool Cupboard, `8`; /mymini, `9`; /nomini
+`Z`Auto running  `C`Auto squatting  `J`Bandage craft  `F2`Combatlog  `F3`Kill 
+`O`Turns down the Game Volume `P`Turns Up the Game Sound  `K`Turns down the volume of speech `L`Turns On the Speech Volume  `CTRL+NUM1`/home ev, 
+`CTRL+NUM2`/home ev1  `CTRL+NUM4`/outpost  `CTRL+NUM5`/bandit `CTRL+"`/tpc  `CTRL+NUM7`Metal Door  `CTRL+NUM8`Code Lock  `CTRL+NUM9`Tool Cupboard  `8`/mymini  `9`/nomini
 
 # In addition
 left hand code: `graphics.vm_horizontal_flip true`
@@ -29,5 +29,3 @@ Change “maxMem” to your system RAM:
 [✨ Discord](https://discord.gg/YtzDYncHVp)
 
 [🐦 Twitter](https://twitter.com/ssefacelebi)
-
-[✔️ Automatic Mouse and Keyboard](https://dosya.co/941kkbwf4b8e/Automatic_Mouse_and_Keyboard_6.1.5.2_+_Crack.rar.html)

@@ -5,7 +5,7 @@
 
 # LAUNCH OPTIONS
 
-`-novid -high +cl_forcepreload 1 -tickrate 128 -nod3d9ex1 -threads 12 -Console +exec autoexec`
+`-novid -high +cl_forcepreload 1 -tickrate 128 -nod3d9ex1 -threads 12  -Console +mat_disable_fancy_blending 1 +mat_specular 0 +exec autoexec`
 
 
 

@@ -7,6 +7,10 @@
 
 `-novid -high +cl_forcepreload 1 -tickrate 128 -nod3d9ex1 -threads 12 -Console +mat_disable_fancy_blending 1 +mat_specular 0 +exec autoexec`
 
+# Bind Command
+
+`Z`Jump Throw  `SHIFT`Clear Decals  `V`Mute All Voice 
+
 
 
 [📺 YouTube](https://www.youtube.com/channel/UCEKm5HWa_NcVglsMKdMHQcQ)

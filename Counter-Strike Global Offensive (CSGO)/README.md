@@ -9,7 +9,7 @@
 
 # Bind Command
 
-`Z`Jump Throw  `SHIFT`Clear Decals  `V`Mute All Voice 
+`Alt`Jump Throw  `SHIFT`Clear Decals  `V`Mute All Voice 
 
 
 

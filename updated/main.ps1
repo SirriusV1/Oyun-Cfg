@@ -6,9 +6,9 @@ $secim = Read-Host "Hangi oyunun CFG dosyasini indirmek istiyorsunuz?
 Lutfen bir numara girin (1-3)"
 
 # GitHub raw linklerini tanimla
-$csScript = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/cs.ps1"
-$rustScript = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/rust.ps1"
-$minecraftScript = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/Minecraft.ps1"
+$csScript = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/cs.ps1"
+$rustScript = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/rust.ps1"
+$minecraftScript = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/Minecraft.ps1"
 
 # Secime gore yonlendirme yap
 switch ($secim) {
@@ -32,7 +32,7 @@ switch ($secim) {
     }
     default {
         # Gecersiz bir secim yapildiginda uyarı ver
-        Write-Host "Gecersiz bir secim yaptiniz. Lutfen 1-3 arasinda bir numara girin."
+        Write-Host "Gecersiz bir secim yaptiniz. Lutfen 1-3 arasinda bir numara girin." -ForegroundColor Red
         break
     }
 }

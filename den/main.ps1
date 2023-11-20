@@ -6,7 +6,7 @@ $secim = Read-Host "Hangi oyunun CFG dosyasini indirmek istiyorsunuz?
 Lutfen bir numara girin (1-3)"
 
 # GitHub raw linklerini tanimla
-$csScript = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/rust.ps1"
+$csScript = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/cs.ps1"
 $rustScript = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/rust.ps1"
 $minecraftScript = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/Minecraft.ps1"
 

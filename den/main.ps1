@@ -9,18 +9,18 @@ Lutfen bir numara girin (1-3)"
 switch ($secim) {
     1 {
         # Cs secildiginde yapilacak islemler
-        .\Cs.ps1
+        "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/cs.ps1"
         break
     }
     2 {
         # Rust secildiginde yapilacak islemler
         Clear-Host
-        .\Rust.ps1
+        "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/rust.ps1"
         break
     }
     3 {
         # Minecraft secildiginde yapilacak islemler
-        .\Minecraft.ps1
+        "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/Minecraft.ps1"
         break
     }
     default {

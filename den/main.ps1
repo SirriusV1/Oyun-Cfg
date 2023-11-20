@@ -5,22 +5,29 @@ $secim = Read-Host "Hangi oyunun CFG dosyasini indirmek istiyorsunuz?
 3. Minecraft
 Lutfen bir numara girin (1-3)"
 
+# GitHub raw linklerini tanimla
+$csScript = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/cs.ps1"
+$rustScript = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/rust.ps1"
+$minecraftScript = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/Minecraft.ps1"
+
 # Secime gore yonlendirme yap
 switch ($secim) {
     1 {
         # Cs secildiginde yapilacak islemler
-        "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/cs.ps1"
+        Clear-Host
+        Invoke-RestMethod -Uri $csScript | Invoke-Expression
         break
     }
     2 {
         # Rust secildiginde yapilacak islemler
         Clear-Host
-        "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/rust.ps1"
+        Invoke-RestMethod -Uri $rustScript | Invoke-Expression
         break
     }
     3 {
         # Minecraft secildiginde yapilacak islemler
-        "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/den/Minecraft.ps1"
+        Clear-Host
+        Invoke-RestMethod -Uri $minecraftScript | Invoke-Expression
         break
     }
     default {

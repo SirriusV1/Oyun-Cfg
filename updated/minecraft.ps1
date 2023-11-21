@@ -28,5 +28,6 @@ switch ($secim) {
     }
     default {
         Write-Host "Gecersiz bir secim yaptiniz. Lutfen 1-3 arasinda bir numara girin." -ForegroundColor Red
+        Start-Sleep -Seconds 2
     }
 }

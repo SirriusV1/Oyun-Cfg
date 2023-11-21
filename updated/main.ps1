@@ -29,7 +29,7 @@ switch ($secim) {
     default {
         # Gecersiz bir secim yapildiginda uyarı ver
         Write-Host "Gecersiz bir secim yaptiniz. Lutfen 1-3 arasinda bir numara girin." -ForegroundColor Red
-        Start-Sleep -Seconds 3
+        Start-Sleep -Seconds 2
         break
     }
 }

@@ -37,7 +37,7 @@ switch ($player_choice) {
     }
     default {
         Write-Host "Gecersiz oyuncu secenegi! Lutfen tekrar deneyin." -ForegroundColor Red
-        Start-Sleep -Seconds 3
+        Start-Sleep -Seconds 2
         exit
     }
 }

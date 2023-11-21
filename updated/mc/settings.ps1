@@ -1,31 +1,35 @@
-﻿$host.ui.RawUI.WindowTitle = "Minecraft Ayarlarını Yükle"
+﻿# Zip dosyasının indirileceği URL
+$zipUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/mc.zip"
 
-# Ana Minecraft dosyasının indirileceği klasör
-$minecraftDosyaKlasoru = ".\%USERPROFILE%\AppData\Roaming\.minecraft"
+# Hedef klasör
+$minecraftFolder = "$env:USERPROFILE\AppData\Roaming\.minecraft"
 
-# Ana Minecraft dosyasının indirme URL'si
-$minecraftDosyaUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/mc.zip"
+# Zip dosyasını indir
+$zipFilePath = Join-Path $minecraftFolder "mc.zip"
+Invoke-WebRequest -Uri $zipUrl -OutFile $zipFilePath
 
-# Minecraft dosyasını indir ve çıkar
-$minecraftDosyaZipYeri = Join-Path -Path $env:TEMP -ChildPath "minecraft-dosyasi.zip"
+# Hedef klasörde aynı isimde klasör var mı kontrol et
+if (Test-Path $minecraftFolder -PathType Container) {
+    $confirmation = Read-Host "Hedef klasörde aynı isimde klasör bulunmaktadır. Üzerine yazmak istiyor musunuz? (E/H)"
+    if ($confirmation -eq "E") {
+        # Zip içeriğini çıkart
+        Expand-Archive -Path $zipFilePath -DestinationPath $minecraftFolder -Force
 
-# Dosyanın var olup olmadığını kontrol et
-if (Test-Path $minecraftDosyaZipYeri) {
-    Write-Host "Minecraft dosyası zaten var." -ForegroundColor Yellow
-} else {
-    try {
-        # Dosya yoksa indir
-        Invoke-WebRequest -Uri $minecraftDosyaUrl -OutFile $minecraftDosyaZipYeri
-        Add-Type -AssemblyName System.IO.Compression.FileSystem
-        [System.IO.Compression.ZipFile]::ExtractToDirectory($minecraftDosyaZipYeri, $minecraftDosyaKlasoru)
-        Write-Host "Minecraft dosyası başarıyla indirildi ve çıkarıldı." -ForegroundColor Green
-    } catch {
-        Write-Host "Hata oluştu: $_" -ForegroundColor Red
-        Write-Host "Minecraft dosyası başarıyla indirildi ve çıkarıldı." -ForegroundColor Green
+        # Zip dosyasını sil
+        Remove-Item $zipFilePath -Force
+
+        Write-Host "Minecraft ayarları başarıyla güncellendi."
+    } else {
+        Write-Host "İşlem iptal edildi."
     }
-}
+} else {
+    # Hedef klasörde aynı isimde klasör bulunmuyorsa, normal çıkartma işlemini yap
+    Expand-Archive -Path $zipFilePath -DestinationPath $minecraftFolder -Force
 
-# Zip dosyasını sil
-Remove-Item -Path $minecraftDosyaZipYeri -Force
+    # Zip dosyasını sil
+    Remove-Item $zipFilePath -Force
+
+    Write-Host "Minecraft ayarları başarıyla güncellendi."
+}
 Start-Sleep -Seconds 3
 PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"

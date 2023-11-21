@@ -1,7 +1,8 @@
-﻿$host.ui.RawUI.WindowTitle = "Modları Yükle"
-Clear-Host
+﻿Clear-Host
+$host.ui.RawUI.WindowTitle = "Modları Yükle"
+
 # Modların indirileceği klasör
-$modKlasoru = ".\%USERPROFILE%\AppData\Roaming\.minecraft\mods"
+$modKlasoru = "$env:USERPROFILE\AppData\Roaming\.minecraft\mods"
 
 
 # Mod bilgilerini içeren bir hash tablosu

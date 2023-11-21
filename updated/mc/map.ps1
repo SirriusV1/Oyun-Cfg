@@ -1,7 +1,8 @@
-﻿$host.ui.RawUI.WindowTitle = "Map Ayarlarını Yükle"
+﻿Clear-Host
+$host.ui.RawUI.WindowTitle = "Map Ayarlarını Yükle"
 
 # Map ayarlarının indirileceği klasör
-$mapAyarKlasoru = ".\%USERPROFILE%\AppData\Roaming\.minecraft\"
+$mapAyarKlasoru = "$env:USERPROFILE\AppData\Roaming\.minecraft\"
 
 # Map ayarlarının indirme URL'si
 $mapAyarUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/journeymap.zip"

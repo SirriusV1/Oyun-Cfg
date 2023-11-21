@@ -5,4 +5,4 @@ Write-Host "Minecraft icin su an destek verilmemektedir."-ForegroundColor Yellow
 
 # Ana PowerShell dosyasina geri don
 Start-Sleep -Seconds 3
-exit
+https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1

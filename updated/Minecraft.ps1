@@ -5,4 +5,4 @@ Write-Host "Minecraft icin su an destek verilmemektedir!!."-ForegroundColor Yell
 
 # Ana PowerShell dosyasina geri don
 Start-Sleep -Seconds 3
-
+PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"

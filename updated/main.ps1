@@ -11,19 +11,16 @@ Lutfen bir numara girin (1-3)"
 switch ($secim) {
     1 {
         # Cs secildiginde yapilacak islemler
-        Clear-Host
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/cs.ps1' | Invoke-Expression }"
         break
     }
     2 {
         # Rust secildiginde yapilacak islemler
-        Clear-Host
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/rust.ps1' | Invoke-Expression }"
         break
     }
     3 {
         # Minecraft secildiginde yapilacak islemler
-        Clear-Host
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"
         break
     }

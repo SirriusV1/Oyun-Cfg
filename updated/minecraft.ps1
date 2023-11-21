@@ -1,5 +1,4 @@
 ﻿$host.ui.RawUI.WindowTitle = "Minecraft"
-Clear-Host
 # Menüyü göster
 Write-Host "1. Minecraft Ayarlarını Yükle"
 Write-Host "2. Modları Yükle"

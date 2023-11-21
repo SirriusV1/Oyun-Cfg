@@ -1,7 +1,7 @@
 ﻿$host.ui.RawUI.WindowTitle = "Minecraft Ayarlarını Yükle"
 Clear-Host
 # Ana Minecraft dosyasının indirileceği klasör
-$minecraftDosyaKlasoru = "%appdata%\.minecraft"
+$minecraftDosyaKlasoru = "%USERPROFILE%\AppData\Roaming\.minecraft"
 
 # Ana Minecraft dosyasının indirme URL'si
 $minecraftDosyaUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/mc.zip"

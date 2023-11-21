@@ -1,7 +1,7 @@
 ﻿$host.ui.RawUI.WindowTitle = "Modları Yükle"
 Clear-Host
 # Modların indirileceği klasör
-$modKlasoru = "%appdata%/.minecraft/mods"
+$modKlasoru = "%appdata%\.minecraft\mods"
 
 
 # Mod bilgilerini içeren bir hash tablosu

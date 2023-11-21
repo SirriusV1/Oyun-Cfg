@@ -8,7 +8,7 @@ $modKlasoru = "$env:USERPROFILE\AppData\Roaming\.minecraft\mods"
 # Mod bilgilerini içeren bir hash tablosu
 $modBilgileri = @{
     "OptiFine" = @{
-        "Url" = "https://optifine.net/downloadx?f=OptiFine_1.20.1_HD_U_I5.jar&x=65bdcd68ab7c2f970135f1f4a56e0bde"
+        "Url" = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/mod/preview_OptiFine_1.20.1_HD_U_I6_pre6.jar"
         "GuncelSürüm" = "preview_OptiFine_1.20.1_HD_U_I6_pre6.jar"
     }
     "BetterF3" = @{

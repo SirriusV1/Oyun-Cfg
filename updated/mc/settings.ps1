@@ -1,5 +1,6 @@
-﻿$host.ui.RawUI.WindowTitle = "Minecraft Ayarlarını Güncelle"
-Clear-Host
+﻿Clear-Host
+$host.ui.RawUI.WindowTitle = "Minecraft Ayarlarını Güncelle"
+
 
 # Zip dosyasının indirileceği URL
 $zipUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/mc.zip"

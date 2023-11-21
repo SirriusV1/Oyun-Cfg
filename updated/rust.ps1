@@ -1,4 +1,4 @@
-# Hangi oyuncunun CFG dosyasını indirmek istiyorsunuz?
+Write-Host "Hangi oyuncunun CFG dosyasını indirmek istiyorsunuz?" -ForegroundColor Cyan
 Write-Host "1. Burak"
 Write-Host "2. Bugra"
 Write-Host "3. Arda"
@@ -39,6 +39,5 @@ switch ($player_choice) {
 }
 
 Write-Host "Islem tamamlandi. Ana menuye donuluyor..." -ForegroundColor Green
-$host.ui.RawUI.WindowTitle = "Indirme Tamamlandi - Rust"
 Start-Sleep -Seconds 2
-exit
+PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"

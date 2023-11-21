@@ -1,6 +1,6 @@
-﻿Clear-Host
+﻿
 $host.ui.RawUI.WindowTitle = "Modları Yükle"
-
+Clear-Host
 # Modların indirileceği klasör
 $modKlasoru = "$env:USERPROFILE\AppData\Roaming\.minecraft\mods"
 
@@ -32,7 +32,7 @@ $modBilgileri = @{
         "GuncelSürüm" = "optifabric-1.13.25.jar"
     }
 }
-
+Start-Sleep -Seconds 1
 # Modları kontrol et, güncelle ve eski sürümleri temizle
 foreach ($mod in $modBilgileri.GetEnumerator()) {
     $modAdi = $mod.Key

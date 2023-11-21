@@ -1,5 +1,5 @@
 ﻿$host.ui.RawUI.WindowTitle = "Map Ayarlarını Yükle"
-Clear-Host
+
 # Map ayarlarının indirileceği klasör
 $mapAyarKlasoru = "./%USERPROFILE%\AppData\Roaming\.minecraft\"
 

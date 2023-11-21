@@ -4,8 +4,8 @@ Clear-Host
 
 # Baslangicta hangi oyunun CFG dosyasini indirmek istedigini sor
 $secim = Read-Host "Hangi oyunun CFG dosyasini indirmek istiyorsunuz?
-1. Cs
-2. Rust
+1. Cs [1.0.4]
+2. Rust [1.0.4]
 3. Minecraft
 Lutfen bir numara girin (1-3)"
 

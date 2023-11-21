@@ -23,7 +23,6 @@ switch ($secim) {
     }
     3 {
         # Minecraft secildiginde yapilacak islemler
-        Clear-Host
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"
         break
     }

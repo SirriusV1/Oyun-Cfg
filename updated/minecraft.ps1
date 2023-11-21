@@ -4,7 +4,7 @@ $host.ui.RawUI.WindowTitle = "Minecraft Menü"
 Write-Host "1. Minecraft Ayarlarını Yükle"
 Write-Host "2. Modları Yükle"
 Write-Host "3. Map Ayarlarını Yükle"
-Write-Host "4. Geri Dön"
+Write-Host "4. Geri Dön" -ForegroundColor Cyan
 $secim = Read-Host "Lütfen yapmak istediğiniz işlemi seçin (1-4)"
 
 # Seçime göre işlem yap

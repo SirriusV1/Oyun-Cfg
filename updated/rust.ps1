@@ -1,5 +1,7 @@
-Clear-Host
+
 $host.ui.RawUI.WindowTitle = "Rust"
+Clear-Host
+
 Write-Host "Hangi oyuncunun CFG dosyasını indirmek istiyorsunuz?" -ForegroundColor Cyan
 Write-Host "1. Burak"
 Write-Host "2. Bugra"

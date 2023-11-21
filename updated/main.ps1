@@ -1,5 +1,7 @@
-Clear-Host
+
 $host.ui.RawUI.WindowTitle = "ATA CFG"
+Clear-Host
+
 # Baslangicta hangi oyunun CFG dosyasini indirmek istedigini sor
 $secim = Read-Host "Hangi oyunun CFG dosyasini indirmek istiyorsunuz?
 1. Cs

@@ -1,6 +1,6 @@
-﻿Clear-Host
+﻿
 $host.ui.RawUI.WindowTitle = "Minecraft Ayarlarını Güncelle"
-
+Clear-Host
 
 # Zip dosyasının indirileceği URL
 $zipUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/mc.zip"
@@ -14,7 +14,7 @@ Invoke-WebRequest -Uri $zipUrl -OutFile $zipFilePath
 
 # Hedef klasörde aynı isimde klasör var mı kontrol et
 if (Test-Path $minecraftFolder -PathType Container) {
-    $confirmation = Read-Host "Hedef klasörde aynı isimde klasör bulunmaktadır. Üzerine yazmak istiyor musunuz? (E/H)" -ForegroundColor Cyan
+    $confirmation = Read-Host "Hedef klasörde aynı isimde klasör bulunmaktadır. Üzerine yazmak istiyor musunuz? (E/H)"
     if ($confirmation -eq "E") {
         # Zip içeriğini çıkart
         Expand-Archive -Path $zipFilePath -DestinationPath $minecraftFolder -Force

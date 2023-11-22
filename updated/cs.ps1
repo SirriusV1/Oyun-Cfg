@@ -1,5 +1,4 @@
-﻿
-$host.ui.RawUI.WindowTitle = "CS"
+﻿$host.ui.RawUI.WindowTitle = "CS"
 Clear-Host
 
 # Cs oyunu için işlemler yapılıyor...

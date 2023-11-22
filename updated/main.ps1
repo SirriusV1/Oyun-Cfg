@@ -2,7 +2,6 @@
 $host.ui.RawUI.WindowTitle = "ATA CFG"
 Clear-Host
 
-# Baslangicta hangi oyunun CFG dosyasini indirmek istedigini sor
 Write-Host "Hangi oyunun CFG dosyasini indirmek istiyorsunuz?"
 Write-Host "1. Cs        " -NoNewline
 Write-Host "1.0.4" -ForegroundColor Green
@@ -13,7 +12,7 @@ Write-Host "1.20.1" -ForegroundColor Green
 Write-Host "4. Pubg "
 $secim = Read-Host "Lütfen bir numara girin (1-4)"
 
-# Secime gore yonlendirme yap
+
 switch ($secim) {
     1 {
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/cs.ps1' | Invoke-Expression }"

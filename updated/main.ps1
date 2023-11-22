@@ -10,7 +10,7 @@ Write-Host "2. Rust      " -NoNewline
 Write-Host "1.0.4" -ForegroundColor Green
 Write-Host "3. Minecraft " -NoNewline
 Write-Host "1.20.1" -ForegroundColor Green
-Write-Host "4. Pubg " -NoNewline
+Write-Host "4. Pubg "
 $secim = Read-Host "Lutfen bir numara girin (1-3)"
 
 # Secime gore yonlendirme yap

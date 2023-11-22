@@ -3,11 +3,14 @@ $host.ui.RawUI.WindowTitle = "ATA CFG"
 Clear-Host
 
 # Baslangicta hangi oyunun CFG dosyasini indirmek istedigini sor
-$secim = Read-Host "Hangi oyunun CFG dosyasini indirmek istiyorsunuz?
-1. Cs [1.0.4]
-2. Rust [1.0.4]
-3. Minecraft
-Lutfen bir numara girin (1-3)"
+Write-Host "Hangi oyunun CFG dosyasini indirmek istiyorsunuz?"
+Write-Host "1. Cs        " -NoNewline
+Write-Host "1.0.4" -ForegroundColor Green
+Write-Host "2. Rust      " -NoNewline
+Write-Host "1.0.4" -ForegroundColor Green
+Write-Host "3. Minecraft " -NoNewline
+Write-Host "1.20.1" -ForegroundColor Green
+$secim = Read-Host "Lutfen bir numara girin (1-3)"
 
 # Secime gore yonlendirme yap
 switch ($secim) {

@@ -12,7 +12,7 @@ $secim = Read-Host "Lütfen yapmak istediğiniz işlemi seçin (1-4)"
 switch ($secim) {
     1 {
         # Minecraft ayarlarını yükle
-        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/settings.ps1' | Invoke-Expression }"
+        https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/settings.ps1
     }
     2 {
         # Modları yükle

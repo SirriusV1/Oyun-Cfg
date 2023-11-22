@@ -1,4 +1,4 @@
-Start-Sleep -Seconds 20
+
 $host.ui.RawUI.WindowTitle = "Minecraft Menü"
 Clear-Host
 # Menüyü göster

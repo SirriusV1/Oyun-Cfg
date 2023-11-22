@@ -1,4 +1,4 @@
-﻿
+﻿Start-Sleep -Seconds 20
 $host.ui.RawUI.WindowTitle = "Minecraft Ayarlarını Güncelle"
 Clear-Host
 

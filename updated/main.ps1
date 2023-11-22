@@ -11,7 +11,7 @@ Write-Host "1.0.4" -ForegroundColor Green
 Write-Host "3. Minecraft " -NoNewline
 Write-Host "1.20.1" -ForegroundColor Green
 Write-Host "4. Pubg "
-$secim = Read-Host "Lutfen bir numara girin (1-4)"
+$secim = Read-Host "Lütfen bir numara girin (1-4)"
 
 # Secime gore yonlendirme yap
 switch ($secim) {
@@ -37,8 +37,8 @@ switch ($secim) {
     }
     default {
         # Gecersiz bir secim yapildiginda uyarı ver
-        Write-Host "Gecersiz bir secim yaptiniz. Lutfen 1-3 arasinda bir numara girin." -ForegroundColor Red
-        Start-Sleep -Seconds 2
+        Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-4 arasinda bir numara girin." -ForegroundColor Red
+        Start-Sleep -Seconds 1
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
     }
 }

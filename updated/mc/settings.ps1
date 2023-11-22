@@ -35,5 +35,5 @@ if (Test-Path $minecraftFolder -PathType Container) {
 
     Write-Host "Minecraft ayarları başarıyla güncellendi." -ForegroundColor Cyan
 }
-Start-Sleep -Seconds 3
+Start-Sleep -Seconds 1
 PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"

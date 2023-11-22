@@ -62,5 +62,5 @@ foreach ($mod in $modBilgileri.GetEnumerator()) {
 Get-ChildItem $modKlasoru | Where-Object { $_.Name -notin $modBilgileri.Values.GuncelSürüm } | Remove-Item -Force
 Write-Host "Güncellenmeyen dosyalar temizlendi." -ForegroundColor Green
 Write-Host "Tüm modlar güncellendi." -ForegroundColor Green
-Start-Sleep -Seconds 3
+Start-Sleep -Seconds 1
 PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"

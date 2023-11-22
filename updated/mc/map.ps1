@@ -25,5 +25,5 @@ if (-not $?) {
 } else {
     Write-Host "Journeymap ayarları başarıyla yüklendi." -ForegroundColor Green
 }
-Start-Sleep -Seconds 3
+Start-Sleep -Seconds 1
 PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"

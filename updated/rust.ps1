@@ -4,15 +4,15 @@ Clear-Host
 
 Write-Host "Hangi oyuncunun CFG dosyasını indirmek istiyorsunuz?" -ForegroundColor Cyan
 Write-Host "1. Burak"
-Write-Host "2. Bugra"
+Write-Host "2. Buğra"
 Write-Host "3. Arda"
 Write-Host "4. Emir"
-Write-Host "5. Cagri"
+Write-Host "5. Çağri"
 Write-Host "6. MFA"
 Write-Host "7. Sirrius"
 Write-Host "8. Geri Dön" -ForegroundColor Cyan
 
-$player_choice = Read-Host "Lutfen bir oyuncu secin (1-8)"
+$player_choice = Read-Host "Lütfen bir oyuncu seçin (1-8)"
 
 switch ($player_choice) {
     "1" {
@@ -40,12 +40,12 @@ switch ($player_choice) {
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
     }
     default {
-        Write-Host "Gecersiz oyuncu secenegi! Lutfen tekrar deneyin." -ForegroundColor Red
+        Write-Host "Geçersiz oyuncu seçeneği! Lütfen tekrar deneyin." -ForegroundColor Red
         Start-Sleep -Seconds 2
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/rust.ps1' | Invoke-Expression }"
     }
 }
 
-Write-Host "Islem tamamlandi. Ana menuye donuluyor..." -ForegroundColor Green
-Start-Sleep -Seconds 2
+Write-Host "İşlem tamamlandı. Ana menüye dönülüyor..." -ForegroundColor Green
+Start-Sleep -Seconds 1
 PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"

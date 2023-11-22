@@ -10,6 +10,7 @@ Write-Host "2. Rust      " -NoNewline
 Write-Host "1.0.4" -ForegroundColor Green
 Write-Host "3. Minecraft " -NoNewline
 Write-Host "1.20.1" -ForegroundColor Green
+Write-Host "4. Pubg " -NoNewline
 $secim = Read-Host "Lutfen bir numara girin (1-3)"
 
 # Secime gore yonlendirme yap
@@ -27,6 +28,11 @@ switch ($secim) {
     3 {
         # Minecraft secildiginde yapilacak islemler
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"
+        break
+    }
+    4 {
+        # Pubg secildiginde yapilacak islemler
+        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/pubg.ps1' | Invoke-Expression }"
         break
     }
     default {

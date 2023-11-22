@@ -10,8 +10,9 @@ Write-Host "4. Emir"
 Write-Host "5. Cagri"
 Write-Host "6. MFA"
 Write-Host "7. Sirrius"
+Write-Host "8. Geri Dön" -ForegroundColor Cyan
 
-$player_choice = Read-Host "Lutfen bir oyuncu secin (1-7)"
+$player_choice = Read-Host "Lutfen bir oyuncu secin (1-8)"
 
 switch ($player_choice) {
     "1" {
@@ -35,10 +36,13 @@ switch ($player_choice) {
     "7" {
         Invoke-WebRequest -Uri "https://drive.google.com/u/0/uc?id=1L3FmXtfaD3OCOF3_4Ra7IdaO8-n_tO_J&export=downloads" -OutFile "C:\Program Files (x86)\Steam\steamapps\common\Rust\cfg\ata.cfg"
     }
+    "8" {
+        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
+    }
     default {
         Write-Host "Gecersiz oyuncu secenegi! Lutfen tekrar deneyin." -ForegroundColor Red
         Start-Sleep -Seconds 2
-        exit
+        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/rust.ps1' | Invoke-Expression }"
     }
 }
 

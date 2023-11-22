@@ -1,5 +1,5 @@
 ﻿
-$host.ui.RawUI.WindowTitle = "Map Ayarlarını Yükle"
+$host.ui.RawUI.WindowTitle = "Journeymap Ayarlarını Yükle"
 Clear-Host
 
 # Map ayarlarının indirileceği klasör
@@ -21,9 +21,9 @@ Remove-Item -Path $zipDosyaYeri -Force
 
 # İşlem başarılı olup olmadığını kontrol et
 if (-not $?) {
-    Write-Host "Map ayarları yüklenmedi." -ForegroundColor Yellow
+    Write-Host "Journeymap ayarları yüklenmedi." -ForegroundColor Yellow
 } else {
-    Write-Host "Map ayarları başarıyla yüklendi." -ForegroundColor Green
+    Write-Host "Journeymap ayarları başarıyla yüklendi." -ForegroundColor Green
 }
 Start-Sleep -Seconds 3
 PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"

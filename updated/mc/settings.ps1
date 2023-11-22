@@ -22,9 +22,9 @@ if (Test-Path $minecraftFolder -PathType Container) {
         # Zip dosyasını sil
         Remove-Item $zipFilePath -Force
 
-        Write-Host "Minecraft ayarları başarıyla güncellendi."
+        Write-Host "Minecraft ayarları başarıyla güncellendi." -ForegroundColor Cyan
     } else {
-        Write-Host "İşlem iptal edildi."
+        Write-Host "İşlem iptal edildi." -ForegroundColor Red
     }
 } else {
     # Hedef klasörde aynı isimde klasör bulunmuyorsa, normal çıkartma işlemini yap

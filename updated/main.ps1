@@ -10,7 +10,8 @@ Write-Host "1.0.4" -ForegroundColor Green
 Write-Host "3. Minecraft " -NoNewline
 Write-Host "1.20.1" -ForegroundColor Green
 Write-Host "4. Pubg "
-$secim = Read-Host "Lütfen bir numara girin (1-4)"
+Write-Host "5. Ruhunu Sat "
+$secim = Read-Host "Lütfen bir numara girin (1-5)"
 
 
 switch ($secim) {
@@ -28,6 +29,10 @@ switch ($secim) {
     }
     4 {
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/pubg.ps1' | Invoke-Expression }"
+        break
+    }
+    5 {
+        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/sell.ps1' | Invoke-Expression }"
         break
     }
     default {

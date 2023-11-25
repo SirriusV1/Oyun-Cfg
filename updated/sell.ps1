@@ -1,4 +1,5 @@
-# Rusta'ya girmeye hazır olup olmadığını sormak için bir fonksiyon
+$host.ui.RawUI.WindowTitle = "Ruhunu satmaya hazır mısın?"
+Clear-Host
 function sorubir {
     $cevap = Read-Host "Ruhunu satmaya hazır mısın? (1. Evet / 2. Hayır)"
     

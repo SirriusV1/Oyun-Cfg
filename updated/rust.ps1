@@ -68,14 +68,18 @@ $fileUrl = "$baseCfgUrl$fileId&export=download"
 foreach ($targetDirectory in $targetDirectories) {
     $fullPath = Join-Path $targetDirectory $fileName
 
-    # Eğer dosya zaten varsa bu yolu kullan
-    if (Test-Path $fullPath) {
+    try {
         # Dosyayı indir
-        Invoke-WebRequest -Uri $fileUrl -OutFile $fullPath
+        Invoke-WebRequest -Uri $fileUrl -OutFile $fullPath -ErrorAction Stop
+        Write-Host "Dosya başarıyla indirildi: $fullPath" -ForegroundColor Green
         break
+    }
+    catch {
+        Write-Host "Dosya indirme hatası: $_" -ForegroundColor Red
     }
 }
 
 Write-Host "İşlem tamamlandı. Ana menüye dönülüyor..." -ForegroundColor Green
 Start-Sleep -Seconds 1
 PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
+

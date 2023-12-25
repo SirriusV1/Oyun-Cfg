@@ -23,7 +23,12 @@ $fileName = "ata.cfg"
 $targetDirectories = @(
     "C:\Program Files (x86)\Steam\steamapps\common\Rust\cfg\",
     "C:\SteamLibrary\steamapps\common\Rust\cfg\",
-    "E:\SteamLibrary\steamapps\common\Rust\cfg\"
+    "D:\Program Files (x86)\Steam\steamapps\common\Rust\cfg\",
+    "D:\SteamLibrary\steamapps\common\Rust\cfg\",
+    "E:\Program Files (x86)\Steam\steamapps\common\Rust\cfg\",
+    "E:\SteamLibrary\steamapps\common\Rust\cfg\",
+    "F:\Program Files (x86)\Steam\steamapps\common\Rust\cfg\",
+    "F:\SteamLibrary\steamapps\common\Rust\cfg\"
     # Ek hedef dizinleri burada ekleyebilirsiniz
 )
 

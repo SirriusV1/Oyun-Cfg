@@ -4,11 +4,11 @@ Clear-Host
 Write-Host "Hangi oyuncunun CFG dosyasını indirmek istiyorsunuz?" -ForegroundColor Cyan
 Write-Host "1. Burak"
 Write-Host "2. Buğra"
-Write-Host "3. Arda"
-Write-Host "4. Emir"
-Write-Host "5. Çağri"
-Write-Host "6. MFA"
-Write-Host "7. Sirrius"
+Write-Host "3. Emir"
+Write-Host "4. Çağri"
+Write-Host "5. MFA"
+Write-Host "6. Sirrius"
+Write-Host "7. Global"
 Write-Host "8. Geri Dön" -ForegroundColor Cyan
 
 $player_choice = Read-Host "Lütfen bir oyuncu seçin (1-8)"
@@ -40,19 +40,19 @@ switch ($player_choice) {
         $fileId = "1bWyD709q0tb8R2yUm0_b6_sggO8TQftH"
     }
     "3" {
-        $fileId = "1u1Ol1tm9SFPUzOrNjMK0jnnpykIZhklv"
-    }
-    "4" {
         $fileId = "1LWxIO5JvwRIqt9-ywIS9kGh6UgTimqhZ"
     }
-    "5" {
+    "4" {
         $fileId = "1b3rAzOlDQVa8LoIn8Een8-FpcxYQrKLA"
     }
-    "6" {
+    "5" {
         $fileId = "1zmcK4soNCz4T2ZEvxXoPESSUN2G0S_xe"
     }
-    "7" {
+    "6" {
         $fileId = "1L3FmXtfaD3OCOF3_4Ra7IdaO8-n_tO_J"
+    }
+    "7" {
+        $fileId = "1u1Ol1tm9SFPUzOrNjMK0jnnpykIZhklv"
     }
     "8" {
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"

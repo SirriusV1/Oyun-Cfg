@@ -42,7 +42,7 @@ switch ($secim) {
     }
     5 {
         Start-Process "https://discord.com/channels/148419527825162240/1118943418421362839"
-        break
+        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
     }
     6 {
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/sell.ps1' | Invoke-Expression }"

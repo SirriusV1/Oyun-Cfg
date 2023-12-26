@@ -2,8 +2,8 @@
 $host.ui.RawUI.WindowTitle = "ATA CFG"
 Clear-Host
 
-Write-Host "Hangi oyunun CFG dosyasini indirmek istiyorsunuz?" -NoNewline
-Write-Host "(Başlatma Seçenekleri panoya kopyalanır)" -ForegroundColor Cyan
+Write-Host "Hangi oyunun CFG dosyasini indirmek istiyorsunuz? " -NoNewline
+Write-Host "(Başlatma Seçenekleri panoya kopyalanır.)" -ForegroundColor Cyan
 Write-Host "1. Cs        " -NoNewline
 Write-Host "1.0.4 [06.12.2023]" -ForegroundColor Green
 Write-Host "2. Rust      " -NoNewline
@@ -11,7 +11,7 @@ Write-Host "1.0.5 [25.12.2023]" -ForegroundColor Green
 Write-Host "3. Minecraft " -NoNewline
 Write-Host "1.20.1" -ForegroundColor Green
 Write-Host "4. Pubg "
-Write-Host "5. Ruhunu Sat "
+Write-Host "5. Ruhunu Sat " -ForegroundColor DarkMagenta
 $sec = "(1-5)"
 $secim = Read-Host "Lütfen bir numara girin $sec"
 

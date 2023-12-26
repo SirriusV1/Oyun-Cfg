@@ -11,8 +11,9 @@ Write-Host "1.0.5 [25.12.2023]" -ForegroundColor Green
 Write-Host "3. Minecraft " -NoNewline
 Write-Host "1.20.1" -ForegroundColor Green
 Write-Host "4. Pubg "
-Write-Host "5. Ruhunu Sat " -ForegroundColor DarkMagenta
-$sec = "(1-5)"
+Write-Host "5. Nvidia Ayarları "
+Write-Host "6. Ruhunu Sat " -ForegroundColor DarkMagenta
+$sec = "(1-6)"
 $secim = Read-Host "Lütfen bir numara girin $sec"
 
 
@@ -40,6 +41,10 @@ switch ($secim) {
         break
     }
     5 {
+        Start-Process "https://discord.com/channels/148419527825162240/1118943418421362839"
+        break
+    }
+    6 {
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/sell.ps1' | Invoke-Expression }"
         break
     }

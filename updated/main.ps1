@@ -30,7 +30,7 @@ switch ($secim) {
                 1 {
                     $launchoptions = "-high -novid -tickrate 128 +exec ata.cfg"
                     Set-Clipboard -Value $launchoptions
-                    Write-Host "Başlatma Seçenekleri panoya kopyalandı." -ForegroundColor Cyan
+                    Write-Host "Başlatma Seçenekleri panoya kopyalandı." -ForegroundColor Green
                     Start-Sleep -Seconds 1
                     Write-Host "Steam Kütüphane Açılıyor." -ForegroundColor Cyan
                     Start-Sleep -Seconds 1
@@ -66,7 +66,7 @@ switch ($secim) {
                 1 {
                     $launchoptions = "-malloc=system -USEALLAVAILABLECORES -system.cpu_priority high -gc.incremental_milliseconds 1 -effects.maxgibs -1 -physics.steps 60 -graphics.waves false"
                     Set-Clipboard -Value $launchoptions
-                    Write-Host "Başlatma Seçenekleri panoya kopyalandı." -ForegroundColor Cyan
+                    Write-Host "Başlatma Seçenekleri panoya kopyalandı." -ForegroundColor Green
                     Start-Sleep -Seconds 1
                     Write-Host "Steam Kütüphane Açılıyor." -ForegroundColor Cyan
                     Start-Sleep -Seconds 1
@@ -105,7 +105,7 @@ switch ($secim) {
                 1 {
                     $launchoptions = "-USEALLAVAILABLECORES -malloc=system -KoreanRating"
                     Set-Clipboard -Value $launchoptions
-                    Write-Host "Başlatma Seçenekleri panoya kopyalandı." -ForegroundColor Cyan
+                    Write-Host "Başlatma Seçenekleri panoya kopyalandı." -ForegroundColor Green
                     Start-Sleep -Seconds 1
                     Write-Host "Steam Kütüphane Açılıyor." -ForegroundColor Cyan
                     Start-Sleep -Seconds 1

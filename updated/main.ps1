@@ -2,8 +2,7 @@
 $host.ui.RawUI.WindowTitle = "ATA CFG"
 Clear-Host
 
-Write-Host "Hangi oyunun CFG dosyasini indirmek istiyorsunuz? " -NoNewline
-Write-Host "(Başlatma Seçenekleri panoya kopyalanır.)" -ForegroundColor Cyan
+Write-Host "Hangi oyunun CFG dosyasini indirmek istiyorsunuz? "
 Write-Host "1. Cs        " -NoNewline
 Write-Host "1.0.4 [06.12.2023]" -ForegroundColor Green
 Write-Host "2. Rust      " -NoNewline

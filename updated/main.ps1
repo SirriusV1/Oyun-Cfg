@@ -20,6 +20,7 @@ switch ($secim) {
     1 {
         while ($true) {
             clear-host
+            $host.ui.RawUI.WindowTitle = "CS Menü"
             Write-Host "1. Başlatma Seçenekleri "
             Write-Host "2. CFG İndir "
             Write-Host "3. Geri Dön" -ForegroundColor Cyan
@@ -55,6 +56,7 @@ switch ($secim) {
     2 {
         while ($true) {
             clear-host
+            $host.ui.RawUI.WindowTitle = "Rust Menü"
             Write-Host "1. Başlatma Seçenekleri "
             Write-Host "2. CFG İndir "
             Write-Host "3. Geri Dön" -ForegroundColor Cyan
@@ -93,6 +95,7 @@ switch ($secim) {
     4 {
         while ($true) {
             clear-host
+            $host.ui.RawUI.WindowTitle = "Pubg Menü"
             Write-Host "1. Başlatma Seçenekleri "
             Write-Host "2. CFG İndir "
             Write-Host "3. Geri Dön" -ForegroundColor Cyan

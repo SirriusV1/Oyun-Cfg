@@ -19,26 +19,112 @@ $secim = Read-Host "Lütfen bir numara girin $sec"
 
 switch ($secim) {
     1 {
-        $launchoptions = "-high -novid -tickrate 128 +exec ata.cfg"
-        Set-Clipboard -Value $launchoptions
-        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/cs.ps1' | Invoke-Expression }"
-        break
+        while ($true) {
+            clear-host
+            Write-Host "1. Başlatma Seçenekleri "
+            Write-Host "2. CFG İndir "
+            Write-Host "3. Geri Dön" -ForegroundColor Cyan
+            $subSecim = Read-Host "Lütfen bir numara girin (1-3)"
+
+            switch ($subSecim) {
+                1 {
+                    $launchoptions = "-high -novid -tickrate 128 +exec ata.cfg"
+                    Set-Clipboard -Value $launchoptions
+                    Write-Host "Başlatma Seçenekleri panoya kopyalandı." -ForegroundColor Cyan
+                    Start-Sleep -Seconds 1
+                    Write-Host "Steam Kütüphane Açılıyor." -ForegroundColor Cyan
+                    Start-Sleep -Seconds 1
+                    Start-Process steam://open/library
+                    Start-Sleep -Seconds 1
+                    break
+                }
+                2 {
+                    PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/cs.ps1' | Invoke-Expression }"
+                }
+                3 {
+                    PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
+                }
+                default {
+                    Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-3 arasında bir numara girin." -ForegroundColor Red
+                    Start-Sleep -Seconds 1
+                    break
+                }
+            }
+        }
     }
+
     2 {
-        $launchoptions = "-malloc=system -USEALLAVAILABLECORES -system.cpu_priority high -gc.incremental_milliseconds 1 -effects.maxgibs -1 -physics.steps 60 -graphics.waves false"
-        Set-Clipboard -Value $launchoptions
-        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/rust.ps1' | Invoke-Expression }"
-        break
+        while ($true) {
+            clear-host
+            Write-Host "1. Başlatma Seçenekleri "
+            Write-Host "2. CFG İndir "
+            Write-Host "3. Geri Dön" -ForegroundColor Cyan
+            $subSecim = Read-Host "Lütfen bir numara girin (1-3)"
+
+            switch ($subSecim) {
+                1 {
+                    $launchoptions = "-malloc=system -USEALLAVAILABLECORES -system.cpu_priority high -gc.incremental_milliseconds 1 -effects.maxgibs -1 -physics.steps 60 -graphics.waves false"
+                    Set-Clipboard -Value $launchoptions
+                    Write-Host "Başlatma Seçenekleri panoya kopyalandı." -ForegroundColor Cyan
+                    Start-Sleep -Seconds 1
+                    Write-Host "Steam Kütüphane Açılıyor." -ForegroundColor Cyan
+                    Start-Sleep -Seconds 1
+                    Start-Process steam://open/library
+                    Start-Sleep -Seconds 1
+                    break
+                }
+                2 {
+                    PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/rust.ps1' | Invoke-Expression }"
+                }
+                3{
+                    PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
+                }
+                default {
+                    Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-3 arasında bir numara girin." -ForegroundColor Red
+                    Start-Sleep -Seconds 1
+                    break
+                }
+            }
+        }
+        
     }
     3 {
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"
-        break
     }
     4 {
-        $launchoptions = "-USEALLAVAILABLECORES -malloc=system -KoreanRating"
-        Set-Clipboard -Value $launchoptions
-        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/pubg.ps1' | Invoke-Expression }"
-        break
+        while ($true) {
+            clear-host
+            Write-Host "1. Başlatma Seçenekleri "
+            Write-Host "2. CFG İndir "
+            Write-Host "3. Geri Dön" -ForegroundColor Cyan
+            $subSecim = Read-Host "Lütfen bir numara girin (1-3)"
+
+            switch ($subSecim) {
+                1 {
+                    $launchoptions = "-USEALLAVAILABLECORES -malloc=system -KoreanRating"
+                    Set-Clipboard -Value $launchoptions
+                    Write-Host "Başlatma Seçenekleri panoya kopyalandı." -ForegroundColor Cyan
+                    Start-Sleep -Seconds 1
+                    Write-Host "Steam Kütüphane Açılıyor." -ForegroundColor Cyan
+                    Start-Sleep -Seconds 1
+                    Start-Process steam://open/library
+                    Start-Sleep -Seconds 1
+                    break
+                }
+                2 {
+                    PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/pubg.ps1' | Invoke-Expression }"
+                }
+                3{
+                    PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
+                }
+                default {
+                    Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-3 arasında bir numara girin." -ForegroundColor Red
+                    Start-Sleep -Seconds 1
+                    break
+                }
+            }
+        }
+        
     }
     5 {
         Start-Process "https://discord.com/channels/148419527825162240/1118943418421362839"
@@ -46,7 +132,6 @@ switch ($secim) {
     }
     6 {
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/sell.ps1' | Invoke-Expression }"
-        break
     }
     default {
         Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-5 arasinda bir numara girin." -ForegroundColor Red

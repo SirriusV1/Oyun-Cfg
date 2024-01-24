@@ -83,7 +83,8 @@ function sorualtı {
         break
     }
     2 {
-        Start-Process steam://rungameid/252490
+        steam://connect/185.193.165.28:27015
+        # Start-Process steam://rungameid/252490
         break
     }
     default {

@@ -29,7 +29,7 @@ switch ($secim) {
             Write-Host "2. CFG İndir "
             Write-Host "3. Bind Komutları"
             Write-Host "4. Geri Dön" -ForegroundColor Cyan
-            $subSecim = Read-Host "Lütfen bir numara girin (1-3)"
+            $subSecim = Read-Host "Lütfen bir numara girin (1-4)"
 
             switch ($subSecim) {
                 1 {
@@ -53,7 +53,7 @@ switch ($secim) {
                     PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
                 }
                 default {
-                    Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-3 arasında bir numara girin." -ForegroundColor Red
+                    Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-4 arasında bir numara girin." -ForegroundColor Red
                     Start-Sleep -Seconds 1
                     break
                 }
@@ -73,7 +73,7 @@ switch ($secim) {
             Write-Host "2. CFG İndir "
             Write-Host "3. Bind Komutları"
             Write-Host "4. Geri Dön" -ForegroundColor Cyan
-            $subSecim = Read-Host "Lütfen bir numara girin (1-3)"
+            $subSecim = Read-Host "Lütfen bir numara girin (1-4)"
 
             switch ($subSecim) {
                 1 {
@@ -97,7 +97,7 @@ switch ($secim) {
                     PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
                 }
                 default {
-                    Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-3 arasında bir numara girin." -ForegroundColor Red
+                    Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-4 arasında bir numara girin." -ForegroundColor Red
                     Start-Sleep -Seconds 1
                     break
                 }

@@ -7,18 +7,18 @@ $baseCfgUrl = "https://drive.google.com/uc?id="
 # Define the file name
 $fileName = "ata.cfg"
 
-# Define multiple target directories
-$targetDirectories = @(
-    "C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\",
-    "C:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\",
-    "D:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\",
-    "D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\",
-    "E:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\",
-    "E:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\",
-    "F:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\",
-    "F:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\"
-    # Ek hedef dizinleri burada ekleyebilirsiniz
-)
+# Get logical drives and sort them alphabetically
+$logicalDrives = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Free -gt 0 } | Sort-Object -Property Root
+
+# Define the target directory array dynamically based on logical drives
+$targetDirectories = @()
+foreach ($drive in $logicalDrives) {
+    $steamDirectory = Join-Path $drive.Root "Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\"
+    $steamLibraryDirectory = Join-Path $drive.Root "SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\"
+
+    $targetDirectories += $steamDirectory, $steamLibraryDirectory
+
+}
 
 # İndirilecek dosyanın tam URL'sini oluştur
 $fileUrl = "$baseCfgUrl" + "1iNfubaww_df_A9IlIS-bavKWVqfHt3dw" + "&export=download"

@@ -1,4 +1,4 @@
-$host.ui.RawUI.WindowTitle = "Rust"
+﻿$host.ui.RawUI.WindowTitle = "Rust"
 Clear-Host
 
 Write-Host "Hangi oyuncunun CFG dosyasını indirmek istiyorsunuz?" -ForegroundColor Cyan
@@ -19,18 +19,17 @@ $baseCfgUrl = "https://drive.google.com/u/0/uc?id="
 # Define the file name
 $fileName = "ata.cfg"
 
-# Define multiple target directories
-$targetDirectories = @(
-    "C:\Program Files (x86)\Steam\steamapps\common\Rust\cfg\",
-    "C:\SteamLibrary\steamapps\common\Rust\cfg\",
-    "D:\Program Files (x86)\Steam\steamapps\common\Rust\cfg\",
-    "D:\SteamLibrary\steamapps\common\Rust\cfg\",
-    "E:\Program Files (x86)\Steam\steamapps\common\Rust\cfg\",
-    "E:\SteamLibrary\steamapps\common\Rust\cfg\",
-    "F:\Program Files (x86)\Steam\steamapps\common\Rust\cfg\",
-    "F:\SteamLibrary\steamapps\common\Rust\cfg\"
-    # Ek hedef dizinleri burada ekleyebilirsiniz
-)
+# Get logical drives and sort them alphabetically
+$logicalDrives = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Free -gt 0 } | Sort-Object -Property Root
+
+# Define the target directory array dynamically based on logical drives
+$targetDirectories = @()
+foreach ($drive in $logicalDrives) {
+    $programFilesDirectory = Join-Path $drive.Root "Program Files (x86)\Steam\steamapps\common\Rust\cfg\"
+    $steamLibraryDirectory = Join-Path $drive.Root "SteamLibrary\steamapps\common\Rust\cfg\"
+
+    $targetDirectories += $programFilesDirectory, $steamLibraryDirectory
+}
 
 switch ($player_choice) {
     "1" {
@@ -84,8 +83,6 @@ foreach ($targetDirectory in $targetDirectories) {
     }
 }
 
-Set-Clipboard -Value "exec ata.cfg"
 Write-Host "İşlem tamamlandı. Ana menüye dönülüyor..." -ForegroundColor Green
 Start-Sleep -Seconds 2
 PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
-

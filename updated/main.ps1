@@ -1,4 +1,4 @@
-
+﻿
 $host.ui.RawUI.WindowTitle = "ATA CFG"
 Clear-Host
 
@@ -21,9 +21,14 @@ switch ($secim) {
         while ($true) {
             clear-host
             $host.ui.RawUI.WindowTitle = "CS Menü"
+            Write-Host "        ╔═══════════╗"  -ForegroundColor Blue
+            Write-Host "        ║  CS Menü  ║"  -ForegroundColor Blue
+            Write-Host "        ╚═══════════╝"  -ForegroundColor Blue
+            Write-Host ""
             Write-Host "1. Başlatma Seçenekleri "
             Write-Host "2. CFG İndir "
-            Write-Host "3. Geri Dön" -ForegroundColor Cyan
+            Write-Host "3. Bind Komutları"
+            Write-Host "4. Geri Dön" -ForegroundColor Cyan
             $subSecim = Read-Host "Lütfen bir numara girin (1-3)"
 
             switch ($subSecim) {
@@ -42,6 +47,9 @@ switch ($secim) {
                     PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/cs.ps1' | Invoke-Expression }"
                 }
                 3 {
+                    Start-Process "https://github.com/SirriusV1/Oyun-Cfg/blob/main/Counter-Strike%20Global%20Offensive%20(CSGO)/README.md"
+                }
+                4 {
                     PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
                 }
                 default {
@@ -57,9 +65,14 @@ switch ($secim) {
         while ($true) {
             clear-host
             $host.ui.RawUI.WindowTitle = "Rust Menü"
+            Write-Host "        ╔═══════════╗"  -ForegroundColor DarkYellow
+            Write-Host "        ║ Rust Menü ║"  -ForegroundColor DarkYellow
+            Write-Host "        ╚═══════════╝"  -ForegroundColor DarkYellow
+            Write-Host ""
             Write-Host "1. Başlatma Seçenekleri "
             Write-Host "2. CFG İndir "
-            Write-Host "3. Geri Dön" -ForegroundColor Cyan
+            Write-Host "3. Bind Komutları"
+            Write-Host "4. Geri Dön" -ForegroundColor Cyan
             $subSecim = Read-Host "Lütfen bir numara girin (1-3)"
 
             switch ($subSecim) {
@@ -78,6 +91,9 @@ switch ($secim) {
                     PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/rust.ps1' | Invoke-Expression }"
                 }
                 3{
+                    Start-Process "https://github.com/SirriusV1/Oyun-Cfg/blob/main/Rust/README.md"
+                }
+                4{
                     PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
                 }
                 default {

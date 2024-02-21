@@ -85,6 +85,8 @@ foreach ($targetDirectory in $targetDirectories) {
     }
 }
 
+Set-Clipboard -Value "exec ata.cfg"
+Set-Clipboard -Value "exec ata.cfg"
 Write-Host "İşlem tamamlandı. Ana menüye dönülüyor..." -ForegroundColor Green
 Start-Sleep -Seconds 2
 PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"

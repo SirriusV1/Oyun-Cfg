@@ -2,17 +2,16 @@
 $host.ui.RawUI.WindowTitle = "ATA CFG"
 Clear-Host
 
-Write-Host "Hangi oyunun CFG dosyasini indirmek istiyorsunuz? "
+Write-Host "Hangi oyunun CFG dosyasını indirmek istiyorsunuz? "
 Write-Host "1. Cs        " -NoNewline
 Write-Host "1.0.4 [09.01.2024]" -ForegroundColor Green
 Write-Host "2. Rust      " -NoNewline
-Write-Host "1.0.5 [25.12.2023]" -ForegroundColor Green
+Write-Host "1.0.6 [21.02.2024]" -ForegroundColor Green
 Write-Host "3. Minecraft " -NoNewline
 Write-Host "1.20.1" -ForegroundColor Green
 Write-Host "4. Pubg "
 Write-Host "5. Nvidia Ayarları "
-Write-Host "6. Ruhunu Sat " -ForegroundColor DarkMagenta
-$sec = "(1-6)"
+$sec = "(1-5)"
 $secim = Read-Host "Lütfen bir numara girin $sec"
 
 
@@ -34,6 +33,7 @@ switch ($secim) {
             switch ($subSecim) {
                 1 {
                     $launchoptions = "-high -novid -tickrate 128 +exec ata.cfg"
+                    Set-Clipboard -Value $launchoptions
                     Set-Clipboard -Value $launchoptions
                     Write-Host "Başlatma Seçenekleri panoya kopyalandı." -ForegroundColor Green
                     Start-Sleep -Seconds 1
@@ -79,6 +79,7 @@ switch ($secim) {
                 1 {
                     $launchoptions = "-malloc=system -USEALLAVAILABLECORES -system.cpu_priority high -gc.incremental_milliseconds 1 -effects.maxgibs -1 -physics.steps 60 -graphics.waves false"
                     Set-Clipboard -Value $launchoptions
+                    Set-Clipboard -Value $launchoptions
                     Write-Host "Başlatma Seçenekleri panoya kopyalandı." -ForegroundColor Green
                     Start-Sleep -Seconds 1
                     Write-Host "Steam Kütüphane Açılıyor." -ForegroundColor Cyan
@@ -121,6 +122,7 @@ switch ($secim) {
                 1 {
                     $launchoptions = "-USEALLAVAILABLECORES -malloc=system -KoreanRating"
                     Set-Clipboard -Value $launchoptions
+                    Set-Clipboard -Value $launchoptions
                     Write-Host "Başlatma Seçenekleri panoya kopyalandı." -ForegroundColor Green
                     Start-Sleep -Seconds 1
                     Write-Host "Steam Kütüphane Açılıyor." -ForegroundColor Cyan
@@ -147,9 +149,6 @@ switch ($secim) {
     5 {
         Start-Process "https://discord.com/channels/148419527825162240/1118943418421362839"
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
-    }
-    6 {
-        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/sell.ps1' | Invoke-Expression }"
     }
     default {
         Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-5 arasinda bir numara girin." -ForegroundColor Red

@@ -55,6 +55,8 @@ switch ($player_choice) {
     }
     "8" {
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
+        Set-Clipboard -Value "exec ata.cfg"
+        Set-Clipboard -Value "exec ata.cfg"
         exit
     }
     default {

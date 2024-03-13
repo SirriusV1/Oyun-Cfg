@@ -1,4 +1,5 @@
-﻿clear-host
+﻿
+Clear-Host
 $host.ui.RawUI.WindowTitle = "Minecraft Menü"
 Write-Host "        ╔═════════════════╗"  -ForegroundColor DarkYellow
 Write-Host "        ║  Minecraft Menü ║"  -ForegroundColor DarkYellow

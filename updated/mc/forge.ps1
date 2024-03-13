@@ -9,7 +9,7 @@ $zipUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/
 $minecraftFolder = "$env:USERPROFILE\AppData\Roaming\.minecraft"
 
 # Zip dosyasını indir
-$zipFilePath = Join-Path $minecraftFolder "[ATA] Forge (1.20.1).rar"
+$zipFilePath = Join-Path $minecraftFolder "Forge.rar"
 Invoke-WebRequest -Uri $zipUrl -OutFile $zipFilePath
 
 # Hedef klasörde aynı isimde klasör var mı kontrol et

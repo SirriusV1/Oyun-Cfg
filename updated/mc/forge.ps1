@@ -1,5 +1,5 @@
 ﻿
-$host.ui.RawUI.WindowTitle = "Forge Yükleniyor..."
+$host.ui.RawUI.WindowTitle = "Force Yükleniyor..."
 Clear-Host
 
 # Zip dosyasının indirileceği URL
@@ -9,7 +9,7 @@ $zipUrl = "https://github.com/SirriusV1/Oyun-Cfg/raw/main/updated/mc/Force.zip"
 $minecraftFolder = "$env:USERPROFILE\AppData\Roaming\.minecraft"
 
 # Zip dosyasını indir
-$zipFilePath = Join-Path $minecraftFolder "Forge.zip"
+$zipFilePath = Join-Path $minecraftFolder "Force.zip"
 Invoke-WebRequest -Uri $zipUrl -OutFile $zipFilePath
 
 # Hedef klasörde aynı isimde klasör var mı kontrol et
@@ -22,7 +22,7 @@ if (Test-Path $minecraftFolder -PathType Container) {
         # Zip dosyasını sil
         Remove-Item $zipFilePath -Force
 
-        Write-Host "Forge başarıyla yüklendi." -ForegroundColor Cyan
+        Write-Host "Force başarıyla yüklendi." -ForegroundColor Cyan
     } else {
         Write-Host "İşlem iptal edildi." -ForegroundColor Red
     }
@@ -33,7 +33,7 @@ if (Test-Path $minecraftFolder -PathType Container) {
     # Zip dosyasını sil
     Remove-Item $zipFilePath -Force
 
-    Write-Host "Forge başarıyla yüklendi." -ForegroundColor Cyan
+    Write-Host "Force başarıyla yüklendi." -ForegroundColor Cyan
 }
 Start-Sleep -Seconds 1
 PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"

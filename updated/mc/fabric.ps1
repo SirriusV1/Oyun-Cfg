@@ -8,9 +8,12 @@ $zipUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/
 # Hedef klasör
 $minecraftFolder = "$env:USERPROFILE\AppData\Roaming\.minecraft"
 
+# WebClient oluştur
+$webClient = New-Object System.Net.WebClient
+
 # Zip dosyasını indir
 $zipFilePath = Join-Path $minecraftFolder "Fabric.zip"
-Invoke-WebRequest -Uri $zipUrl -OutFile $zipFilePath
+$webClient.DownloadFile($zipUrl, $zipFilePath)
 
 # Hedef klasörde aynı isimde klasör var mı kontrol et
 if (Test-Path $minecraftFolder -PathType Container) {

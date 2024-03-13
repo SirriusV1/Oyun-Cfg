@@ -3,13 +3,13 @@ $host.ui.RawUI.WindowTitle = "Fabric Yükleniyor..."
 Clear-Host
 
 # Zip dosyasının indirileceği URL
-$zipUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/[ATA] Fabric (1.20.1).rar"
+$zipUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/Fabric.zip"
 
 # Hedef klasör
 $minecraftFolder = "$env:USERPROFILE\AppData\Roaming\.minecraft"
 
 # Zip dosyasını indir
-$zipFilePath = Join-Path $minecraftFolder "[ATA] Fabric (1.20.1).rar"
+$zipFilePath = Join-Path $minecraftFolder "Fabric.zip"
 Invoke-WebRequest -Uri $zipUrl -OutFile $zipFilePath
 
 # Hedef klasörde aynı isimde klasör var mı kontrol et

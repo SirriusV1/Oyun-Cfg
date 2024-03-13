@@ -8,25 +8,26 @@ $zipUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/
 # Hedef klasör
 $minecraftFolder = "$env:USERPROFILE\AppData\Roaming\.minecraft"
 
-# Zip dosyasını indir
-$zipFilePath = Join-Path $minecraftFolder "Forge.zip"
-Invoke-WebRequest -Uri $zipUrl -OutFile $zipFilePath
+# Dosya adı
+$fileName = "Forge.zip"
+
+# İndirme işlemi
+$webClient = New-Object System.Net.WebClient
+$webClient.DownloadFile($zipUrl, "$minecraftFolder\$fileName")
 
 # Zip dosyasını çıkart
-Expand-Archive -Path $zipFilePath -DestinationPath $minecraftFolder -Force
+Expand-Archive -Path "$minecraftFolder\$fileName" -DestinationPath $minecraftFolder -Force
 
-# "versions" klasörünü kontrol et
-if (Test-Path "$minecraftFolder\versions" -PathType Container) {
-    # "versions" klasörü varsa, içeriği hedef klasöre taşı
-    Move-Item -Path "$minecraftFolder\versions\*" -Destination $minecraftFolder -Force
-    Write-Host "Uyarı: 'versions' klasörü içeriği hedef klasöre taşındı." -ForegroundColor Yellow
-}
+# "versions" klasörünü hedef klasöre taşı
+Move-Item -Path "$minecraftFolder\versions\*" -Destination $minecraftFolder -Force
+
+# "versions" klasörünü silecek
+Remove-Item -Path "$minecraftFolder\versions" -Force
 
 # Zip dosyasını sil
-Remove-Item $zipFilePath -Force
+Remove-Item "$minecraftFolder\$fileName" -Force
 
 Write-Host "Forge başarıyla yüklendi." -ForegroundColor Cyan
 
 Start-Sleep -Seconds 1
 PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"
-Read-Host "Devam etmek için bir tuşa basın..."

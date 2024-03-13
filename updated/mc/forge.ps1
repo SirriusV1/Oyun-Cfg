@@ -15,11 +15,12 @@ Invoke-WebRequest -Uri $zipUrl -OutFile $zipFilePath
 # Zip dosyasını çıkart
 Expand-Archive -Path $zipFilePath -DestinationPath $minecraftFolder -Force
 
-# "versions" klasörünü hedef klasöre taşı
-Move-Item -Path "$minecraftFolder\versions" -Destination $minecraftFolder -Force
-
-# "versions" klasörünü silecek
-Remove-Item -Path "$minecraftFolder\versions" -Force
+# "versions" klasörünü kontrol et
+if (Test-Path "$minecraftFolder\versions" -PathType Container) {
+    # "versions" klasörü varsa, içeriği hedef klasöre taşı
+    Move-Item -Path "$minecraftFolder\versions\*" -Destination $minecraftFolder -Force
+    Write-Host "Uyarı: 'versions' klasörü içeriği hedef klasöre taşındı." -ForegroundColor Yellow
+}
 
 # Zip dosyasını sil
 Remove-Item $zipFilePath -Force

@@ -3,7 +3,7 @@ $host.ui.RawUI.WindowTitle = "TLauncher Ayarı Yükleniyor..."
 Clear-Host
 
 # Zip dosyasının indirileceği URL
-$zipUrl = "https://github.com/SirriusV1/Oyun-Cfg/raw/main/updated/mc/tlauncher-2.0.properties"
+$zipUrl = "https://github.com/SirriusV1/Oyun-Cfg/raw/main/updated/mc/tlauncher.zip"
 
 # Hedef klasör
 $minecraftFolder = "$env:USERPROFILE\AppData\Roaming\.tlauncher"

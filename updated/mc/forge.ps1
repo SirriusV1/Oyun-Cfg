@@ -3,7 +3,7 @@ $host.ui.RawUI.WindowTitle = "Forge Yükleniyor..."
 Clear-Host
 
 # Zip dosyasının indirileceği URL
-$zipUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/Forge.zip"
+$zipUrl = "https://github.com/SirriusV1/Oyun-Cfg/raw/main/updated/mc/Force.zip"
 
 # Hedef klasör
 $minecraftFolder = "$env:USERPROFILE\AppData\Roaming\.minecraft"

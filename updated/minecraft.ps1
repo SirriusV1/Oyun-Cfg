@@ -23,7 +23,14 @@ switch ($secim) {
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/forge.ps1' | Invoke-Expression }"
     }
     3 {
-        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/tlauncher.ps1' | Invoke-Expression }"
+        $url = "https://github.com/SirriusV1/Oyun-Cfg/raw/main/updated/mc/tlauncher-2.0.properties"
+        $outputPath = "$env:USERPROFILE\AppData\Roaming\.tlauncher\tlauncher-2.0.properties"
+
+        $webClient = New-Object System.Net.WebClient
+        $webClient.DownloadFile($url, $outputPath)
+
+        Start-Sleep -Seconds 1
+        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"
     }
     4 {
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"

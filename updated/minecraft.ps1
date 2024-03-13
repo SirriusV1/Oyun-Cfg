@@ -26,6 +26,12 @@ switch ($secim) {
         $url = "https://github.com/SirriusV1/Oyun-Cfg/raw/main/updated/mc/tlauncher-2.0.properties.zip"
         $outputPath = "$env:USERPROFILE\AppData\Roaming\.tlauncher\tlauncher-2.0.properties"
 
+        # Eğer hedef dosya zaten varsa, silerek üzerine yazma
+        if (Test-Path $outputPath) {
+            Remove-Item $outputPath
+        }
+
+        # Dosyayı indir
         $webClient = New-Object System.Net.WebClient
         $webClient.DownloadFile($url, $outputPath)
 

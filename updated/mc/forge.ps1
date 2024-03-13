@@ -3,29 +3,37 @@ $host.ui.RawUI.WindowTitle = "Forge Yükleniyor..."
 Clear-Host
 
 # Zip dosyasının indirileceği URL
-$zipUrl = "https://github.com/SirriusV1/Oyun-Cfg/raw/main/updated/mc/Force.zip"
+$zipUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/Forge.zip"
 
 # Hedef klasör
 $minecraftFolder = "$env:USERPROFILE\AppData\Roaming\.minecraft"
 
-# Dosya adı
-$fileName = "Forge.zip"
+# Zip dosyasını indir
+$zipFilePath = Join-Path $minecraftFolder "Forge.zip"
+Invoke-WebRequest -Uri $zipUrl -OutFile $zipFilePath
 
-# İndirme işlemi
-$webClient = New-Object System.Net.WebClient
-$webClient.DownloadFile($zipUrl, "$minecraftFolder\$fileName")
+# Hedef klasörde aynı isimde klasör var mı kontrol et
+if (Test-Path $minecraftFolder -PathType Container) {
+    $confirmation = Read-Host "Hedef klasörde aynı isimde klasör bulunmaktadır. Üzerine yazmak istiyor musunuz? (E/H)"
+    if ($confirmation -eq "E") {
+        # Zip içeriğini çıkart
+        Expand-Archive -Path $zipFilePath -DestinationPath $minecraftFolder -Force
 
-# Zip dosyasını çıkart
-Add-Type -AssemblyName System.IO.Compression.FileSystem
-[System.IO.Compression.ZipFile]::ExtractToDirectory("$minecraftFolder\$fileName", $minecraftFolder)
+        # Zip dosyasını sil
+        Remove-Item $zipFilePath -Force
 
-# Zip dosyasını sil
-Remove-Item "$minecraftFolder\$fileName" -Force
+        Write-Host "Forge başarıyla yüklendi." -ForegroundColor Cyan
+    } else {
+        Write-Host "İşlem iptal edildi." -ForegroundColor Red
+    }
+} else {
+    # Hedef klasörde aynı isimde klasör bulunmuyorsa, normal çıkartma işlemini yap
+    Expand-Archive -Path $zipFilePath -DestinationPath $minecraftFolder -Force
 
-Write-Host "Forge başarıyla yüklendi." -ForegroundColor Cyan
+    # Zip dosyasını sil
+    Remove-Item $zipFilePath -Force
 
+    Write-Host "Forge başarıyla yüklendi." -ForegroundColor Cyan
+}
 Start-Sleep -Seconds 1
 PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"
-
-
-Read-Host "Devam etmek için bir tuşa basın..."

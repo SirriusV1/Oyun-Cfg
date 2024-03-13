@@ -1,31 +1,24 @@
-﻿
-$host.ui.RawUI.WindowTitle = "Forge Yükleniyor..."
+﻿$host.ui.RawUI.WindowTitle = "Forge Yükleniyor..."
 Clear-Host
 
 # Zip dosyasının indirileceği URL
 $zipUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/Forge.zip"
 
-# Indirme hızını sınırlayan başlık
-$headers = @{
-    "Rate-Limit" = "25MB/s"  # 25MB/s'ye eşdeğer olan 200 Mbps
-}
-
 # Hedef klasör
 $minecraftFolder = "$env:USERPROFILE\AppData\Roaming\.minecraft"
 
-# Zip dosyasını indir
-$zipFilePath = Join-Path $minecraftFolder "Forge.zip"
-Invoke-WebRequest -Uri $zipUrl -Headers $headers -OutFile $zipFilePath
+# İndirme işlemi
+wget -OutFile "$minecraftFolder\Forge.zip" $zipUrl
 
 # Hedef klasörde aynı isimde klasör var mı kontrol et
 if (Test-Path $minecraftFolder -PathType Container) {
     $confirmation = Read-Host "Hedef klasörde aynı isimde klasör bulunmaktadır. Üzerine yazmak istiyor musunuz? (E/H)"
     if ($confirmation -eq "E") {
         # Zip içeriğini çıkart
-        Expand-Archive -Path $zipFilePath -DestinationPath $minecraftFolder -Force
+        Expand-Archive -Path "$minecraftFolder\Forge.zip" -DestinationPath $minecraftFolder -Force
 
         # Zip dosyasını sil
-        Remove-Item $zipFilePath -Force
+        Remove-Item "$minecraftFolder\Forge.zip" -Force
 
         Write-Host "Forge başarıyla yüklendi." -ForegroundColor Cyan
     } else {
@@ -33,10 +26,10 @@ if (Test-Path $minecraftFolder -PathType Container) {
     }
 } else {
     # Hedef klasörde aynı isimde klasör bulunmuyorsa, normal çıkartma işlemini yap
-    Expand-Archive -Path $zipFilePath -DestinationPath $minecraftFolder -Force
+    Expand-Archive -Path "$minecraftFolder\Forge.zip" -DestinationPath $minecraftFolder -Force
 
     # Zip dosyasını sil
-    Remove-Item $zipFilePath -Force
+    Remove-Item "$minecraftFolder\Forge.zip" -Force
 
     Write-Host "Forge başarıyla yüklendi." -ForegroundColor Cyan
 }

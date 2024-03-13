@@ -5,12 +5,17 @@ Clear-Host
 # Zip dosyasının indirileceği URL
 $zipUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/Fabric.zip"
 
+# Indirme hızını sınırlayan başlık
+$headers = @{
+    "Rate-Limit" = "25MB/s"  # 25MB/s'ye eşdeğer olan 200 Mbps
+}
+
 # Hedef klasör
 $minecraftFolder = "$env:USERPROFILE\AppData\Roaming\.minecraft"
 
 # Zip dosyasını indir
 $zipFilePath = Join-Path $minecraftFolder "Fabric.zip"
-Invoke-WebRequest -Uri $zipUrl -OutFile $zipFilePath
+Invoke-WebRequest -Uri $zipUrl -Headers $headers -OutFile  $zipFilePath
 
 # Hedef klasörde aynı isimde klasör var mı kontrol et
 if (Test-Path $minecraftFolder -PathType Container) {

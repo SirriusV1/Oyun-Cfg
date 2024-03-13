@@ -8,7 +8,7 @@ $zipUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/
 $minecraftFolder = "$env:USERPROFILE\AppData\Roaming\.minecraft"
 
 # İndirme işlemi
-wget -OutFile "$minecraftFolder\Forge.zip" $zipUrl
+curl -o "$minecraftFolder\Forge.zip" $zipUrl
 
 # Hedef klasörde aynı isimde klasör var mı kontrol et
 if (Test-Path $minecraftFolder -PathType Container) {

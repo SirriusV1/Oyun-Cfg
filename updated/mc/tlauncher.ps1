@@ -15,12 +15,9 @@ $fileName = "tlauncher-2.0.properties"
 $webClient = New-Object System.Net.WebClient
 $webClient.DownloadFile($zipUrl, "$minecraftFolder\$fileName")
 
-# Zip dosyasını çıkart
-Add-Type -AssemblyName System.IO.Compression.FileSystem
-[System.IO.Compression.ZipFile]::ExtractToDirectory("$minecraftFolder\$fileName", $minecraftFolder)
 
-# Zip dosyasını sil
-Remove-Item "$minecraftFolder\$fileName" -Force
+
+
 
 Write-Host "TLauncher Ayarı başarıyla yüklendi." -ForegroundColor Cyan
 

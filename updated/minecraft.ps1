@@ -23,6 +23,8 @@ switch ($secim) {
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/forge.ps1' | Invoke-Expression }"
     }
     3 {
+        $host.ui.RawUI.WindowTitle = "tlauncher Ayarı yükleniyor..."
+        Clear-Host
         $url = "https://github.com/SirriusV1/Oyun-Cfg/raw/main/updated/mc/tlauncher-2.0.properties.zip"
         $outputPath = "$env:USERPROFILE\AppData\Roaming\.tlauncher\tlauncher-2.0.properties"
 
@@ -34,6 +36,7 @@ switch ($secim) {
         # Dosyayı indir
         $webClient = New-Object System.Net.WebClient
         $webClient.DownloadFile($url, $outputPath)
+        Write-Host "tlauncher Ayarı başarıyla yüklendi." -ForegroundColor Cyan
 
         Start-Sleep -Seconds 1
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"

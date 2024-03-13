@@ -3,7 +3,7 @@ $host.ui.RawUI.WindowTitle = "Fabric Yükleniyor..."
 Clear-Host
 
 # Zip dosyasının indirileceği URL
-$zipUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/Fabric.zip"
+$zipUrl = "https://github.com/SirriusV1/Oyun-Cfg/blob/main/updated/mc/Fabric.zip"
 
 # Hedef klasör
 $minecraftFolder = "$env:USERPROFILE\AppData\Roaming\.minecraft"

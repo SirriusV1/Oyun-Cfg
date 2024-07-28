@@ -147,7 +147,7 @@ switch ($secim) {
         
     }
     5 {
-        Start-Process "https://discord.com/channels/148419527825162240/1118943418421362839"
+        Start-Process "discord://https://discord.com/channels/148419527825162240/1118943418421362839"
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
     }
     default {

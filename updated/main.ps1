@@ -11,7 +11,8 @@ Write-Host "3. Minecraft " -NoNewline
 Write-Host "1.20.1" -ForegroundColor Green
 Write-Host "4. Pubg "
 Write-Host "5. Nvidia Ayarları "
-$sec = "(1-5)"
+Write-Host "6.Windows Yardımcı Programı"
+$sec = "(1-6)"
 $secim = Read-Host "Lütfen bir numara girin $sec"
 
 
@@ -148,6 +149,10 @@ switch ($secim) {
     }
     5 {
         Start-Process "discord://https://discord.com/channels/148419527825162240/1118943418421362839"
+        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
+    }
+    6 {
+        powershell -Command "Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command irm https://christitus.com/win | iex' -Verb RunAs"
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
     }
     default {

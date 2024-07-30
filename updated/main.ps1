@@ -148,9 +148,7 @@ switch ($secim) {
         
     }
     5 {
-        Start-Process "discord://https://discord.com/channels/148419527825162240/1118943418421362839"
-        Clear-Host
-        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
+        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/dc.ps1' | Invoke-Expression }"
     }
     6 {
         powershell -Command "Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command irm https://christitus.com/win | iex' -Verb RunAs"

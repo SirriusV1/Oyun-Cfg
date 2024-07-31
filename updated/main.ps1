@@ -2,16 +2,7 @@
 $faviconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"
 
 # Kullanıcının masaüstü dizinini belirleme
-$desktopPath = [System.IO.Path]::Combine($env:USERPROFILE, 'Desktop')
-
-# OneDrive masaüstü dizini kontrolü
-$oneDriveDesktopPath = [System.IO.Path]::Combine($env:USERPROFILE, 'OneDrive', 'Desktop')
-
-# Kullanıcının masaüstü dizinini kontrol et ve doğru yolu belirle
-if (Test-Path $oneDriveDesktopPath) {
-    # OneDrive masaüstü varsa
-    $desktopPath = $oneDriveDesktopPath
-}
+$desktopPath = [Environment]::GetFolderPath("Desktop")
 
 # Dosya yolunu belirleme
 $iconPath = [System.IO.Path]::Combine($desktopPath, 'favicon.ico')
@@ -24,6 +15,7 @@ try {
     # Hata durumunda mesajı yazdır
     Write-Error "İco dosyası indirilemedi: $_"
 }
+
 
 
 

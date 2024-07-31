@@ -15,6 +15,7 @@ $shortcut = $shell.CreateShortcut($shortcutPath)
 $shortcut.TargetPath = "PowerShell.exe"
 $shortcut.Arguments = "-ExecutionPolicy Bypass -Command `"& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }`""
 $shortcut.WorkingDirectory = $desktopPath  # Çalışma dizini, kısayolu masaüstünde oluşturur
+$shortcut.Description = "Her Şey Sizin İçin..."  # Kısayolun açıklamasını değiştirir
 $shortcut.Save()
 
 # Favicon.ico'yu GitHub'dan indirin

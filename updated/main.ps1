@@ -229,7 +229,7 @@ switch ($secim) {
                     break
                 }
                 2 {
-                    PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/c++.ps1' | Invoke-Expression } -Verb RunAs"
+                    Start-Process PowerShell.exe -ArgumentList "-ExecutionPolicy Bypass -Command `"& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/c++.ps1' | Invoke-Expression }`"" -Verb RunAs
                 }
                 3 {
                     Start-Process "discord://discord.com/channels/148419527825162240/1118943418421362839"

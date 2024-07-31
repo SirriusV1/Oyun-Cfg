@@ -9,7 +9,7 @@ $iconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/fa
 $iconPath = [System.IO.Path]::Combine($documentsPath, "favicon.ico")
 
 # Kısayol dosyasının yolu
-$oldBatchFilePath = [System.IO.Path]::Combine($desktopPath, "ATA CFG.bat")
+$oldBatchFilePath = [System.IO.Path]::Combine($desktopPath, "ATA_CFG.bat")
 
 # WScript.Shell COM nesnesini oluşturun
 $shell = New-Object -ComObject WScript.Shell

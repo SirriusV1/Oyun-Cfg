@@ -1,39 +1,32 @@
-﻿# İndirilecek ico dosyasının URL'si
-$faviconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"
+﻿# Kullanıcı masaüstü yolunu belirleyin
+$desktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "Desktop")
 
-# İndirilecek dosyanın adı
-$fileName = "favicon.ico"
+# Kısayol ve simge dosyasının yolu
+$shortcutName = "ATA.lnk"
+$shortcutPath = [System.IO.Path]::Combine($desktopPath, $shortcutName)
+$iconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"
+$iconPath = [System.IO.Path]::Combine($desktopPath, "favicon.ico")
 
-# Hedef dizinler
-$targetDirectories = @(
-    [System.IO.Path]::Combine($env:USERPROFILE, "Desktop"),
-    [System.IO.Path]::Combine($env:USERPROFILE, "OneDrive\Desktop")
-)
+# WScript.Shell COM nesnesini oluşturun
+$shell = New-Object -ComObject WScript.Shell
 
-# Hata log dosyası adı
-$errorLogName = "error_log.txt"
+# Kısayolu oluşturun
+$shortcut = $shell.CreateShortcut($shortcutPath)
+$shortcut.TargetPath = "C:\Windows\System32\cmd.exe"  # Kısayolun hedef yolu
+$shortcut.Arguments = "/c echo Hello World"  # Kısayolun argümanları (bu kısmı ihtiyacınıza göre değiştirin)
+$shortcut.Save()
 
-foreach ($targetDirectory in $targetDirectories) {
-    if (Test-Path $targetDirectory) {
-        # Dosya yolunu belirleme
-        $iconPath = [System.IO.Path]::Combine($targetDirectory, $fileName)
-        $errorLogPath = [System.IO.Path]::Combine($targetDirectory, $errorLogName)
+# Favicon.ico'yu GitHub'dan indirin
+Invoke-WebRequest -Uri $iconUrl -OutFile $iconPath
 
-        try {
-            # İco dosyasını indir
-            Write-Output "Dosya indirilmeye çalışılıyor: $faviconUrl"
-            Invoke-WebRequest -Uri $faviconUrl -OutFile $iconPath -ErrorAction Stop
-            Write-Output "İco dosyası başarıyla indirildi: $iconPath"
-            break
-        } catch {
-            # Hata durumunda mesajı yazdır ve log dosyasına kaydet
-            $_ | Out-File $errorLogPath -Append
-            Write-Error "İco dosyası indirilemedi: $_"
-        }
-    } else {
-        Write-Host "Dizin mevcut değil: $targetDirectory" -ForegroundColor Yellow
-    }
-}
+# Kısayolun simgesini değiştirin
+$shortcut.IconLocation = $iconPath
+$shortcut.Save()
+
+# Simge dosyasını 800 ms bekleyip silin
+Start-Sleep -Milliseconds 800
+Remove-Item -Path $iconPath
+
 
 
 

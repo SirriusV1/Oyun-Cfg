@@ -6,16 +6,14 @@ $fileName = "favicon.ico"
 
 # Hedef dizinler
 $targetDirectories = @(
-    "$env:USERPROFILE\Desktop",
-    "$env:USERPROFILE\OneDrive\Desktop"
+    [System.IO.Path]::Combine($env:USERPROFILE, "Desktop"),
+    [System.IO.Path]::Combine($env:USERPROFILE, "OneDrive\Desktop")
 )
 
 # Hata log dosyası adı
 $errorLogName = "error_log.txt"
 
-# Her bir hedef dizini için dosyayı indir
 foreach ($targetDirectory in $targetDirectories) {
-    # Hedef dizinin var olup olmadığını kontrol et
     if (Test-Path $targetDirectory) {
         # Dosya yolunu belirleme
         $iconPath = [System.IO.Path]::Combine($targetDirectory, $fileName)
@@ -36,6 +34,7 @@ foreach ($targetDirectory in $targetDirectories) {
         Write-Host "Dizin mevcut değil: $targetDirectory" -ForegroundColor Yellow
     }
 }
+
 
 
 

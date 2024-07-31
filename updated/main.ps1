@@ -73,9 +73,8 @@ Write-Host "1.0.6 [21.02.2024]" -ForegroundColor Green
 Write-Host "3. Minecraft " -NoNewline
 Write-Host "1.20.1" -ForegroundColor Green
 Write-Host "4. Pubg "
-Write-Host "5. Nvidia Ayarları "
-Write-Host "6. Windows Yardımcı Programı"
-$sec = "(1-6)"
+Write-Host "5. Pc Ayar "
+$sec = "(1-5)"
 $secim = Read-Host "Lütfen bir numara girin $sec"
 
 
@@ -211,11 +210,42 @@ switch ($secim) {
         
     }
     5 {
-        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/dc.ps1' | Invoke-Expression }"
-    }
-    6 {
-        powershell -Command "Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command irm https://christitus.com/win | iex' -Verb RunAs"
-        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
+        while ($true) {
+            clear-host
+            $host.ui.RawUI.WindowTitle = "Pc Menü"
+            Write-Host "        ╔═══════════╗"  -ForegroundColor Blue
+            Write-Host "        ║  Pc Menü  ║"  -ForegroundColor Blue
+            Write-Host "        ╚═══════════╝"  -ForegroundColor Blue
+            Write-Host ""
+            Write-Host "1. Chris Titus Tech's Windows Utility "
+            Write-Host "2. C++ All-in-One + Java 8 "
+            Write-Host "3. Nvidia Ayarları "
+            Write-Host "4. Geri Dön" -ForegroundColor Cyan
+            $subSecim = Read-Host "Lütfen bir numara girin (1-4)"
+
+            switch ($subSecim) {
+                1 {
+                    powershell -Command "Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command irm https://christitus.com/win | iex' -Verb RunAs"
+                    break
+                }
+                2 {
+                    PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/c++.ps1' | Invoke-Expression } -Verb RunAs"
+                }
+                3 {
+                    Start-Process "discord://discord.com/channels/148419527825162240/1118943418421362839"
+                    Start-Sleep -Milliseconds 500
+                    Clear-Host
+                }
+                4 {
+                    PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
+                }
+                default {
+                    Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-4 arasında bir numara girin." -ForegroundColor Red
+                    Start-Sleep -Seconds 1
+                    break
+                }
+            }
+        }
     }
     default {
         Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-5 arasinda bir numara girin." -ForegroundColor Red

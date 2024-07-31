@@ -1,8 +1,14 @@
 ﻿# Kısayol ve simge URL'leri
 $faviconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"
-$iconPath = [System.IO.Path]::Combine($env:USERPROFILE, 'Desktop', 'favicon.ico')
-$shortcutPath = [System.IO.Path]::Combine($env:USERPROFILE, 'Desktop', 'ATA.lnk')
-$errorLogPath = [System.IO.Path]::Combine($env:USERPROFILE, 'Desktop', 'error_log.txt')
+$iconPath = [System.IO.Path]::Combine($desktopPath, 'favicon.ico')
+$shortcutPath = [System.IO.Path]::Combine($desktopPath, 'ATA.lnk')
+$errorLogPath = [System.IO.Path]::Combine($desktopPath, 'error_log.txt')
+
+# OneDrive Desktop yolu kontrolü
+$desktopPath = [System.IO.Path]::Combine($env:USERPROFILE, 'Desktop')
+if (Test-Path "$env:OneDrive\Desktop") {
+    $desktopPath = [System.IO.Path]::Combine($env:OneDrive, 'Desktop')
+}
 
 if ([string]::IsNullOrEmpty($faviconUrl)) {
     Write-Error "Favicon URL'si geçersiz veya boş."

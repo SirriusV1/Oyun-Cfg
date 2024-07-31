@@ -1,5 +1,9 @@
-﻿# Kullanıcı klasörlerinin yollarını belirleyin
-$desktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "Desktop")
+﻿# Kullanıcı masaüstü yolunu belirleyin
+$oneDriveDesktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "OneDrive", "Desktop")
+$defaultDesktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "Desktop")
+$desktopPath = if (Test-Path -Path $oneDriveDesktopPath) { $oneDriveDesktopPath } else { $defaultDesktopPath }
+
+# Belgelerim yolunu belirleyin
 $documentsPath = [System.IO.Path]::Combine($env:USERPROFILE, "Documents")
 
 # Kısayol ve simge dosyasının yolu
@@ -7,7 +11,7 @@ $shortcutName = "ATA.lnk"
 $shortcutPath = [System.IO.Path]::Combine($desktopPath, $shortcutName)
 $iconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"
 $iconPath = [System.IO.Path]::Combine($documentsPath, "favicon.ico")
-$oldBatchFilePath = [System.IO.Path]::Combine($desktopPath, "ATA_CFG.bat")
+$oldBatchFilePath = [System.IO.Path]::Combine($desktopPath, "ATA CFG.bat")
 
 # GitHub'daki favicon.ico'nun boyutunu al
 function Get-FileSize {
@@ -31,23 +35,26 @@ $localIconSize = if (Test-Path -Path $iconPath) {
     0
 }
 
-# Simge dosyasını indirme ve kısayolu güncelleme işlemi
-if ($localIconSize -ne $githubIconSize) {
-    # Favicon.ico'yu GitHub'dan indirin
-    Invoke-WebRequest -Uri $iconUrl -OutFile $iconPath -UseBasicP
-    # Not: -UseBasicP parametresi sadece örnektir, çalıştırmak için deneyebilirsiniz
+# Kısayolu kontrol edin ve gerekiyorsa oluşturun
+$updateShortcut = $false
 
-    # Kısayolu oluşturun veya güncelleyin
+if (-Not (Test-Path -Path $shortcutPath)) {
+    $updateShortcut = $true
+} elseif ($localIconSize -ne $githubIconSize) {
+    # Favicon.ico'yu GitHub'dan indirin
+    Invoke-WebRequest -Uri $iconUrl -OutFile $iconPath
+    $updateShortcut = $true
+}
+
+# Eğer kısayol güncellenmeli veya yeni oluşturulmalıysa
+if ($updateShortcut) {
+    # WScript.Shell COM nesnesini oluşturun
     $shell = New-Object -ComObject WScript.Shell
-    if (Test-Path -Path $shortcutPath) {
-        $shortcut = $shell.CreateShortcut($shortcutPath)
-    } else {
-        $shortcut = $shell.CreateShortcut($shortcutPath)
-        $shortcut.TargetPath = "PowerShell.exe"
-        $shortcut.Arguments = "-ExecutionPolicy Bypass -Command `"& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }`""
-        $shortcut.WorkingDirectory = $desktopPath
-        $shortcut.Description = "Her Şey Sizin İçin..."
-    }
+    $shortcut = $shell.CreateShortcut($shortcutPath)
+    $shortcut.TargetPath = "PowerShell.exe"
+    $shortcut.Arguments = "-ExecutionPolicy Bypass -Command `"& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }`""
+    $shortcut.WorkingDirectory = $desktopPath
+    $shortcut.Description = "ATA Script"
     $shortcut.IconLocation = $iconPath
     $shortcut.Save()
 }

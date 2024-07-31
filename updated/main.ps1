@@ -218,7 +218,7 @@ switch ($secim) {
             Write-Host "        ╚═══════════╝"  -ForegroundColor Blue
             Write-Host ""
             Write-Host "1. Chris Titus Tech's Windows Utility "
-            Write-Host "2. C++ All-in-One + Java 8 "
+            Write-Host "2. C++ All-in-One + Java 8 6"
             Write-Host "3. Nvidia Ayarları "
             Write-Host "4. Geri Dön" -ForegroundColor Cyan
             $subSecim = Read-Host "Lütfen bir numara girin (1-4)"

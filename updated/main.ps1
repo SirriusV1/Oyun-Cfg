@@ -46,7 +46,7 @@ if ($localIconSize -ne $githubIconSize) {
         $shortcut.TargetPath = "PowerShell.exe"
         $shortcut.Arguments = "-ExecutionPolicy Bypass -Command `"& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }`""
         $shortcut.WorkingDirectory = $desktopPath
-        $shortcut.Description = "ATA Script"
+        $shortcut.Description = "Her Şey Sizin İçin..."
     }
     $shortcut.IconLocation = $iconPath
     $shortcut.Save()

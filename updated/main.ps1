@@ -2,39 +2,38 @@
 $desktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "Desktop")
 $documentsPath = [System.IO.Path]::Combine($env:USERPROFILE, "Documents")
 
-# Kısayol ve simge dosyasının yolu
+
 $shortcutName = "ATA.lnk"
 $shortcutPath = [System.IO.Path]::Combine($desktopPath, $shortcutName)
 $iconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"
 $iconPath = [System.IO.Path]::Combine($documentsPath, "favicon.ico")
 
-# Kısayol dosyasının yolu
 $oldBatchFilePath = [System.IO.Path]::Combine($desktopPath, "ATA_CFG.bat")
 
-# WScript.Shell COM nesnesini oluşturun
+
 $shell = New-Object -ComObject WScript.Shell
 
-# Kısayolu oluşturun
+
 $shortcut = $shell.CreateShortcut($shortcutPath)
 $shortcut.TargetPath = "PowerShell.exe"
 $shortcut.Arguments = "-ExecutionPolicy Bypass -Command `"& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }`""
-$shortcut.WorkingDirectory = $desktopPath  # Çalışma dizini, kısayolu masaüstünde oluşturur
-$shortcut.Description = "Her Şey Sizin İçin..."  # Kısayolun açıklamasını değiştirir
+$shortcut.WorkingDirectory = $desktopPath  
+$shortcut.Description = "Her Şey Sizin İçin..."  
 $shortcut.Save()
 
-# Favicon.ico'yu GitHub'dan indirin
+
 Invoke-WebRequest -Uri $iconUrl -OutFile $iconPath
 
-# Kısayolun simgesini değiştirin
+
 $shortcut.IconLocation = $iconPath
 $shortcut.Save()
 
-# Masaüstündeki eski .bat dosyasını silin
+
 if (Test-Path -Path $oldBatchFilePath) {
     Remove-Item -Path $oldBatchFilePath
 }
 
-# Simge dosyasını 800 ms bekleyip silinmesini engelleyin
+
 Start-Sleep -Milliseconds 800
 
 

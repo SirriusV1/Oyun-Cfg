@@ -1,54 +1,30 @@
-﻿# Kısayol ve simge URL'leri
+﻿# İndirilecek ico dosyasının URL'si
 $faviconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"
-$iconPath = [System.IO.Path]::Combine($desktopPath, 'favicon.ico')
-$shortcutPath = [System.IO.Path]::Combine($desktopPath, 'ATA.lnk')
-$errorLogPath = [System.IO.Path]::Combine($desktopPath, 'error_log.txt')
 
-# OneDrive Desktop yolu kontrolü
+# Kullanıcının masaüstü dizinini belirleme
 $desktopPath = [System.IO.Path]::Combine($env:USERPROFILE, 'Desktop')
-if (Test-Path "$env:OneDrive\Desktop") {
-    $desktopPath = [System.IO.Path]::Combine($env:OneDrive, 'Desktop')
+
+# OneDrive masaüstü dizini kontrolü
+$oneDriveDesktopPath = [System.IO.Path]::Combine($env:USERPROFILE, 'OneDrive', 'Desktop')
+
+# Kullanıcının masaüstü dizinini kontrol et ve doğru yolu belirle
+if (Test-Path $oneDriveDesktopPath) {
+    # OneDrive masaüstü varsa
+    $desktopPath = $oneDriveDesktopPath
 }
 
-if ([string]::IsNullOrEmpty($faviconUrl)) {
-    Write-Error "Favicon URL'si geçersiz veya boş."
-    exit
-}
+# Dosya yolunu belirleme
+$iconPath = [System.IO.Path]::Combine($desktopPath, 'favicon.ico')
 
-# Favicon.ico dosyasını indir
 try {
+    # İco dosyasını indir
     Invoke-WebRequest -Uri $faviconUrl -OutFile $iconPath -ErrorAction Stop
+    Write-Output "İco dosyası başarıyla indirildi: $iconPath"
 } catch {
-    $_ | Out-File $errorLogPath -Append
-    Write-Error "İkon dosyası indirilemedi: $_"
-    exit
+    # Hata durumunda mesajı yazdır
+    Write-Error "İco dosyası indirilemedi: $_"
 }
 
-# Kısayolu oluştur veya güncelle
-try {
-    $WshShell = New-Object -ComObject WScript.Shell
-    $Shortcut = $WshShell.CreateShortcut($shortcutPath)
-    $Shortcut.TargetPath = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-    $Shortcut.Arguments = "-ExecutionPolicy Bypass -Command & { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
-    $Shortcut.WorkingDirectory = "C:\Path\To\Working\Directory"  # Gerekirse bu yolu güncelleyin
-    $Shortcut.IconLocation = $iconPath
-    $Shortcut.Save()
-} catch {
-    $_ | Out-File $errorLogPath -Append
-    Write-Error "Kısayol oluşturulamadı: $_"
-    exit
-}
-
-# Kısayolu oluşturduktan sonra kısa bir bekleme süresi ekleyin
-Start-Sleep -Milliseconds 1000
-
-# İndirilen ikon dosyasını sil
-try {
-    Remove-Item -Path $iconPath -Force -ErrorAction Stop
-} catch {
-    $_ | Out-File $errorLogPath -Append
-    Write-Error "İkon dosyası silinemedi: $_"
-}
 
 
 

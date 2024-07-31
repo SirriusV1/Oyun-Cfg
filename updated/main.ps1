@@ -1,8 +1,13 @@
 ﻿# Kısayol ve simge URL'leri
-$faviconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"  # Simge URL'sini güncelleyin
+$faviconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"
 $iconPath = [System.IO.Path]::Combine($env:USERPROFILE, 'Desktop', 'favicon.ico')
 $shortcutPath = [System.IO.Path]::Combine($env:USERPROFILE, 'Desktop', 'ATA.lnk')
 $errorLogPath = [System.IO.Path]::Combine($env:USERPROFILE, 'Desktop', 'error_log.txt')
+
+if ([string]::IsNullOrEmpty($faviconUrl)) {
+    Write-Error "Favicon URL'si geçersiz veya boş."
+    exit
+}
 
 # Favicon.ico dosyasını indir
 try {
@@ -38,6 +43,7 @@ try {
     $_ | Out-File $errorLogPath -Append
     Write-Error "İkon dosyası silinemedi: $_"
 }
+
 
 
 $host.ui.RawUI.WindowTitle = "ATA CFG"

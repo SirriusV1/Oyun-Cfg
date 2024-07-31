@@ -7,7 +7,7 @@ $desktopPath = if (Test-Path -Path $oneDriveDesktopPath) { $oneDriveDesktopPath 
 $documentsPath = [System.IO.Path]::Combine($env:USERPROFILE, "Documents")
 
 # Kısayol ve simge dosyasının yolu
-$shortcutName = "ATA.lnk"
+$shortcutName = "ATA Script.lnk"
 $shortcutPath = [System.IO.Path]::Combine($desktopPath, $shortcutName)
 $iconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"
 $iconPath = [System.IO.Path]::Combine($documentsPath, "favicon.ico")

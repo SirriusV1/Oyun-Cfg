@@ -1,30 +1,41 @@
 ﻿# İndirilecek ico dosyasının URL'si
 $faviconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"
 
-# Kullanıcının masaüstü dizinini kontrol et
-# OneDrive dizinini kontrol et ve yoksa varsayılan masaüstü dizinini kullan
-$desktopPath = "$env:USERPROFILE\Desktop"
-if (Test-Path "$env:USERPROFILE\OneDrive\Desktop") {
-    $desktopPath = "$env:USERPROFILE\OneDrive\Desktop"
+# İndirilecek dosyanın adı
+$fileName = "favicon.ico"
+
+# Hedef dizinler
+$targetDirectories = @(
+    "$env:USERPROFILE\Desktop",
+    "$env:USERPROFILE\OneDrive\Desktop"
+)
+
+# Hata log dosyası adı
+$errorLogName = "error_log.txt"
+
+# Her bir hedef dizini için dosyayı indir
+foreach ($targetDirectory in $targetDirectories) {
+    # Hedef dizinin var olup olmadığını kontrol et
+    if (Test-Path $targetDirectory) {
+        # Dosya yolunu belirleme
+        $iconPath = [System.IO.Path]::Combine($targetDirectory, $fileName)
+        $errorLogPath = [System.IO.Path]::Combine($targetDirectory, $errorLogName)
+
+        try {
+            # İco dosyasını indir
+            Write-Output "Dosya indirilmeye çalışılıyor: $faviconUrl"
+            Invoke-WebRequest -Uri $faviconUrl -OutFile $iconPath -ErrorAction Stop
+            Write-Output "İco dosyası başarıyla indirildi: $iconPath"
+            break
+        } catch {
+            # Hata durumunda mesajı yazdır ve log dosyasına kaydet
+            $_ | Out-File $errorLogPath -Append
+            Write-Error "İco dosyası indirilemedi: $_"
+        }
+    } else {
+        Write-Host "Dizin mevcut değil: $targetDirectory" -ForegroundColor Yellow
+    }
 }
-
-# Dosya yolunu belirleme
-$iconPath = [System.IO.Path]::Combine($desktopPath, 'favicon.ico')
-
-# Hata log dosyası
-$errorLogPath = [System.IO.Path]::Combine($desktopPath, 'error_log.txt')
-
-try {
-    # İco dosyasını indir
-    Write-Output "Dosya indirilmeye çalışılıyor: $faviconUrl"
-    Invoke-WebRequest -Uri $faviconUrl -OutFile $iconPath -ErrorAction Stop
-    Write-Output "İco dosyası başarıyla indirildi: $iconPath"
-} catch {
-    # Hata durumunda mesajı yazdır ve log dosyasına kaydet
-    $_ | Out-File $errorLogPath -Append
-    Write-Error "İco dosyası indirilemedi: $_"
-}
-
 
 
 

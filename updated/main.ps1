@@ -1,20 +1,30 @@
 ﻿# İndirilecek ico dosyasının URL'si
-$faviconUrl = "https://cdn.icon-icons.com/icons2/2248/PNG/512/text_to_speech_icon_135108.png"
+$faviconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"
 
-# Kullanıcının masaüstü dizinini belirleme
-$desktopPath = [Environment]::GetFolderPath("Desktop")
+# Kullanıcının masaüstü dizinini kontrol et
+# OneDrive dizinini kontrol et ve yoksa varsayılan masaüstü dizinini kullan
+$desktopPath = "$env:USERPROFILE\Desktop"
+if (Test-Path "$env:USERPROFILE\OneDrive\Desktop") {
+    $desktopPath = "$env:USERPROFILE\OneDrive\Desktop"
+}
 
 # Dosya yolunu belirleme
 $iconPath = [System.IO.Path]::Combine($desktopPath, 'favicon.ico')
 
+# Hata log dosyası
+$errorLogPath = [System.IO.Path]::Combine($desktopPath, 'error_log.txt')
+
 try {
     # İco dosyasını indir
+    Write-Output "Dosya indirilmeye çalışılıyor: $faviconUrl"
     Invoke-WebRequest -Uri $faviconUrl -OutFile $iconPath -ErrorAction Stop
     Write-Output "İco dosyası başarıyla indirildi: $iconPath"
 } catch {
-    # Hata durumunda mesajı yazdır
+    # Hata durumunda mesajı yazdır ve log dosyasına kaydet
+    $_ | Out-File $errorLogPath -Append
     Write-Error "İco dosyası indirilemedi: $_"
 }
+
 
 
 

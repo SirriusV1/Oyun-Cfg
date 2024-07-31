@@ -1,4 +1,4 @@
-﻿# Kullanıcı klasörlerinin yollarını belirleyin
+﻿
 $desktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "Desktop")
 $documentsPath = [System.IO.Path]::Combine($env:USERPROFILE, "Documents")
 

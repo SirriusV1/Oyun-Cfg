@@ -1,4 +1,37 @@
-﻿
+﻿# OneDrive Klasör Yolu
+$oneDrivePath = [System.IO.Path]::Combine($env:USERPROFILE, 'OneDrive')
+
+# Masaüstü Yolunu Bulma
+if (Test-Path $oneDrivePath) {
+    $desktopPath = [System.IO.Path]::Combine($oneDrivePath, 'Desktop')
+} else {
+    # Eğer OneDrive yolu mevcut değilse, standart Desktop yolunu kullan
+    $desktopPath = [System.IO.Path]::Combine($env:USERPROFILE, 'Desktop')
+}
+
+# Kısayol ve simge URL'leri
+$faviconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/logo.ico"
+$iconPath = [System.IO.Path]::Combine($desktopPath, 'favicon.ico')
+$shortcutPath = [System.IO.Path]::Combine($desktopPath, 'ATA.lnk')
+
+# Favicon.ico dosyasını indir
+Invoke-WebRequest -Uri $faviconUrl -OutFile $iconPath
+
+# Kısayolu oluştur veya güncelle
+$WshShell = New-Object -ComObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut($shortcutPath)
+$Shortcut.TargetPath = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
+$Shortcut.Arguments = "-ExecutionPolicy Bypass -Command `& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }`"
+$Shortcut.WorkingDirectory = "C:\Path\To\Working\Directory" # Çalışma dizini, gerekirse ayarlayın
+$Shortcut.IconLocation = $iconPath
+$Shortcut.Save()
+
+# İndirilen ikon dosyasını sil
+Remove-Item -Path $iconPath -Force
+
+
+
+
 $host.ui.RawUI.WindowTitle = "ATA CFG"
 Clear-Host
 

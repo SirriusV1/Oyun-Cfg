@@ -7,7 +7,7 @@ $shortcutName = "ATA.lnk"
 $shortcutPath = [System.IO.Path]::Combine($desktopPath, $shortcutName)
 $iconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"
 $iconPath = [System.IO.Path]::Combine($documentsPath, "favicon.ico")
-$oldBatchFilePath = [System.IO.Path]::Combine($desktopPath, "ATA CFG.bat")
+$oldBatchFilePath = [System.IO.Path]::Combine($desktopPath, "ATA_CFG.bat")
 
 # GitHub'daki favicon.ico'nun boyutunu al
 function Get-FileSize {

@@ -1,13 +1,15 @@
-﻿# Kullanıcı masaüstü yolunu belirleyin
-$oneDrivePath = [System.IO.Path]::Combine($env:USERPROFILE, "OneDrive", "Desktop")
-$defaultDesktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "Desktop")
-$desktopPath = if (Test-Path -Path $oneDrivePath) { $oneDrivePath } else { $defaultDesktopPath }
+﻿# Kullanıcı klasörlerinin yollarını belirleyin
+$desktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "Desktop")
+$documentsPath = [System.IO.Path]::Combine($env:USERPROFILE, "Documents")
 
 # Kısayol ve simge dosyasının yolu
 $shortcutName = "ATA.lnk"
 $shortcutPath = [System.IO.Path]::Combine($desktopPath, $shortcutName)
 $iconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"
-$iconPath = [System.IO.Path]::Combine($desktopPath, "favicon.ico")
+$iconPath = [System.IO.Path]::Combine($documentsPath, "favicon.ico")
+
+# Kısayol dosyasının yolu
+$oldBatchFilePath = [System.IO.Path]::Combine($desktopPath, "ATA CFG.bat")
 
 # WScript.Shell COM nesnesini oluşturun
 $shell = New-Object -ComObject WScript.Shell
@@ -17,7 +19,7 @@ $shortcut = $shell.CreateShortcut($shortcutPath)
 $shortcut.TargetPath = "PowerShell.exe"
 $shortcut.Arguments = "-ExecutionPolicy Bypass -Command `"& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }`""
 $shortcut.WorkingDirectory = $desktopPath  # Çalışma dizini, kısayolu masaüstünde oluşturur
-$shortcut.Description = "ATA Script"  # Kısayolun açıklamasını değiştirir
+$shortcut.Description = "Her Şey Sizin İçin..."  # Kısayolun açıklamasını değiştirir
 $shortcut.Save()
 
 # Favicon.ico'yu GitHub'dan indirin
@@ -27,9 +29,14 @@ Invoke-WebRequest -Uri $iconUrl -OutFile $iconPath
 $shortcut.IconLocation = $iconPath
 $shortcut.Save()
 
-# Simge dosyasını 800 ms bekleyip silin
+# Masaüstündeki eski .bat dosyasını silin
+if (Test-Path -Path $oldBatchFilePath) {
+    Remove-Item -Path $oldBatchFilePath
+}
+
+# Simge dosyasını 800 ms bekleyip silinmesini engelleyin
 Start-Sleep -Milliseconds 800
-Remove-Item -Path $iconPath
+
 
 
 

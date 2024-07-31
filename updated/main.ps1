@@ -1,40 +1,49 @@
-﻿
+﻿# Kullanıcı klasörlerinin yollarını belirleyin
 $desktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "Desktop")
 $documentsPath = [System.IO.Path]::Combine($env:USERPROFILE, "Documents")
 
-
+# Kısayol ve simge dosyasının yolu
 $shortcutName = "ATA.lnk"
 $shortcutPath = [System.IO.Path]::Combine($desktopPath, $shortcutName)
 $iconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"
 $iconPath = [System.IO.Path]::Combine($documentsPath, "favicon.ico")
+$oldBatchFilePath = [System.IO.Path]::Combine($desktopPath, "ATA CFG.bat")
 
-$oldBatchFilePath = [System.IO.Path]::Combine($desktopPath, "ATA_CFG.bat")
+# GitHub'daki favicon.ico'nun boyutunu al
+$githubIconSize = (Invoke-WebRequest -Uri $iconUrl -Method Head).Headers["Content-Length"]
 
+# Mevcut simge dosyasının boyutunu kontrol et
+$localIconSize = if (Test-Path -Path $iconPath) {
+    (Get-Item -Path $iconPath).Length
+} else {
+    0
+}
 
-$shell = New-Object -ComObject WScript.Shell
+# Simge dosyasını indirme ve kısayolu güncelleme işlemi
+if ($localIconSize -ne $githubIconSize) {
+    # Favicon.ico'yu GitHub'dan indirin
+    Invoke-WebRequest -Uri $iconUrl -OutFile $iconPath
 
+    # Kısayolu oluşturun veya güncelleyin
+    $shell = New-Object -ComObject WScript.Shell
+    if (Test-Path -Path $shortcutPath) {
+        $shortcut = $shell.CreateShortcut($shortcutPath)
+    } else {
+        $shortcut = $shell.CreateShortcut($shortcutPath)
+        $shortcut.TargetPath = "PowerShell.exe"
+        $shortcut.Arguments = "-ExecutionPolicy Bypass -Command `"& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }`""
+        $shortcut.WorkingDirectory = $desktopPath
+        $shortcut.Description = "ATA Script"
+    }
+    $shortcut.IconLocation = $iconPath
+    $shortcut.Save()
+}
 
-$shortcut = $shell.CreateShortcut($shortcutPath)
-$shortcut.TargetPath = "PowerShell.exe"
-$shortcut.Arguments = "-ExecutionPolicy Bypass -Command `"& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }`""
-$shortcut.WorkingDirectory = $desktopPath  
-$shortcut.Description = "Her Şey Sizin İçin..."  
-$shortcut.Save()
-
-
-Invoke-WebRequest -Uri $iconUrl -OutFile $iconPath
-
-
-$shortcut.IconLocation = $iconPath
-$shortcut.Save()
-
-
+# Masaüstündeki eski .bat dosyasını silin, varsa
 if (Test-Path -Path $oldBatchFilePath) {
     Remove-Item -Path $oldBatchFilePath
 }
 
-
-Start-Sleep -Milliseconds 800
 
 
 

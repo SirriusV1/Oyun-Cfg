@@ -1,5 +1,7 @@
 ﻿# Kullanıcı masaüstü yolunu belirleyin
-$desktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "Desktop")
+$oneDrivePath = [System.IO.Path]::Combine($env:USERPROFILE, "OneDrive", "Desktop")
+$defaultDesktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "Desktop")
+$desktopPath = if (Test-Path -Path $oneDrivePath) { $oneDrivePath } else { $defaultDesktopPath }
 
 # Kısayol ve simge dosyasının yolu
 $shortcutName = "ATA.lnk"
@@ -15,7 +17,7 @@ $shortcut = $shell.CreateShortcut($shortcutPath)
 $shortcut.TargetPath = "PowerShell.exe"
 $shortcut.Arguments = "-ExecutionPolicy Bypass -Command `"& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }`""
 $shortcut.WorkingDirectory = $desktopPath  # Çalışma dizini, kısayolu masaüstünde oluşturur
-$shortcut.Description = "Her Şey Sizin İçin..."  # Kısayolun açıklamasını değiştirir
+$shortcut.Description = "ATA Script"  # Kısayolun açıklamasını değiştirir
 $shortcut.Save()
 
 # Favicon.ico'yu GitHub'dan indirin
@@ -28,8 +30,6 @@ $shortcut.Save()
 # Simge dosyasını 800 ms bekleyip silin
 Start-Sleep -Milliseconds 800
 Remove-Item -Path $iconPath
-
-
 
 
 

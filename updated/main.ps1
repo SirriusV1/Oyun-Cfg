@@ -25,6 +25,9 @@ try {
     exit
 }
 
+# Kısayolu oluşturduktan sonra kısa bir bekleme süresi ekleyin
+Start-Sleep -Milliseconds 1000
+
 # İndirilen ikon dosyasını sil
 try {
     Remove-Item -Path $iconPath -Force -ErrorAction Stop

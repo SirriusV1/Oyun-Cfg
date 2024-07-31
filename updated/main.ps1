@@ -10,7 +10,19 @@ $iconPath = [System.IO.Path]::Combine($documentsPath, "favicon.ico")
 $oldBatchFilePath = [System.IO.Path]::Combine($desktopPath, "ATA CFG.bat")
 
 # GitHub'daki favicon.ico'nun boyutunu al
-$githubIconSize = (Invoke-WebRequest -Uri $iconUrl -Method Head).Headers["Content-Length"]
+function Get-FileSize {
+    param (
+        [string]$url
+    )
+    $request = [System.Net.HttpWebRequest]::Create($url)
+    $request.Method = "HEAD"
+    $response = $request.GetResponse()
+    $size = $response.Headers["Content-Length"]
+    $response.Close()
+    return $size
+}
+
+$githubIconSize = Get-FileSize -url $iconUrl
 
 # Mevcut simge dosyasının boyutunu kontrol et
 $localIconSize = if (Test-Path -Path $iconPath) {
@@ -22,7 +34,8 @@ $localIconSize = if (Test-Path -Path $iconPath) {
 # Simge dosyasını indirme ve kısayolu güncelleme işlemi
 if ($localIconSize -ne $githubIconSize) {
     # Favicon.ico'yu GitHub'dan indirin
-    Invoke-WebRequest -Uri $iconUrl -OutFile $iconPath
+    Invoke-WebRequest -Uri $iconUrl -OutFile $iconPath -UseBasicP
+    # Not: -UseBasicP parametresi sadece örnektir, çalıştırmak için deneyebilirsiniz
 
     # Kısayolu oluşturun veya güncelleyin
     $shell = New-Object -ComObject WScript.Shell

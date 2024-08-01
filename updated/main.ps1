@@ -239,7 +239,7 @@ switch ($secim) {
                     Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/c++.ps1'' | Invoke-Expression }"' -Verb RunAs
                 }
                 3 {
-                    Start-Process "discord://discord.com/channels/148419527825162240/1118943418421362839"
+                    Start-Process "discord://discord.com/channels/148419527825162240/1118943418421362839/1118945575040192614"
                     Start-Sleep -Milliseconds 500
                     Clear-Host
                 }

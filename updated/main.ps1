@@ -3,8 +3,10 @@ $oneDriveDesktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "OneDrive", "
 $defaultDesktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "Desktop")
 $desktopPath = if (Test-Path -Path $oneDriveDesktopPath) { $oneDriveDesktopPath } else { $defaultDesktopPath }
 
-# Belgelerim yolunu belirleyin
-$documentsPath = [System.IO.Path]::Combine($env:USERPROFILE, "Documents")
+# Kullanıcı belgelerim yolunu belirleyin
+$oneDriveDocumentsPath = [System.IO.Path]::Combine($env:USERPROFILE, "OneDrive", "Documents")
+$defaultDocumentsPath = [System.IO.Path]::Combine($env:USERPROFILE, "Documents")
+$documentsPath = if (Test-Path -Path $oneDriveDocumentsPath) { $oneDriveDocumentsPath } else { $defaultDocumentsPath }
 
 # Kısayol ve simge dosyasının yolu
 $shortcutName = "ATA Script.lnk"

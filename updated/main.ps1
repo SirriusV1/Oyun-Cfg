@@ -35,12 +35,17 @@ function Get-FileSize {
     param (
         [string]$url
     )
-    $request = [System.Net.HttpWebRequest]::Create($url)
-    $request.Method = "HEAD"
-    $response = $request.GetResponse()
-    $size = $response.Headers["Content-Length"]
-    $response.Close()
-    return $size
+    try {
+        $request = [System.Net.HttpWebRequest]::Create($url)
+        $request.Method = "HEAD"
+        $response = $request.GetResponse()
+        $size = $response.Headers["Content-Length"]
+        $response.Close()
+        return $size
+    } catch {
+        Write-Error "Dosya boyutu alınırken hata oluştu: $_"
+        return $null
+    }
 }
 
 $githubIconSize = Get-FileSize -url $iconUrl
@@ -58,29 +63,40 @@ $updateShortcut = $false
 if (-Not (Test-Path -Path $shortcutPath)) {
     $updateShortcut = $true
 } elseif ($localIconSize -ne $githubIconSize) {
-    # Favicon.ico'yu GitHub'dan indirin
-    Invoke-WebRequest -Uri $iconUrl -OutFile $iconPath
-    $updateShortcut = $true
+    try {
+        # Favicon.ico'yu GitHub'dan indirin
+        Invoke-WebRequest -Uri $iconUrl -OutFile $iconPath -UseBasicP
+        $updateShortcut = $true
+    } catch {
+        Write-Error "Simge dosyasını indirirken hata oluştu: $_"
+    }
 }
 
 # Eğer kısayol güncellenmeli veya yeni oluşturulmalıysa
 if ($updateShortcut) {
-    # WScript.Shell COM nesnesini oluşturun
-    $shell = New-Object -ComObject WScript.Shell
-    $shortcut = $shell.CreateShortcut($shortcutPath)
-    $shortcut.TargetPath = "PowerShell.exe"
-    $shortcut.Arguments = "-ExecutionPolicy Bypass -Command `"& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }`""
-    $shortcut.WorkingDirectory = $desktopPath
-    $shortcut.Description = "Her Şey Sizin İçin..."
-    $shortcut.IconLocation = $iconPath
-    $shortcut.Save()
+    try {
+        # WScript.Shell COM nesnesini oluşturun
+        $shell = New-Object -ComObject WScript.Shell
+        $shortcut = $shell.CreateShortcut($shortcutPath)
+        $shortcut.TargetPath = "PowerShell.exe"
+        $shortcut.Arguments = "-ExecutionPolicy Bypass -Command `"& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }`""
+        $shortcut.WorkingDirectory = $desktopPath
+        $shortcut.Description = "Her Şey Sizin İçin..."
+        $shortcut.IconLocation = $iconPath
+        $shortcut.Save()
+    } catch {
+        Write-Error "Kısayolu oluştururken hata oluştu: $_"
+    }
 }
 
 # Masaüstündeki eski .bat dosyasını silin, varsa
 if (Test-Path -Path $oldBatchFilePath) {
-    Remove-Item -Path $oldBatchFilePath
+    try {
+        Remove-Item -Path $oldBatchFilePath
+    } catch {
+        Write-Error "Eski .bat dosyasını silerken hata oluştu: $_"
+    }
 }
-
 
 
 $host.ui.RawUI.WindowTitle = "ATA CFG"

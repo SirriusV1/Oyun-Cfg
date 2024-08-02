@@ -1,12 +1,27 @@
-﻿# Kullanıcı masaüstü yolunu belirleyin
+﻿# Fonksiyon: Belirtilen klasör adının olup olmadığını kontrol eder
+function Test-PathWithFallback {
+    param (
+        [string]$fallbackPath,
+        [string]$primaryPath
+    )
+    if (Test-Path -Path $primaryPath) {
+        return $primaryPath
+    } elseif (Test-Path -Path $fallbackPath) {
+        return $fallbackPath
+    } else {
+        return $null
+    }
+}
+
+# Masaüstü yolunu belirleyin
 $oneDriveDesktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "OneDrive", "Desktop")
 $defaultDesktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "Desktop")
-$desktopPath = if (Test-Path -Path $oneDriveDesktopPath) { $oneDriveDesktopPath } else { $defaultDesktopPath }
+$desktopPath = Test-PathWithFallback -fallbackPath $defaultDesktopPath -primaryPath $oneDriveDesktopPath
 
-# Kullanıcı belgelerim yolunu belirleyin
+# Belgelerim yolunu belirleyin
 $oneDriveDocumentsPath = [System.IO.Path]::Combine($env:USERPROFILE, "OneDrive", "Documents")
 $defaultDocumentsPath = [System.IO.Path]::Combine($env:USERPROFILE, "Documents")
-$documentsPath = if (Test-Path -Path $oneDriveDocumentsPath) { $oneDriveDocumentsPath } else { $defaultDocumentsPath }
+$documentsPath = Test-PathWithFallback -fallbackPath $defaultDocumentsPath -primaryPath $oneDriveDocumentsPath
 
 # Kısayol ve simge dosyasının yolu
 $shortcutName = "ATA Script.lnk"
@@ -65,9 +80,6 @@ if ($updateShortcut) {
 if (Test-Path -Path $oldBatchFilePath) {
     Remove-Item -Path $oldBatchFilePath
 }
-
-
-
 
 
 

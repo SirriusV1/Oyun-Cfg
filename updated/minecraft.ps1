@@ -9,8 +9,11 @@ Write-Host "1. Fabric (" -NoNewline
 Write-Host "Önerilen" -ForegroundColor Green -NoNewline
 Write-Host ") "
 Write-Host "2. Forge "
-Write-Host "3. TLauncher Ayarı "
-Write-Host "4. Geri Dön" -ForegroundColor Cyan
+Write-Host "3. TLauncher Ayarı " -NoNewline
+Write-Host "[Güvcel Değil]" -ForegroundColor RED
+Write-Host "4. "-NoNewline
+Write-Host "AT Adamlar 1.21 " -ForegroundColor Green
+Write-Host "5. Geri Dön" -ForegroundColor Cyan
 $secim = Read-Host "Lütfen bir numara girin (1-4)"
 
 
@@ -41,7 +44,10 @@ switch ($secim) {
         Start-Sleep -Seconds 1
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"
     }
-    4 {
+    4{
+        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/Fabric_121.ps1' | Invoke-Expression }"
+    }
+    5 {
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
     }
     default {

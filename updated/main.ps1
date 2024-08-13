@@ -106,7 +106,7 @@ Write-Host "Hangi oyunun CFG dosyasını indirmek istiyorsunuz? "
 Write-Host "1. Cs        " -NoNewline
 Write-Host "1.0.4 [09.01.2024]" -ForegroundColor Green
 Write-Host "2. Rust      " -NoNewline
-Write-Host "1.0.6 [21.02.2024]" -ForegroundColor Green
+Write-Host "1.0.8 [13.08.2024]" -ForegroundColor Green
 Write-Host "3. Minecraft " -NoNewline
 Write-Host "1.21 Geldi Geldi" -ForegroundColor Green
 Write-Host "4. Pubg "
@@ -168,6 +168,10 @@ switch ($secim) {
             Write-Host "        ╔═══════════╗"  -ForegroundColor DarkYellow
             Write-Host "        ║ Rust Menü ║"  -ForegroundColor DarkYellow
             Write-Host "        ╚═══════════╝"  -ForegroundColor DarkYellow
+            Write-Host ""
+            Write-Host "[" -NoNewline -ForegroundColor Green
+            Write-Host " Güncellemeler belirsiz bir tarihe kadar duraklatılmıştır. " -NoNewline -ForegroundColor Red
+            Write-Host "]" -ForegroundColor Green
             Write-Host ""
             Write-Host "1. Başlatma Seçenekleri "
             Write-Host "2. CFG İndir "

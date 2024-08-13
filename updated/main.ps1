@@ -104,7 +104,7 @@ Clear-Host
 
 Write-Host "Hangi oyunun CFG dosyasını indirmek istiyorsunuz? "
 Write-Host "1. Cs        " -NoNewline
-Write-Host "1.0.4 [09.01.2024]" -ForegroundColor Green
+Write-Host "1.0.4 [09.01.2024]" -ForegroundColor DarkYellow
 Write-Host "2. Rust      " -NoNewline
 Write-Host "1.0.8 [13.08.2024]" -ForegroundColor Green
 Write-Host "3. Minecraft " -NoNewline

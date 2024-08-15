@@ -1,4 +1,6 @@
-﻿function Test-PowerShell {
+﻿$host.ui.RawUI.WindowTitle = "ATA CFG"
+Clear-Host
+function Test-PowerShell {
     $isInstalled = $false
     try {
         $version = (Get-Command pwsh -ErrorAction SilentlyContinue).FileVersionInfo.ProductVersion

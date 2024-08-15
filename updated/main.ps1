@@ -1,4 +1,35 @@
-﻿# Fonksiyon: Belirtilen klasör adının olup olmadığını kontrol eder
+﻿# PowerShell yüklü mü kontrol et
+function Test-PowerShell {
+    $isInstalled = $false
+    try {
+        $version = (Get-Command pwsh -ErrorAction SilentlyContinue).FileVersionInfo.ProductVersion
+        if ($version) {
+            Write-Host "PowerShell mevcut: $version" -ForegroundColor Green
+            $isInstalled = $true
+        }
+    } catch {
+        Write-Host "PowerShell yüklü değil." -ForegroundColor Red
+    }
+    return $isInstalled
+}
+
+# PowerShell yüklü değilse, winget ile yükle
+function Install-PowerShell {
+    Write-Host "PowerShell yükleniyor..." -ForegroundColor Yellow
+    Start-Process -FilePath "winget" -ArgumentList "install Microsoft.PowerShell" -NoNewWindow -Wait
+    Write-Host "PowerShell başarıyla yüklendi." -ForegroundColor Green
+}
+
+# Ana fonksiyon
+function Main {
+    $isInstalled = Test-PowerShell
+    if (-not $isInstalled) {
+        Install-PowerShell
+    }
+}
+
+
+# Fonksiyon: Belirtilen klasör adının olup olmadığını kontrol eder
 function Test-PathWithFallback {
     param (
         [string]$fallbackPath,
@@ -289,7 +320,7 @@ switch ($secim) {
         }
     }
     default {
-        Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-5 arasinda bir numara girin." -ForegroundColor Red
+        Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-5 arasında bir numara girin." -ForegroundColor Red
         Start-Sleep -Seconds 1
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
     }

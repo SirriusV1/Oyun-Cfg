@@ -1,4 +1,5 @@
-﻿function Check-PowerShell {
+﻿# PowerShell yüklü mü kontrol et
+function Check-PowerShell {
     $isInstalled = $false
     try {
         $version = (Get-Command pwsh -ErrorAction SilentlyContinue).FileVersionInfo.ProductVersion
@@ -29,7 +30,11 @@ function Main {
     Write-Host "Script devam ediyor..." -ForegroundColor Cyan
 }
 
+# Ana fonksiyonu çalıştır
+Main
 
+
+# Fonksiyon: Belirtilen klasör adının olup olmadığını kontrol eder
 function Test-PathWithFallback {
     param (
         [string]$fallbackPath,

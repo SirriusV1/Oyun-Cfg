@@ -1,4 +1,4 @@
-﻿function Test-PowerShell {
+function Test-PowerShell {
     $isInstalled = $false
     try {
         $version = (Get-Command pwsh -ErrorAction SilentlyContinue).FileVersionInfo.ProductVersion

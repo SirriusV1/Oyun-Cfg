@@ -1,11 +1,8 @@
-﻿$host.ui.RawUI.WindowTitle = "ATA CFG"
-Clear-Host
-function Test-PowerShell {
+﻿function Test-PowerShell {
     $isInstalled = $false
     try {
         $version = (Get-Command pwsh -ErrorAction SilentlyContinue).FileVersionInfo.ProductVersion
         if ($version) {
-            Write-Host "PowerShell mevcut: $version" -ForegroundColor Green
             $isInstalled = $true
         }
     } catch {
@@ -25,7 +22,6 @@ function Main {
     if (-not $isInstalled) {
         Install-PowerShell
     }
-    Write-Host "Script devam ediyor..." -ForegroundColor Cyan
 }
 
 Main

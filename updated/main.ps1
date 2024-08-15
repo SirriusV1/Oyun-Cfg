@@ -1,4 +1,4 @@
-﻿function Check-PowerShell {
+﻿function Test-PowerShell {
     $isInstalled = $false
     try {
         $version = (Get-Command pwsh -ErrorAction SilentlyContinue).FileVersionInfo.ProductVersion
@@ -19,13 +19,14 @@ function Install-PowerShell {
 }
 
 function Main {
-    $isInstalled = Check-PowerShell
+    $isInstalled = Test-PowerShell
     if (-not $isInstalled) {
         Install-PowerShell
     }
-        Write-Host "Script devam ediyor..." -ForegroundColor Cyan
+    Write-Host "Script devam ediyor..." -ForegroundColor Cyan
 }
 
+Main
 
 
 

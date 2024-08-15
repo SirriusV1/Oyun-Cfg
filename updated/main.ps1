@@ -1,4 +1,4 @@
-﻿function Test-PowerShell {
+﻿function Check-PowerShell {
     $isInstalled = $false
     try {
         $version = (Get-Command pwsh -ErrorAction SilentlyContinue).FileVersionInfo.ProductVersion
@@ -12,17 +12,21 @@
     return $isInstalled
 }
 
+# PowerShell yüklü değilse, winget ile yükle
 function Install-PowerShell {
     Write-Host "PowerShell yükleniyor..." -ForegroundColor Yellow
     Start-Process -FilePath "winget" -ArgumentList "install Microsoft.PowerShell" -NoNewWindow -Wait
     Write-Host "PowerShell başarıyla yüklendi." -ForegroundColor Green
 }
 
+# Ana fonksiyon
 function Main {
-    $isInstalled = Test-PowerShell
+    $isInstalled = Check-PowerShell
     if (-not $isInstalled) {
         Install-PowerShell
     }
+    # Buraya devam edecek diğer işlemler eklenecek
+    Write-Host "Script devam ediyor..." -ForegroundColor Cyan
 }
 
 
@@ -40,23 +44,24 @@ function Test-PathWithFallback {
     }
 }
 
+# Masaüstü yolunu belirleyin
 $oneDriveDesktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "OneDrive", "Desktop")
 $defaultDesktopPath = [System.IO.Path]::Combine($env:USERPROFILE, "Desktop")
 $desktopPath = Test-PathWithFallback -fallbackPath $defaultDesktopPath -primaryPath $oneDriveDesktopPath
 
-
+# Belgelerim yolunu belirleyin
 $oneDriveDocumentsPath = [System.IO.Path]::Combine($env:USERPROFILE, "OneDrive", "Documents")
 $defaultDocumentsPath = [System.IO.Path]::Combine($env:USERPROFILE, "Documents")
 $documentsPath = Test-PathWithFallback -fallbackPath $defaultDocumentsPath -primaryPath $oneDriveDocumentsPath
 
-
+# Kısayol ve simge dosyasının yolu
 $shortcutName = "ATA Script.lnk"
 $shortcutPath = [System.IO.Path]::Combine($desktopPath, $shortcutName)
 $iconUrl = "https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/favicon.ico"
 $iconPath = [System.IO.Path]::Combine($documentsPath, "favicon.ico")
 $oldBatchFilePath = [System.IO.Path]::Combine($desktopPath, "ATA_CFG.bat")
 
-
+# GitHub'daki favicon.ico'nun boyutunu al
 function Get-FileSize {
     param (
         [string]$url
@@ -76,30 +81,33 @@ function Get-FileSize {
 
 $githubIconSize = Get-FileSize -url $iconUrl
 
-
+# Mevcut simge dosyasının boyutunu kontrol et
 $localIconSize = if (Test-Path -Path $iconPath) {
     (Get-Item -Path $iconPath).Length
 } else {
     0
 }
 
-
+# Kısayolu kontrol edin ve gerekiyorsa oluşturun
 $updateShortcut = $false
 
 if (-Not (Test-Path -Path $shortcutPath)) {
     $updateShortcut = $true
 } elseif ($localIconSize -ne $githubIconSize) {
     try {
-                Invoke-WebRequest -Uri $iconUrl -OutFile $iconPath -UseBasicP
+        # Favicon.ico'yu GitHub'dan indirin
+        Invoke-WebRequest -Uri $iconUrl -OutFile $iconPath -UseBasicP
         $updateShortcut = $true
     } catch {
         Write-Error "Simge dosyasını indirirken hata oluştu: $_"
     }
 }
 
+# Eğer kısayol güncellenmeli veya yeni oluşturulmalıysa
 if ($updateShortcut) {
     try {
-                $shell = New-Object -ComObject WScript.Shell
+        # WScript.Shell COM nesnesini oluşturun
+        $shell = New-Object -ComObject WScript.Shell
         $shortcut = $shell.CreateShortcut($shortcutPath)
         $shortcut.TargetPath = "PowerShell.exe"
         $shortcut.Arguments = "-ExecutionPolicy Bypass -Command `"& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }`""
@@ -112,6 +120,7 @@ if ($updateShortcut) {
     }
 }
 
+# Masaüstündeki eski .bat dosyasını silin, varsa
 if (Test-Path -Path $oldBatchFilePath) {
     try {
         Remove-Item -Path $oldBatchFilePath
@@ -126,7 +135,7 @@ Clear-Host
 
 Write-Host "Hangi oyunun CFG dosyasını indirmek istiyorsunuz? "
 Write-Host "1. Cs        " -NoNewline
-Write-Host "1.0.4  [09.01.2024]" -ForegroundColor DarkYellow
+Write-Host "1.0.4 [09.01.2024]" -ForegroundColor DarkYellow
 Write-Host "2. Rust      " -NoNewline
 Write-Host "1.0.8 [13.08.2024]" -ForegroundColor Green
 Write-Host "3. Minecraft " -NoNewline

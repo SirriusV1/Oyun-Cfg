@@ -101,4 +101,4 @@ foreach ($setting in $settingsToUpdate.Keys) {
 Set-Content -Path $optionsFilePath -Value $optionsContent
 
 Write-Host "Tüm anahtarlar ve ayarlar başarıyla güncellendi."
-PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/settings.ps1' | Invoke-Expression }"
+pwsh.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/settings.ps1' | Invoke-Expression }"

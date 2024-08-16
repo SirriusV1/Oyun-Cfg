@@ -1,4 +1,4 @@
-$host.ui.RawUI.WindowTitle = "ATA CFG"
+$host.ui.RawUI.WindowTitle = "Map İndirliyor.."
 Clear-Host
 
 Write-Host "Google drive bağlanılıyor..."

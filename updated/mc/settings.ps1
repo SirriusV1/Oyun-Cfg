@@ -1,4 +1,4 @@
-﻿# WinRAR ve 7-Zip kurulum yolları
+﻿
 $winrarPath = "C:\Program Files\WinRAR\WinRAR.exe"
 $sevenZipPath = "C:\Program Files\7-Zip\7z.exe"
 

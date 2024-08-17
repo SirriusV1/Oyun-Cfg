@@ -8,8 +8,8 @@ Write-Host ""
 Write-Host "1. ATA [1.21] (" -NoNewline
 Write-Host "Önerilen" -ForegroundColor Green -NoNewline
 Write-Host ") "
-Write-Host "2. Güncel Map [" -NoNewline
-Write-Host "157,8 MB" -ForegroundColor Green -NoNewline
+Write-Host "2. Güncel Map + Distans Horizons verileri [" -NoNewline
+Write-Host "398 MB" -ForegroundColor Green -NoNewline
 Write-Host "]"
 Write-Host "3. Geri Dön" -ForegroundColor Cyan
 $secim = Read-Host "Lütfen bir numara girin (1-4)"

@@ -41,6 +41,8 @@ $keysToModify = @{
     "key_iris.keybind.toggleShaders" = "key.keyboard.k";
     "key_iris.keybind.shaderPackSelection" = "key.keyboard.0";
     "key_iris.keybind.wireframe" = "key.keyboard.unknown";
+    "key_key.showmeyourskin.open_settings" = "key.keyboard.right.bracket";
+    "key_key.showmeyourskin.global_toggle" = "key.keyboard.unknown";
 }
 
 # Güncellenecek ayarlar ve yeni değerler

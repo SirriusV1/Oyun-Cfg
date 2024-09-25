@@ -20,7 +20,8 @@ try {
         "Microsoft.VCRedist.2010.x64",
         "Microsoft.VCRedist.2012.x64",
         "Microsoft.VCRedist.2013.x64",
-        "Microsoft.VCRedist.2015+.x64"
+        "Microsoft.VCRedist.2015+.x64",
+        "Microsoft.DirectX"
     )
 
     # Her paketi yükle

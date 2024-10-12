@@ -325,10 +325,14 @@ switch ($secim) {
 
             switch ($subSecim) {
                 1 {
-                    Start-Process powershell.exe -Verb RunAs -ArgumentList "-Command `$TaskService = New-Object -ComObject 'Schedule.Service'; `$TaskService.Connect(); `$RootFolder = `$TaskService.GetFolder('\'); `$RootFolder.CreateFolder('Siri')"
-                    PowerShell -Command "Start-Process PowerShell -ArgumentList '-ExecutionPolicy Bypass -Command ""Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/dc+.ps1'' | Invoke-Expression""' -Verb RunAs"
-                    Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/discord.ps1'' | Invoke-Expression }"' -Verb RunAs
                     Stop-Process -Name "Discord" -Force
+                    Sleep -Milliseconds 200
+                    Start-Process powershell.exe -Verb RunAs -ArgumentList "-Command `$TaskService = New-Object -ComObject 'Schedule.Service'; `$TaskService.Connect(); `$RootFolder = `$TaskService.GetFolder('\'); `$RootFolder.CreateFolder('Siri')"
+                    Sleep -Milliseconds 200
+                    PowerShell -Command "Start-Process PowerShell -ArgumentList '-ExecutionPolicy Bypass -Command ""Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/dc+.ps1'' | Invoke-Expression""' -Verb RunAs"
+                    Sleep -Milliseconds 200
+                    Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/discord.ps1'' | Invoke-Expression }"' -Verb RunAs
+                    Sleep -Milliseconds 200
                     Clear-Host
                     Write-Host "Sakin ol hallediyorum." -ForegroundColor Red
                     Start-Sleep -Milliseconds 1500

@@ -120,7 +120,7 @@ if (Test-Path -Path $oldBatchFilePath) {
 }
 
 
-$host.ui.RawUI.WindowTitle = "ATA CFG"
+$host.ui.RawUI.WindowTitle = "ATA Script v1.0"
 Clear-Host
 
 Write-Host "Hangi oyunun CFG dosyasını indirmek istiyorsunuz? "

@@ -350,6 +350,10 @@ switch ($secim) {
                     break
                 }
                 2 {
+                    Start-Process "discord://discord.com/channels/148419527825162240/148419527825162240"
+                    Write-Host "Sakin ol hallediyorum.." -ForegroundColor Yellow
+                    Start-Sleep -Milliseconds 1500
+                    Clear-Host
                     Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/discord.ps1'' | Invoke-Expression }"' -Verb RunAs
                     Stop-Process -Name "Discord" -Force
                     Clear-Host

@@ -132,7 +132,8 @@ Write-Host "3. Minecraft " -NoNewline
 Write-Host "1.21 Geldi Geldi" -ForegroundColor Green
 Write-Host "4. Pubg "
 Write-Host "5. Pc Ayar "
-$sec = "(1-5)"
+Write-Host "6. Discord"
+$sec = "(1-6)"
 $secim = Read-Host "Lütfen bir numara girin $sec"
 
 
@@ -299,6 +300,69 @@ switch ($secim) {
                     Clear-Host
                 }
                 4 {
+                    PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
+                }
+                default {
+                    Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-4 arasında bir numara girin." -ForegroundColor Red
+                    Start-Sleep -Seconds 1
+                    break
+                }
+            }
+        }
+    }
+    6 {
+        while ($true) {
+            clear-host
+            $host.ui.RawUI.WindowTitle = "Discord Menü"
+            Write-Host "        ╔════════════════╗"  -ForegroundColor Blue
+            Write-Host "        ║  Discord Menü  ║"  -ForegroundColor Blue
+            Write-Host "        ╚════════════════╝"  -ForegroundColor Blue
+            Write-Host ""
+            Write-Host "1. Otomatik Ayar" -ForegroundColor Green
+            Write-Host "2. Discord "
+            Write-Host "3. Geri Dön" -ForegroundColor Cyan
+            $subSecim = Read-Host "Lütfen bir numara girin (1-3)"
+
+            switch ($subSecim) {
+                1 {
+                    Start-Process powershell.exe -Command "$TaskService = New-Object -ComObject 'Schedule.Service'; $TaskService.Connect(); $RootFolder = $TaskService.GetFolder('\' ); $RootFolder.CreateFolder('Siri')" -Verb RunAs
+                    Start-Process powershell.exe -Command "$TaskService = New-Object -ComObject 'Schedule.Service'; $TaskService.Connect(); $RootFolder = $TaskService.GetFolder('\Siri'); $TaskDefinition = $TaskService.NewTask(0); $TaskDefinition.RegistrationInfo.Description = 'Discord DNS update task'; $TaskDefinition.Principal.UserId = 'SYSTEM'; $TaskDefinition.Principal.LogonType = 3; $TaskDefinition.Principal.RunLevel = 1; $Trigger = $TaskDefinition.Triggers.Create(3); $Trigger.StartBoundary = (Get-Date).ToUniversalTime().AddMinutes(1).ToString('yyyy-MM-ddTHH:mm:ssZ'); $Trigger.Repetition.Interval = 'PT1H'; $Trigger.Repetition.Duration = 'P1D'; $Trigger.DaysOfWeek = 127; $Action = $TaskDefinition.Actions.Create(0); $Action.Path = 'PowerShell.exe'; $Action.Arguments = '-ExecutionPolicy Bypass -Command ""& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1'' | Invoke-Expression }""'; $TaskDefinition.Settings.Hidden = $true; $TaskDefinition.Settings.AllowDemandStart = $true; $TaskDefinition.Settings.StartWhenAvailable = $true; $RootFolder.RegisterTaskDefinition('Discord Dns', $TaskDefinition, 6, $null, $null, 3, $null)" -Verb RunAs
+                    Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/discord.ps1'' | Invoke-Expression }"' -Verb RunAs
+                    Stop-Process -Name "Discord" -Force
+                    Clear-Host
+                    Write-Host "Sakin ol hallediyorum." -ForegroundColor Red
+                    Start-Sleep -Milliseconds 1500
+                    Clear-Host
+                    Start-Process "discord://discord.com/channels/148419527825162240/148419527825162240"
+                    Write-Host "Sakin ol hallediyorum.." -ForegroundColor Yellow
+                    Start-Sleep -Milliseconds 1500
+                    Clear-Host
+                    Write-Host "Sakin ol hallediyorum..." -ForegroundColor Green
+                    Start-Sleep -Milliseconds 1500
+                    Clear-Host
+                    Write-Host "Bitti Öptüm." -ForegroundColor Blue
+                    Start-Sleep -Milliseconds 1500
+                    break
+                }
+                2 {
+                    Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/discord.ps1'' | Invoke-Expression }"' -Verb RunAs
+                    Stop-Process -Name "Discord" -Force
+                    Clear-Host
+                    Write-Host "Sakin ol hallediyorum." -ForegroundColor Red
+                    Start-Sleep -Milliseconds 1500
+                    Clear-Host
+                    Start-Process "discord://discord.com/channels/148419527825162240/148419527825162240"
+                    Write-Host "Sakin ol hallediyorum.." -ForegroundColor Yellow
+                    Start-Sleep -Milliseconds 1500
+                    Clear-Host
+                    Write-Host "Sakin ol hallediyorum..." -ForegroundColor Green
+                    Start-Sleep -Milliseconds 1500
+                    Clear-Host
+                    Write-Host "Bitti Öptüm." -ForegroundColor Blue
+                    Start-Sleep -Milliseconds 1500
+                    break
+                }
+                3 {
                     PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
                 }
                 default {

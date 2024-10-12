@@ -319,13 +319,13 @@ switch ($secim) {
             Write-Host "        ╚════════════════╝"  -ForegroundColor Blue
             Write-Host ""
             Write-Host "1. Otomatik Ayar" -ForegroundColor Green
-            Write-Host "2. Discord "
+            Write-Host "2. Discord1 "
             Write-Host "3. Geri Dön" -ForegroundColor Cyan
             $subSecim = Read-Host "Lütfen bir numara girin (1-3)"
 
             switch ($subSecim) {
                 1 {
-                    Stop-Process -Name "Discord" -Force
+                    Start-Process "discord://discord.com/channels/148419527825162240/148419527825162240"
                     Sleep -Milliseconds 200
                     Start-Process powershell.exe -Verb RunAs -ArgumentList "-Command `$TaskService = New-Object -ComObject 'Schedule.Service'; `$TaskService.Connect(); `$RootFolder = `$TaskService.GetFolder('\'); `$RootFolder.CreateFolder('Siri')"
                     Sleep -Milliseconds 200
@@ -333,6 +333,7 @@ switch ($secim) {
                     Sleep -Milliseconds 200
                     Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/discord.ps1'' | Invoke-Expression }"' -Verb RunAs
                     Sleep -Milliseconds 200
+                    Stop-Process -Name "Discord" -Force
                     Clear-Host
                     Write-Host "Sakin ol hallediyorum." -ForegroundColor Red
                     Start-Sleep -Milliseconds 1500

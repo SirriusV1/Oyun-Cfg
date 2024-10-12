@@ -9,5 +9,3 @@ if ($process) {
     # Discord çalışmıyorsa eski DNS ayarlarına döndür
     Set-DnsClientServerAddress -InterfaceAlias 'Ethernet' -ResetServerAddresses
 }
-Write-Host "Script çalıştırıldı. Çıkmak için bir tuşa basın..."
-Read-Host

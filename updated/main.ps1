@@ -326,7 +326,7 @@ switch ($secim) {
             switch ($subSecim) {
                 1 {
                     Start-Process "discord://discord.com/channels/148419527825162240/148419527825162240"
-                    Sleep -Milliseconds 200
+                    Sleep -Milliseconds 1000
                     Start-Process powershell.exe -Verb RunAs -ArgumentList "-Command `$TaskService = New-Object -ComObject 'Schedule.Service'; `$TaskService.Connect(); `$RootFolder = `$TaskService.GetFolder('\'); `$RootFolder.CreateFolder('Siri')"
                     Sleep -Milliseconds 200
                     PowerShell -Command "Start-Process PowerShell -ArgumentList '-ExecutionPolicy Bypass -Command ""Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/dc+.ps1'' | Invoke-Expression""' -Verb RunAs"

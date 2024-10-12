@@ -28,4 +28,3 @@ $TaskDefinition.Settings.StartWhenAvailable = $true
 
 # Görevi kaydetme
 $RootFolder.RegisterTaskDefinition('Discord Dns', $TaskDefinition, 6, $null, $null, 3, $null)
-Read-Host -Prompt "Devam etmek için Enter tuşuna basın..."

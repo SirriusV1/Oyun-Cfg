@@ -352,23 +352,23 @@ switch ($secim) {
                 2 {
                     Start-Process "discord://discord.com/channels/148419527825162240/148419527825162240"
                     Write-Host "Sakin ol hallediyorum.." -ForegroundColor Yellow
-                    Start-Sleep -Milliseconds 3000
+                    Start-Sleep -seconds 3
                     Clear-Host
                     Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/discord.ps1'' | Invoke-Expression }"' -Verb RunAs
                     Stop-Process -Name "Discord" -Force
                     Clear-Host
                     Write-Host "Sakin ol hallediyorum." -ForegroundColor Red
-                    Start-Sleep -Milliseconds 1500
+                    Start-Sleep -seconds 3
                     Clear-Host
                     Start-Process "discord://discord.com/channels/148419527825162240/148419527825162240"
                     Write-Host "Sakin ol hallediyorum.." -ForegroundColor Yellow
-                    Start-Sleep -Milliseconds 1500
+                    Start-Sleep -seconds 1
                     Clear-Host
                     Write-Host "Sakin ol hallediyorum..." -ForegroundColor Green
-                    Start-Sleep -Milliseconds 1500
+                    Start-Sleep -seconds 1
                     Clear-Host
                     Write-Host "Bitti Öptüm." -ForegroundColor Blue
-                    Start-Sleep -Milliseconds 1500
+                    Start-Sleep -seconds 1
                     break
                 }
                 3 {

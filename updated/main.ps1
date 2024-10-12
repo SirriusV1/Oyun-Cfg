@@ -353,7 +353,7 @@ switch ($secim) {
                     Start-Sleep -seconds 1
                     Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "Start-Process ''discord://channels/148419527825162240/148419527825162240''"'
                     Clear-Host
-                    Start-Sleep -seconds 5
+                    Start-Sleep -seconds 1
                     Write-Host "Hallettim." -ForegroundColor Green
                     Clear-Host
                     exit

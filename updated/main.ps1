@@ -319,7 +319,7 @@ switch ($secim) {
             Write-Host "        ╚════════════════╝"  -ForegroundColor Blue
             Write-Host ""
             Write-Host "1. Otomatik Ayar" -ForegroundColor Green
-            Write-Host "2. Discord 11"
+            Write-Host "2. Discord 13"
             Write-Host "3. Geri Dön" -ForegroundColor Cyan
             $subSecim = Read-Host "Lütfen bir numara girin (1-3)"
 

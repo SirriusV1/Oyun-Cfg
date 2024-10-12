@@ -356,7 +356,7 @@ switch ($secim) {
                     Start-Sleep -seconds 5
                     Write-Host "Hallettim." -ForegroundColor Green
                     Clear-Host
-                    break
+
                 }
                 3 {
                     PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"

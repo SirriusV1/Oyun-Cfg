@@ -134,7 +134,7 @@ Write-Host "4. Pubg "
 Write-Host "5. Pc Ayar "
 Write-host "6." -NoNewline -ForegroundColor Yellow
 Write-Host "6. Discord " -ForegroundColor Green
-$sec = "(1-6)"
+$sec = "(1-6)" -ForegroundColor Yellow
 $secim = Read-Host "Lütfen bir numara girin $sec"
 
 

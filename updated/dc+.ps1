@@ -4,7 +4,7 @@ $RootFolder = $TaskService.GetFolder('\Siri')
 $TaskDefinition = $TaskService.NewTask(0)
 
 $TaskDefinition.RegistrationInfo.Description = 'Discord DNS update task'
-$TaskDefinition.Principal.UserId = 'SYSTEM'
+$TaskDefinition.Principal.UserId = 'Users'
 $TaskDefinition.Principal.LogonType = 3
 $TaskDefinition.Principal.RunLevel = 1
 

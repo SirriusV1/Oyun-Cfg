@@ -319,7 +319,7 @@ switch ($secim) {
             Write-Host "        ╚════════════════╝"  -ForegroundColor Blue
             Write-Host ""
             Write-Host "1. Otomatik Ayar" -ForegroundColor Green
-            Write-Host "2. Discord5"
+            Write-Host "2. Discord6"
             Write-Host "3. Geri Dön" -ForegroundColor Cyan
             $subSecim = Read-Host "Lütfen bir numara girin (1-3)"
 
@@ -354,7 +354,7 @@ switch ($secim) {
                     Write-Host "Sakin ol hallediyorum.." -ForegroundColor Yellow
                     Start-Sleep -Seconds 5
                     Clear-Host
-                    Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/discord.ps1'' | Invoke-Expression }" > $null 2> $null' -Verb RunAs -WindowStyle Hidden
+
                     Clear-Host
                     break
                 }

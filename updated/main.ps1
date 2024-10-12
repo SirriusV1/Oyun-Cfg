@@ -132,7 +132,7 @@ Write-Host "3. Minecraft " -NoNewline
 Write-Host "1.21 Geldi Geldi" -ForegroundColor Green
 Write-Host "4. Pubg "
 Write-Host "5. Pc Ayar "
-Write-Host "6. Discord"
+Write-Host "6. Discord " -ForegroundColor Green
 $sec = "(1-6)"
 $secim = Read-Host "Lütfen bir numara girin $sec"
 

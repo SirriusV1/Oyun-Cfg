@@ -9,3 +9,4 @@ if ($process) {
     # Discord çalışmıyorsa eski DNS ayarlarına döndür
     Set-DnsClientServerAddress -InterfaceAlias 'Ethernet' -ResetServerAddresses
 }
+Start-Sleep -seconds 3

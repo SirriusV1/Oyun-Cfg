@@ -327,7 +327,7 @@ switch ($secim) {
             switch ($subSecim) {
                 1 {
                     Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "Start-Process ''discord://''"'
-                    Start-Sleep -seconds 1
+                    Start-Sleep -seconds 3
                     Start-Process powershell.exe -Verb RunAs -ArgumentList "-Command `$TaskService = New-Object -ComObject 'Schedule.Service'; `$TaskService.Connect(); `$RootFolder = `$TaskService.GetFolder('\'); `$RootFolder.CreateFolder('Siri')"
                     Start-Sleep -seconds 1 
                     PowerShell -Command "Start-Process PowerShell -ArgumentList '-ExecutionPolicy Bypass -Command ""Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/dc+.ps1'' | Invoke-Expression""' -Verb RunAs"
@@ -346,7 +346,7 @@ switch ($secim) {
                 2 {
                     Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "Start-Process ''discord://''"'
                     Write-Host "Sakin ol hallediyorum.." -ForegroundColor Yellow
-                    Start-Sleep -Seconds 1
+                    Start-Sleep -Seconds 3
                     Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/discord.ps1'' | Invoke-Expression }" > $null 2> $null' -Verb RunAs
                     Start-Sleep -seconds 1
                     Stop-Process -Name "Discord" -Force

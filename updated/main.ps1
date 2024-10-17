@@ -345,19 +345,11 @@ switch ($secim) {
                     break
                 }
                 2 {
-                    Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "Start-Process ''discord://''"'
-                    Write-Host "Sakin ol hallediyorum.." -ForegroundColor Yellow
-                    Start-Sleep -Seconds 3
+                    
+                    
+                    
                     Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/discord.ps1'' | Invoke-Expression }" > $null 2> $null' -Verb RunAs
                     Start-Sleep -Seconds 2
-                    Stop-Process -Name "Discord" -Force
-                    cmd /c "curl https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/ping_duzelt.bat | cmd"
-                    Start-Sleep -seconds 1
-                    Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "Start-Process ''discord://channels/148419527825162240/148419527825162240''"'
-                    Clear-Host
-                    Start-Sleep -seconds 1
-                    Write-Host "Hallettim." -ForegroundColor Green
-                    Clear-Host
                     exit
                 }
                 3 {

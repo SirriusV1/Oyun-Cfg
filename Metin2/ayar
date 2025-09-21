@@ -20,7 +20,7 @@ GEZGIN_SATICI=
 METIN_SAYACI=
 ----------------------------NOTIFICATIONS----------------------------
 Eğer kullanmıyorsanız buradaki değerleri silin!!
-TELEGRAM_CHAT_ID= 
+TELEGRAM_CHAT_ID=         
 DISCORD_CHAT_ID=
 --------------------------------SKILL--------------------------------
 KESKINLIK_TUS=

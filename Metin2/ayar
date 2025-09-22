@@ -9,7 +9,6 @@ METIN_KORDINAT_X=-20
 METIN_KORDINAT_Y=15
 UYARILAR=
 KAPANIS_SAATI=
-KARAKTER_TANIMA=True
 --------------------------------EVENT--------------------------------
 BEGINNER_EVENT_ATLANSINMI=
 REAKSIYON_OYUNU_ATLANSINMI=
@@ -23,10 +22,10 @@ Eğer kullanmıyorsanız buradaki değerleri silin!!
 TELEGRAM_CHAT_ID=         
 DISCORD_CHAT_ID=
 --------------------------------SKILL--------------------------------
+KESKINLIK=True
 KESKINLIK_TUS=
+ZIRH=True
 ZIRH_TUS=
-KESKINLIK=
-ZIRH=
 ---------------------------------KD----------------------------------
 MOR=
 YESIL=

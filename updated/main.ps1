@@ -282,10 +282,11 @@ switch ($secim) {
             Write-Host "        ╚═══════════╝"  -ForegroundColor Blue
             Write-Host ""
             Write-Host "1. Chris Titus Tech's Windows Utility "
-            Write-Host "2. C++ All-in-One + Java 8 "
-            Write-Host "3. Nvidia Ayarları "
-            Write-Host "4. Geri Dön" -ForegroundColor Cyan
-            $subSecim = Read-Host "Lütfen bir numara girin (1-4)"
+            Write-Host "2. Windows Etkinleştirme Aracı '[1] HWID'yi seçin.'"
+            Write-Host "3. C++ All-in-One + Java 8 "
+            Write-Host "4. Nvidia Ayarları "
+            Write-Host "5. Geri Dön" -ForegroundColor Cyan
+            $subSecim = Read-Host "Lütfen bir numara girin (1-5)"
 
             switch ($subSecim) {
                 1 {
@@ -293,14 +294,18 @@ switch ($secim) {
                     break
                 }
                 2 {
-                    Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/c++.ps1'' | Invoke-Expression }"' -Verb RunAs
+                    powershell -Command "Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command irm https://get.activated.win | iex' -Verb RunAs"
+                    break
                 }
                 3 {
+                    Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/c++.ps1'' | Invoke-Expression }"' -Verb RunAs
+                }
+                4 {
                     Start-Process "discord://discord.com/channels/148419527825162240/1118943418421362839/1118945575040192614"
                     Start-Sleep -Milliseconds 500
                     Clear-Host
                 }
-                4 {
+                5 {
                     PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
                 }
                 default {

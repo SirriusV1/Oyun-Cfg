@@ -132,9 +132,7 @@ Write-Host "3. Minecraft " -NoNewline
 Write-Host "1.21 Geldi Geldi" -ForegroundColor Yellow
 Write-Host "4. Pubg "
 Write-Host "5. Pc Ayar "
-Write-Host "6. " -ForegroundColor Yellow -NoNewline
-Write-Host "Discord " -ForegroundColor Green
-$sec = "(1-6)" 
+$sec = "(1-5)" 
 $secim = Read-Host "Lütfen bir numara girin $sec"
 
 
@@ -307,58 +305,6 @@ switch ($secim) {
                     Clear-Host
                 }
                 5 {
-                    PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
-                }
-                default {
-                    Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-4 arasında bir numara girin." -ForegroundColor Red
-                    Start-Sleep -Seconds 1
-                    break
-                }
-            }
-        }
-    }
-    6 {
-        while ($true) {
-            clear-host
-            $host.ui.RawUI.WindowTitle = "Discord Menü"
-            Write-Host "        ╔════════════════╗"  -ForegroundColor Blue
-            Write-Host "        ║  Discord Menü  ║"  -ForegroundColor Blue
-            Write-Host "        ╚════════════════╝"  -ForegroundColor Blue
-            Write-Host ""
-            Write-Host "1. Otomatik Ayar" -ForegroundColor Green
-            Write-Host "2. Discord"
-            Write-Host "3. Geri Dön" -ForegroundColor Cyan
-            $subSecim = Read-Host "Lütfen bir numara girin (1-3)"
-
-            switch ($subSecim) {
-                1 {
-                    Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "Start-Process ''discord://''"'
-                    Start-Sleep -seconds 3
-                    Start-Process powershell.exe -Verb RunAs -ArgumentList "-Command `$TaskService = New-Object -ComObject 'Schedule.Service'; `$TaskService.Connect(); `$RootFolder = `$TaskService.GetFolder('\'); `$RootFolder.CreateFolder('Siri')"
-                    Start-Sleep -seconds 1 
-                    PowerShell -Command "Start-Process PowerShell -ArgumentList '-ExecutionPolicy Bypass -Command ""Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/dc+.ps1'' | Invoke-Expression""' -Verb RunAs"
-                    Start-Sleep -seconds 5
-                    Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/discord.ps1'' | Invoke-Expression }"' -Verb RunAs
-                    Start-Sleep -seconds 5
-                    Stop-Process -Name "Discord" -Force
-                    cmd /c "curl https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/ping_duzelt.bat | cmd"
-                    Start-Sleep -seconds 1
-                    Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "Start-Process ''discord://channels/148419527825162240/148419527825162240''"'
-                    Clear-Host
-                    Start-Sleep -seconds 5
-                    Write-Host "Hallettim." -ForegroundColor Green
-                    Clear-Host
-                    break
-                }
-                2 {
-                    
-                    
-                    
-                    Start-Process PowerShell.exe -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri ''https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/discord.ps1'' | Invoke-Expression }" > $null 2> $null' -Verb RunAs
-                    Start-Sleep -Seconds 2
-                    exit
-                }
-                3 {
                     PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
                 }
                 default {

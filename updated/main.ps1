@@ -282,7 +282,8 @@ switch ($secim) {
             Write-Host "        ╚═══════════╝"  -ForegroundColor Blue
             Write-Host ""
             Write-Host "1. Chris Titus Tech's Windows Utility "
-            Write-Host "2. Windows Etkinleştirme Aracı '[1] HWID'yi seçin.'"
+            Write-Host "2. Windows Etkinleştirme Aracı" -NoNewline
+            Write-Host " '[1] HWID'yi seçin.'" -ForegroundColor Green
             Write-Host "3. C++ All-in-One + Java 8 "
             Write-Host "4. Nvidia Ayarları "
             Write-Host "5. Geri Dön" -ForegroundColor Cyan

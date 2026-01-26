@@ -1,4 +1,4 @@
-﻿
+
 # Boş $PSCommandPath hatası için fallback
 if (-not $PSCommandPath) { exit }
 Clear-Host

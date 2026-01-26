@@ -85,10 +85,20 @@ if ($PSVersionTable.PSVersion.Major -ge 7) {
     Write-Host "Mods başarıyla güncellendi."
 
 } else {
-    # PowerShell 6 ve altı sürümler için
-    # İndirme işlemi
-    Write-Host "İndirme işlemi başlatılıyor..."
-    Invoke-WebRequest -Uri $zipUrl -OutFile $zipFilePath
+    # PowerShell 6 ve altı sürümler için - BITS Transfer (daha hızlı)
+    Write-Host "İndirme işlemi başlatılıyor..." -ForegroundColor Cyan
+    try {
+        # Dizin oluştur
+        if (-not (Test-Path (Split-Path $zipFilePath))) {
+            New-Item -ItemType Directory -Path (Split-Path $zipFilePath) -Force | Out-Null
+        }
+        # BITS Transfer ile indir (Windows'a entegre, daha hızlı)
+        Start-BitsTransfer -Source $zipUrl -Destination $zipFilePath -DisplayName "Mods indiriliyor" -Priority High
+    } catch {
+        # BITS başarısız olursa fallback
+        Write-Host "BITS Transfer başarısız, alternatif yöntem kullanılıyor..." -ForegroundColor Yellow
+        Invoke-WebRequest -Uri $zipUrl -OutFile $zipFilePath
+    }
 
     # Mevcut mods klasörünü sil
     Write-Host "Eski mods klasörü siliniyor..."

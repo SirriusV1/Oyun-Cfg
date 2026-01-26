@@ -1,14 +1,11 @@
 $host.ui.RawUI.WindowTitle = "Oyun Konfigürasyonu Güncelleniyor..."
 Clear-Host
 
-# Dosyaların bulunduğu dizin
-$scriptPath = Split-Path -Parent $PSCommandPath
-
 # Adım 1: tlauncher.ps1 çalıştır
 Write-Host "Adım 1/3: TLauncher ayarları güncelleniyor..." -ForegroundColor Cyan
 Write-Host "================================================" -ForegroundColor Cyan
 try {
-    & "$scriptPath\tlauncher.ps1"
+    PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/tlauncher.ps1' | Invoke-Expression }"
 } catch {
     Write-Error "tlauncher.ps1 çalıştırılırken hata oluştu: $_"
     Start-Sleep -Seconds 3
@@ -20,7 +17,7 @@ Write-Host "================================================" -ForegroundColor C
 
 # Adım 2: mods.ps1 çalıştır
 try {
-    & "$scriptPath\mods.ps1"
+    PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/mods.ps1' | Invoke-Expression }"
 } catch {
     Write-Error "mods.ps1 çalıştırılırken hata oluştu: $_"
     Start-Sleep -Seconds 3

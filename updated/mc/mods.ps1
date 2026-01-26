@@ -7,8 +7,8 @@ $zipFilePath = "$env:APPDATA\.minecraft\versions\ATA\mods.zip"
 $extractPath = "$env:APPDATA\.minecraft\versions\ATA"
 $modsFolder = "$env:APPDATA\.minecraft\versions\ATA\mods"
 
-# PowerShell sürümünü kontrol et
-if ($PSVersionTable.PSVersion.Major -lt 7) {
+# PowerShell sürümünü kontrol et (sadece yerel çalıştırıldıysa)
+if ($PSCommandPath -and $PSVersionTable.PSVersion.Major -lt 7) {
     # PowerShell 7 yüklenmiş mi kontrol et
     $pwshPath = "C:\Program Files\PowerShell\7\pwsh.exe"
     

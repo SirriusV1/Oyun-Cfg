@@ -7,23 +7,7 @@ $zipFilePath = "$env:APPDATA\.minecraft\versions\ATA\mods.zip"
 $extractPath = "$env:APPDATA\.minecraft\versions\ATA"
 $modsFolder = "$env:APPDATA\.minecraft\versions\ATA\mods"
 
-# PowerShell sürümünü kontrol et (sadece yerel çalıştırıldıysa)
-if ($PSCommandPath -and $PSVersionTable.PSVersion.Major -lt 7) {
-    # PowerShell 7 yüklenmiş mi kontrol et
-    $pwshPath = "C:\Program Files\PowerShell\7\pwsh.exe"
-    
-    if (Test-Path $pwshPath) {
-        Start-Process -FilePath $pwshPath -ArgumentList "-File `"$PSCommandPath`"" -NoNewWindow -Wait
-        exit
-    } else {
-        Write-Host "PowerShell 7 yüklü değil, script eski sürümle çalışmaya devam edecek."  -ForegroundColor Red
-        Write-Host "Bu işlem uzun sürecek."
-        Write-Host ""
-    }
-}
-
-# PowerShell 7 ile çalıştırılmaya devam edecek scriptin geri kalanı buradan devam eder
-
+# PowerShell 7 ve üstü sürümler için
 if ($PSVersionTable.PSVersion.Major -ge 7) {
     # PowerShell 7 ve üstü sürümler için
     # HttpClient nesnesi oluştur

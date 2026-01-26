@@ -1,6 +1,3 @@
-
-# Boş $PSCommandPath hatası için fallback
-if (-not $PSCommandPath) { exit }
 Clear-Host
 $host.ui.RawUI.WindowTitle = "Minecraft Menü"
 Write-Host "        ╔═════════════════╗"  -ForegroundColor DarkYellow

@@ -85,19 +85,29 @@ if ($PSVersionTable.PSVersion.Major -ge 7) {
     Write-Host "Mods başarıyla güncellendi."
 
 } else {
-    # PowerShell 6 ve altı sürümler için - BITS Transfer (daha hızlı)
+    # PowerShell 6 ve altı sürümler için - curl (en hızlı)
     Write-Host "İndirme işlemi başlatılıyor..." -ForegroundColor Cyan
+    
+    # Dizin oluştur
+    if (-not (Test-Path (Split-Path $zipFilePath))) {
+        New-Item -ItemType Directory -Path (Split-Path $zipFilePath) -Force | Out-Null
+    }
+    
     try {
-        # Dizin oluştur
-        if (-not (Test-Path (Split-Path $zipFilePath))) {
-            New-Item -ItemType Directory -Path (Split-Path $zipFilePath) -Force | Out-Null
+        # curl.exe ile indir (Windows 10+, en hızlı)
+        & curl.exe -L -o $zipFilePath $zipUrl
+        
+        if ($LASTEXITCODE -ne 0) {
+            throw "curl indirme başarısız"
         }
-        # BITS Transfer ile indir (Windows'a entegre, daha hızlı)
-        Start-BitsTransfer -Source $zipUrl -Destination $zipFilePath -DisplayName "Mods indiriliyor" -Priority High
     } catch {
-        # BITS başarısız olursa fallback
-        Write-Host "BITS Transfer başarısız, alternatif yöntem kullanılıyor..." -ForegroundColor Yellow
-        Invoke-WebRequest -Uri $zipUrl -OutFile $zipFilePath
+        Write-Host "curl başarısız, BITS Transfer deneniyor..." -ForegroundColor Yellow
+        try {
+            Start-BitsTransfer -Source $zipUrl -Destination $zipFilePath -DisplayName "Mods indiriliyor" -Priority High
+        } catch {
+            Write-Host "BITS başarısız, Invoke-WebRequest deneniyor..." -ForegroundColor Yellow
+            Invoke-WebRequest -Uri $zipUrl -OutFile $zipFilePath
+        }
     }
 
     # Mevcut mods klasörünü sil

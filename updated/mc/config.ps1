@@ -2,7 +2,7 @@ $winrarPath = "C:\Program Files\WinRAR\WinRAR.exe"
 $sevenZipPath = "C:\Program Files\7-Zip\7z.exe"
 
 # Google Drive Config URL'sini belirleyin
-$zipUrl = "https://drive.usercontent.google.com/u/0/uc?id=1xLijanuxqYjuXfREaV7TA7suhrrtVdaE&export=download"
+$zipUrl = "https://drive.usercontent.google.com/u/0/uc?id=1WTb7qytxLTNrs_5qJfPAKosQ-FgpUrqE&export=download"
 $zipFilePath = "$env:APPDATA\.minecraft\versions\ATA\config.zip"
 $extractPath = "$env:APPDATA\.minecraft\versions\ATA"
 $configFolder = "$env:APPDATA\.minecraft\versions\ATA\config"
@@ -95,7 +95,7 @@ if ($PSVersionTable.PSVersion.Major -ge 7) {
     
     try {
         # curl.exe ile indir (Windows 10+, en hızlı)
-        & curl.exe -L -o $zipFilePath $zipUrl -C - --compressed -#
+        & curl.exe -L -o $zipFilePath $zipUrl
         
         if ($LASTEXITCODE -ne 0) {
             throw "curl indirme başarısız"

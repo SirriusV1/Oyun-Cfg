@@ -5,29 +5,21 @@ Write-Host "        ╔═════════════════╗"  
 Write-Host "        ║  Minecraft Menü ║"  -ForegroundColor DarkYellow
 Write-Host "        ╚═════════════════╝"  -ForegroundColor DarkYellow
 Write-Host ""
-Write-Host "1. ATA [1.21] (" -NoNewline
-Write-Host "Önerilen" -ForegroundColor Green -NoNewline
-Write-Host ") "
-Write-Host "2. Güncel Map + Distans Horizons verileri [" -NoNewline
-Write-Host "398 MB" -ForegroundColor Green -NoNewline
-Write-Host "]"
-Write-Host "3. Geri Dön" -ForegroundColor Cyan
-$secim = Read-Host "Lütfen bir numara girin (1-4)"
+Write-Host "1. ATA [1.21.11] "
+Write-Host "2. Geri Dön" -ForegroundColor Cyan
+$secim = Read-Host "Lütfen bir numara girin (1-2)"
 
 
 # Seçime göre işlem yap
 switch ($secim) {
     1 {
-        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/options.ps1' | Invoke-Expression }"
+        PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/all-setup.ps1' | Invoke-Expression }"
     }
     2 {
-        pwsh.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/map.ps1' | Invoke-Expression }"
-    }
-    3 {
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
     }
     default {
-        Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-4 arasında bir numara girin." -ForegroundColor Red
+        Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-2 arasında bir numara girin." -ForegroundColor Red
         Start-Sleep -Seconds 1
         PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"
     }

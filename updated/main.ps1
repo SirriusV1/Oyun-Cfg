@@ -128,7 +128,7 @@ Write-Host "1. Cs        " -NoNewline
 Write-Host "1.0.4 [09.01.2024] " -ForegroundColor DarkRed
 Write-Host "2. Rust      " -NoNewline
 Write-Host "1.0.8 [13.08.2024]" -ForegroundColor DarkRed
-Write-Host "3. Minecraft 2 " -NoNewline
+Write-Host "3. Minecraft " -NoNewline
 Write-Host "1.21.11 " -ForegroundColor Green
 Write-Host "4. Pubg "
 Write-Host "5. Pc Ayar "

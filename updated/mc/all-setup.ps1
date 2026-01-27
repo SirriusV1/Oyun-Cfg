@@ -36,11 +36,16 @@ try {
 }
 
 Write-Host ""
-Write-Host "Adım 4/5: Minecraft ayarları uygulanıyor..." -ForegroundColor Cyan
+Write-Host "Adım 4/6: Minecraft ayarları uygulanıyor..." -ForegroundColor Cyan
 Write-Host "================================================" -ForegroundColor Cyan
 
-# Adım 4: Config klasörünü silme veya ayarları sıfırlama işlemleri (gerekli ise)
-Write-Host "Minecraft hazırlanıyor..." -ForegroundColor Gray
+# Adım 4: options.ps1 çalıştır
+try {
+    PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/mc/options.ps1' | Invoke-Expression }"
+} catch {
+    Write-Error "options.ps1 çalıştırılırken hata oluştu: $_"
+    Start-Sleep -Seconds 3
+}
 
 Write-Host ""
 Write-Host "================================================" -ForegroundColor Green
@@ -49,7 +54,7 @@ Write-Host "================================================" -ForegroundColor G
 Start-Sleep -Seconds 2
 
 # TLauncher'ı aç
-Write-Host "Adım 5/5: TLauncher açılıyor..." -ForegroundColor Cyan
+Write-Host "Adım 5/6: TLauncher açılıyor..." -ForegroundColor Cyan
 Start-Sleep -Seconds 1
 
 $tlaucherPath = "$env:APPDATA\.minecraft\TLauncher.exe"
@@ -61,5 +66,5 @@ if (Test-Path $tlaucherPath) {
 }
 
 # Minecraft menüsünü aç
-Write-Host "Minecraft menüsü açılıyor..." -ForegroundColor Cyan
+Write-Host "Adım 6/6: Minecraft menüsü açılıyor..." -ForegroundColor Cyan
 PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/minecraft.ps1' | Invoke-Expression }"

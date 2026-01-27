@@ -4,7 +4,7 @@ $sevenZipPath = "C:\Program Files\7-Zip\7z.exe"
 # Google Drive Config URL'sini belirleyin
 $zipUrl = "https://drive.usercontent.google.com/u/0/uc?id=1WTb7qytxLTNrs_5qJfPAKosQ-FgpUrqE&export=download"
 $zipFilePath = "$env:APPDATA\.minecraft\versions\ATA\config.zip"
-$extractPath = "$env:APPDATA\.minecraft\versions\ATA"
+$extractPath = "$env:APPDATA\.minecraft\versions\ATA\config"
 $configFolder = "$env:APPDATA\.minecraft\versions\ATA\config"
 
 # PowerShell 7 ve üstü sürümler için

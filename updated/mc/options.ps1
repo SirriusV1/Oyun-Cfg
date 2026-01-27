@@ -6,7 +6,7 @@ Stop-Process -Name "javaw" -Force -ErrorAction SilentlyContinue
 Start-Sleep -Seconds 1
 
 # options.txt dosya yolu
-$optionsFilePath = "$env:APPDATA\.minecraft\options.txt"
+$optionsFilePath = "$env:APPDATA\.minecraft\versions\ATA\options.txt"
 
 # Güncellenecek anahtar kelimeler ve yeni tuş değerleri
 $keysToModify = @{

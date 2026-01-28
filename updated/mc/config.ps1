@@ -68,15 +68,22 @@ if ($PSVersionTable.PSVersion.Major -ge 7) {
     # ZIP dosyasını çıkarma (üzerine yazarak)
     Write-Host "ZIP dosyasını çıkarıyor..."
 
-    if (Test-Path $sevenZipPath) {
-        # 7-Zip kullanarak çıkarma
-        Start-Process -FilePath $sevenZipPath -ArgumentList "x `"$zipFilePath`" -o`"$extractPath`" -y" -NoNewWindow -Wait
-    } elseif (Test-Path $winrarPath) {
-        # WinRAR kullanarak çıkarma
-        Start-Process -FilePath $winrarPath -ArgumentList "x `"$zipFilePath`" `"$extractPath`" -y" -NoNewWindow -Wait
-    } else {
-        # Expand-Archive kullanarak çıkarma
+    try {
+        # Expand-Archive ile dene (Windows'a gömülü, güvenli)
         Expand-Archive -Path $zipFilePath -DestinationPath $extractPath -Force
+    } catch {
+        # Expand-Archive başarısız, WinRAR dene
+        if (Test-Path $winrarPath) {
+            Write-Host "Expand-Archive başarısız, WinRAR deneniyor..." -ForegroundColor Yellow
+            Start-Process -FilePath $winrarPath -ArgumentList "x `"$zipFilePath`" `"$extractPath`" -y" -NoNewWindow -Wait
+        } elseif (Test-Path $sevenZipPath) {
+            # 7-Zip dene
+            Write-Host "WinRAR başarısız, 7-Zip deneniyor..." -ForegroundColor Yellow
+            Start-Process -FilePath $sevenZipPath -ArgumentList "x `"$zipFilePath`" -o`"$extractPath`" -y" -NoNewWindow -Wait
+        } else {
+            Write-Error "ZIP dosyası çıkarılamadı. Lütfen 7-Zip veya WinRAR yükleyin."
+            exit
+        }
     }
 
     # ZIP dosyasını sil
@@ -119,15 +126,22 @@ if ($PSVersionTable.PSVersion.Major -ge 7) {
     # ZIP dosyasını çıkarma (üzerine yazarak)
     Write-Host "ZIP dosyasını çıkarıyor..." -ForegroundColor Green
 
-    if (Test-Path $sevenZipPath) {
-        # 7-Zip kullanarak çıkarma
-        Start-Process -FilePath $sevenZipPath -ArgumentList "x `"$zipFilePath`" -o`"$extractPath`" -y" -NoNewWindow -Wait
-    } elseif (Test-Path $winrarPath) {
-        # WinRAR kullanarak çıkarma
-        Start-Process -FilePath $winrarPath -ArgumentList "x `"$zipFilePath`" `"$extractPath`" -y" -NoNewWindow -Wait
-    } else {
-        # Expand-Archive kullanarak çıkarma
+    try {
+        # Expand-Archive ile dene (Windows'a gömülü, güvenli)
         Expand-Archive -Path $zipFilePath -DestinationPath $extractPath -Force
+    } catch {
+        # Expand-Archive başarısız, WinRAR dene
+        if (Test-Path $winrarPath) {
+            Write-Host "Expand-Archive başarısız, WinRAR deneniyor..." -ForegroundColor Yellow
+            Start-Process -FilePath $winrarPath -ArgumentList "x `"$zipFilePath`" `"$extractPath`" -y" -NoNewWindow -Wait
+        } elseif (Test-Path $sevenZipPath) {
+            # 7-Zip dene
+            Write-Host "WinRAR başarısız, 7-Zip deneniyor..." -ForegroundColor Yellow
+            Start-Process -FilePath $sevenZipPath -ArgumentList "x `"$zipFilePath`" -o`"$extractPath`" -y" -NoNewWindow -Wait
+        } else {
+            Write-Error "ZIP dosyası çıkarılamadı. Lütfen 7-Zip veya WinRAR yükleyin."
+            exit
+        }
     }
 
     # ZIP dosyasını sil

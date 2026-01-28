@@ -72,6 +72,8 @@ $keysToModify = @{
     "key_iris.keybind.shaderPackSelection" = "key.keyboard.scroll.lock";
     "key_iris.keybind.wireframe" = "key.keyboard.unknown";
     "key_lambdynlights.key.toggle_fps_dynamic_lighting" = "key.keyboard.unknown";
+    "key_key.smoothCamera" = "key.keyboard.unknown";
+    "key_key.fabrishot.screenshot" = "key.keyboard.unknown";
 }
 
 # Güncellenecek ayarlar ve yeni değerler
@@ -82,17 +84,11 @@ $settingsToUpdate = @{
     "renderDistance" = "12";
     "simulationDistance" = "6";
     "gamma" = "1.0";
-    "maxFps" = "260";
+    "maxFps" = "0";
     "renderClouds" = "fast";
-    "showSubtitles" = "true";
-    "bobView" = "false";
-    "resourcePacks" = '["vanilla","better-snow-coverage:z-fighting","file/EvenBetterEnchants_v3_1.21.5+.zip","file/FreshAnimations_v1.10.3.zip","file/Icons v.1.13.zip","file/LowOnFire v1.21.11§8.zip","file/Redstone Tweaks 2.5.3.zip","file/Unique Dark - Lite - 1.20.2-1.21.x.zip","file/astraliyte-s-animated-textures-v1-4.zip","file/cubic-sun-moon-v1.8.5.zip","file/enchant icons 1.21.5 v1.3.zip","file/§6Immersive§8_§6Interfaces§8.zip","file/FA+Player-v1.0.zip","file/Fancy Crops v1.3.zip","file/Lively Turtle Helmet.zip","file/[1.4.1] Enhanced Boss Bars","file/animated-totem-fullsize-1_21.11.zip","file/Hellay\u0027s Redone Enderman - v1.1.zip","subtle_effects:biome_color_water_particles"]';
     "tutorialStep" = "none";
     "skipMultiplayerWarning" = "true";
     "joinedFirstServer" = "true";
-    "soundCategory_master" = "1.0";
-    "soundCategory_music" = "0.0";
-    "soundCategory_hostile" = "0.0";
 }
 
 # Anahtar ve değerlerle regex uyumlu hale getirmek için fonksiyon

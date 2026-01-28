@@ -14,7 +14,7 @@ $keysToModify = @{
     "key_tab.bettertab.keybind.open_config" = "key.keyboard.unknown";
     "key_tab.bettertab.keybind.scroll_right" = "key.keyboard.unknown";
     "key_tab.bettertab.keybind.scroll_left" = "key.keyboard.unknown";
-    "key_key.fabrishot.screenshot" = "key.keyboard.f9";
+    "key_key.fabrishot.screenshot" = "key.keyboard.unknown";
     "key_flashback.keybind.create_marker_1" = "key.keyboard.unknown";
     "key_flashback.keybind.create_marker_2" = "key.keyboard.unknown";
     "key_flashback.keybind.create_marker_3" = "key.keyboard.unknown";
@@ -73,7 +73,6 @@ $keysToModify = @{
     "key_iris.keybind.wireframe" = "key.keyboard.unknown";
     "key_lambdynlights.key.toggle_fps_dynamic_lighting" = "key.keyboard.unknown";
     "key_key.smoothCamera" = "key.keyboard.unknown";
-    "key_key.fabrishot.screenshot" = "key.keyboard.unknown";
 }
 
 # Güncellenecek ayarlar ve yeni değerler

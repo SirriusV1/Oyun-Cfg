@@ -26,6 +26,22 @@ function Main {
 
 Main
 
+function Get-VersionColor {
+    param([string]$dateString)
+    if (-not $dateString) { return "White" }
+    try {
+        $parsedDate = [DateTime]::ParseExact($dateString, "dd.MM.yyyy", $null)
+        $now = Get-Date
+        $diff = $now - $parsedDate
+        $days = $diff.TotalDays
+        if ($days -lt 180) { return "Green" }
+        elseif ($days -lt 365) { return "Yellow" }
+        else { return "darkRed" }
+    } catch {
+        return "White"
+    }
+}
+
 
 
 function Test-PathWithFallback {
@@ -123,11 +139,16 @@ if (Test-Path -Path $oldBatchFilePath) {
 $host.ui.RawUI.WindowTitle = "ATA Script v1.0"
 Clear-Host
 
+$csDate = "09.01.2024"
+$rustDate = "13.08.2024"
+
 Write-Host "Hangi oyunun CFG dosyasını indirmek istiyorsunuz? "
 Write-Host "1. Cs        " -NoNewline
-Write-Host "1.0.4 [09.01.2024] " -ForegroundColor DarkRed
+$csColor = Get-VersionColor $csDate
+Write-Host "1.0.4 [09.01.2024] " -ForegroundColor $csColor
 Write-Host "2. Rust      " -NoNewline
-Write-Host "1.0.8 [13.08.2024]" -ForegroundColor DarkRed
+$rustColor = Get-VersionColor $rustDate
+Write-Host "1.0.8 [13.08.2024]" -ForegroundColor $rustColor
 Write-Host "3. Minecraft " -NoNewline
 Write-Host "1.21.11 " -ForegroundColor Green
 Write-Host "4. Pubg "
@@ -170,11 +191,11 @@ switch ($secim) {
                 3 {
                     Start-Process "https://github.com/SirriusV1/Oyun-Cfg/blob/main/Counter-Strike%20Global%20Offensive%20(CSGO)/README.md"
                 }
-                4 {
+                6 {
                     PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
                 }
                 default {
-                    Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-4 arasında bir numara girin." -ForegroundColor Red
+                    Write-Host "Geçersiz bir seçim yaptınız. Lütfen 1-6 arasında bir numara girin." -ForegroundColor Red
                     Start-Sleep -Seconds 1
                     break
                 }
@@ -284,8 +305,9 @@ switch ($secim) {
             Write-Host " '[1] HWID'yi seçin.'" -ForegroundColor Green
             Write-Host "3. C++ All-in-One + Java 8 "
             Write-Host "4. Nvidia Ayarları "
-            Write-Host "5. Geri Dön" -ForegroundColor Cyan
-            $subSecim = Read-Host "Lütfen bir numara girin (1-5)"
+            Write-Host "5. Discord Cache Temizleme "
+            Write-Host "6. Geri Dön" -ForegroundColor Cyan
+            $subSecim = Read-Host "Lütfen bir numara girin (1-6)"
 
             switch ($subSecim) {
                 1 {
@@ -305,6 +327,41 @@ switch ($secim) {
                     Clear-Host
                 }
                 5 {
+                    Write-Host "Discord kapatılıyor..." -ForegroundColor Yellow
+                    Get-Process -Name "Discord" -ErrorAction SilentlyContinue | Stop-Process -Force
+                    Start-Sleep -Seconds 2
+
+                    $DiscordPath = "$env:APPDATA\discord"
+
+                    # Kritik dosyaları koru (giriş bilgileri için)
+                    $Keep = @("Local State", "Preferences", "settings.json", "quotes.json", "Network", "Local Storage", "Session Storage", "WebStorage", "SharedStorage", "Shared Dictionary", "shared_proto_db")
+
+                    # Tüm alt öğeleri al
+                    $AllItems = Get-ChildItem $DiscordPath -ErrorAction SilentlyContinue
+
+                    # Kritik olmayanları sil
+                    foreach ($item in $AllItems) {
+                        if ($Keep -notcontains $item.Name) {
+                            Write-Host "Siliniyor: $($item.Name)" -ForegroundColor Green
+                            Remove-Item $item.FullName -Recurse -Force -ErrorAction SilentlyContinue
+                        }
+                    }
+
+                    Write-Host "Temizlik tamamlandı! Giriş bilgileri korundu." -ForegroundColor Cyan
+
+                    # Discord'u yeniden aç
+                    Write-Host "Discord açılıyor..." -ForegroundColor Yellow
+                    $DiscordExe = "$env:LOCALAPPDATA\Discord\Update.exe"
+                    if (Test-Path $DiscordExe) {
+                        Start-Process $DiscordExe -ArgumentList "--processStart", "Discord.exe"
+                    } else {
+                        Write-Host "Discord exe bulunamadı. Manuel açın." -ForegroundColor Red
+                    }
+
+                    Write-Host "İşlem tamamlandı." -ForegroundColor Green
+                    break
+                }
+                6 {
                     PowerShell.exe -ExecutionPolicy Bypass -Command "& { Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/SirriusV1/Oyun-Cfg/main/updated/main.ps1' | Invoke-Expression }"
                 }
                 default {

@@ -193,7 +193,7 @@ function Run-LocalAction ($scriptName, $displayName) {
         
         # Temiz bir ekranla başla ve çalıştır
         Clear-Host
-        Write-Host "--- $displayName Çalıştırılıyor ---" -ForegroundColor Purple
+        Write-Host "--- $displayName Çalıştırılıyor ---" -ForegroundColor Magenta
         
         # Mevcut oturumda çalıştır ama hataları izole et
         & $scriptBlock

@@ -6,7 +6,7 @@ chcp 65001 | Out-Null
 
 Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase, System.Windows.Forms
 
-# --- GITHUB AYARLARI (BURAYI KENDİ BİLGİLERİNLE DOLDUR) ---
+# --- GITHUB AYARLARI (Lütfen buraları kendi bilgilerine göre güncelle) ---
 $GitHubUser = "SirriusV1"
 $GitHubRepo = "Oyun-Cfg"
 $BaseUrl = "https://raw.githubusercontent.com/$GitHubUser/$GitHubRepo/refs/heads/main/ATA_Script/functions"
@@ -143,7 +143,7 @@ $csC = Get-DateColor $csDate ; $rustC = Get-DateColor $rustDate
                     <ProgressBar Name="pbStatus" Height="3" IsIndeterminate="False" Background="#111" Foreground="#3C1867" BorderThickness="0" Visibility="Hidden" Margin="0,0,0,5"/>
                     <DockPanel>
                         <TextBlock Name="txtStatus" Text="Sistem Hazır." Foreground="#666" FontSize="11" VerticalAlignment="Center"/>
-                        <TextBlock Text="v1.1.0" Foreground="#3C1867" FontWeight="Bold" DockPanel.Dock="Right" HorizontalAlignment="Right"/>
+                        <TextBlock Text="v1.1.2" Foreground="#3C1867" FontWeight="Bold" DockPanel.Dock="Right" HorizontalAlignment="Right"/>
                     </DockPanel>
                 </StackPanel>
             </Grid>
@@ -179,35 +179,41 @@ function Update-UIStatus ([string]$msg, [bool]$working) {
     [System.Windows.Forms.Application]::DoEvents() 
 }
 
-# --- BULUT ÇALIŞTIRMA MANTIĞI ---
+# --- YENİ NESİL KAPANMAZ ÇALIŞTIRMA MANTIĞI ---
 function Run-LocalAction ($scriptName, $displayName) {
     $fullUrl = "$BaseUrl/$scriptName"
-    Update-UIStatus "$displayName okunuyor..." $true
+    Update-UIStatus "$displayName buluttan okunuyor..." $true
+    
     try { 
-        # Scripti internetten oku
-        $remoteCode = Invoke-RestMethod -Uri $fullUrl -UseBasicParsing
+        # Kodu internetten al
+        $code = Invoke-RestMethod -Uri $fullUrl -UseBasicParsing
         
-        # Bağımsız bir PowerShell süreciyle kodu çalıştır (Kapanmayı önler)
-        $encodedCommand = [Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($remoteCode))
-        Start-Process powershell.exe -ArgumentList "-NoProfile", "-ExecutionPolicy", "Bypass", "-EncodedCommand", $encodedCommand -Wait
+        # 'exit' komutu ana scripti kapatmasın diye ScriptBlock içinde ve & operatörüyle çağırıyoruz
+        $scriptBlock = [ScriptBlock]::Create($code)
+        
+        # Temiz bir ekranla başla ve çalıştır
+        Clear-Host
+        Write-Host "--- $displayName Çalıştırılıyor ---" -ForegroundColor Purple
+        
+        # Mevcut oturumda çalıştır ama hataları izole et
+        & $scriptBlock
         
         Update-UIStatus "Tamamlandı: $displayName" $false 
-    } catch { 
-        Update-UIStatus "Bağlantı Hatası!" $false 
-        [System.Windows.MessageBox]::Show("Hata: Script GitHub'dan çekilemedi. İnterneti ve URL'yi kontrol edin.`n`n$fullUrl")
+    } 
+    catch { 
+        Update-UIStatus "Hata: Script çalıştırılamadı!" $false 
+        Write-Error $_.Exception.Message
     }
 }
 
 function Run-RustCfg ($id, $name) {
     $fullUrl = "$BaseUrl/RustCfg.ps1"
-    Update-UIStatus "$name CFG çekiliyor..." $true
+    Update-UIStatus "$name CFG indiriliyor..." $true
     try {
-        $remoteCode = Invoke-RestMethod -Uri $fullUrl -UseBasicParsing
-        # Parametreleri scriptin başına ekleyip çalıştırıyoruz
-        $header = "`$fileId='$id'; `$playerName='$name';`n"
-        $fullCode = $header + $remoteCode
-        $encodedCommand = [Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($fullCode))
-        Start-Process powershell.exe -ArgumentList "-NoProfile", "-ExecutionPolicy", "Bypass", "-EncodedCommand", $encodedCommand -Wait
+        $code = Invoke-RestMethod -Uri $fullUrl -UseBasicParsing
+        # Parametreleri script bloğuna aktararak çalıştırıyoruz
+        $scriptBlock = [ScriptBlock]::Create($code)
+        & $scriptBlock -fileId $id -playerName $name
         Update-UIStatus "Yüklendi: $name" $false
     } catch { Update-UIStatus "Hata!" $false }
 }
@@ -227,6 +233,7 @@ $Form.FindName("btnPcBack").Add_Click({ Set-Menu $MainMenu })
 $Form.FindName("btnRustCfgNav").Add_Click({ Set-Menu $RustPlayerMenu })
 $Form.FindName("btnRBack").Add_Click({ Set-Menu $RustMenu })
 
+# Aksiyon Atamaları (GitHub'daki Functions klasöründeki isimlerle birebir aynı olmalı)
 $Form.FindName("btnPcTitus").Add_Click({ Run-LocalAction "Titus.ps1" "Titus Tool" })
 $Form.FindName("btnPcActiv").Add_Click({ Run-LocalAction "Activation.ps1" "Activation" })
 $Form.FindName("btnPcDiscord").Add_Click({ Run-LocalAction "DiscordCleanup.ps1" "Discord Cleanup" })

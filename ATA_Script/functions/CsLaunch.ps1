@@ -13,9 +13,9 @@ Write-Host "[!] Steam Kütüphanesi açılıyor..." -ForegroundColor Yellow
 # Steam Kütüphanesini aç (En garanti komut budur)
 Start-Process "steam://open/library"
 
-Write-Host "`n" + ("=" * 50) -ForegroundColor Magenta
-Write-Host " ŞİMDİ NE YAPMALISIN?" -ForegroundColor White -BackgroundColor Magenta
+Write-Host "`n" + ("=" * 50) -ForegroundColor Purple
+Write-Host " ŞİMDİ NE YAPMALISIN?" -ForegroundColor White -BackgroundColor Purple
 Write-Host " 1. Steam kütüphanende CS2'ye SAĞ TIKLA."
 Write-Host " 2. ÖZELLİKLER (Properties) seçeneğine gir."
 Write-Host " 3. BAŞLATMA SEÇENEKLERİ kutusuna CTRL+V yap."
-Write-Host ("=" * 50) -ForegroundColor Magenta
+Write-Host ("=" * 50) -ForegroundColor Purple

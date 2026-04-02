@@ -1,4 +1,4 @@
-﻿Clear-Host
+Clear-Host
 Write-Host "[>] CS2 CFG İndiriliyor..." -ForegroundColor Cyan
 Write-Host "-------------------------------------------" -ForegroundColor Gray
 

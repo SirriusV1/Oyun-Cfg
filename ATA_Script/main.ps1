@@ -25,8 +25,8 @@ function Get-DateColor ([string]$dateStr) {
 $csDate = "09.01.2024" ; $rustDate = "13.08.2024"
 $csC = Get-DateColor $csDate ; $rustC = Get-DateColor $rustDate
 
-# --- XAML ARAYÜZ TASARIMI ---
-[xml]$XAML = @"
+# --- XAML ARAYÜZ TASARIMI (METİN OLARAK TUTUYORUZ) ---
+$XAML_Raw = @"
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ATA Script" Height="600" Width="480" Background="Transparent" 
@@ -64,8 +64,8 @@ $csC = Get-DateColor $csDate ; $rustC = Get-DateColor $rustDate
                                             <Setter TargetName="b" Property="Background" Value="#3C1867"/>
                                         </Trigger>
                                         <Trigger Property="IsEnabled" Value="False">
+                                            <Setter TargetName="b" Property="Background" Value="#050505"/>
                                             <Setter Property="Foreground" Value="#444"/>
-                                            <Setter TargetName="b" Property="Background" Value="#0A0A0A"/>
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -80,7 +80,7 @@ $csC = Get-DateColor $csDate ; $rustC = Get-DateColor $rustDate
                             <TextBlock Text="CS" VerticalAlignment="Center"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                                 <TextBlock Text="v1.0.4" Foreground="#888" Margin="0,0,10,0"/>
-                                <TextBlock Text="$csDate" Foreground="$csC"/>
+                                <TextBlock Text="[$csDate]" Foreground="$csC"/>
                             </StackPanel>
                         </DockPanel>
                     </Button>
@@ -89,7 +89,7 @@ $csC = Get-DateColor $csDate ; $rustC = Get-DateColor $rustDate
                             <TextBlock Text="Rust" VerticalAlignment="Center"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                                 <TextBlock Text="v1.0.8" Foreground="#888" Margin="0,0,10,0"/>
-                                <TextBlock Text="$rustDate" Foreground="$rustC"/>
+                                <TextBlock Text="[$rustDate]" Foreground="$rustC"/>
                             </StackPanel>
                         </DockPanel>
                     </Button>
@@ -156,19 +156,22 @@ $csC = Get-DateColor $csDate ; $rustC = Get-DateColor $rustDate
 </Window>
 "@
 
-# XAML içindeki değişkenleri PowerShell değişkenleriyle eşleştiriyoruz
-$XAML = $XAML.Replace('$csC', $csC).Replace('$rustC', $rustC).Replace('$csDate', $csDate).Replace('$rustDate', $rustDate)
+# --- DEĞİŞKENLERİ XAML İÇİNE GÖMME (HATASIZ YÖNTEM) ---
+$XAML_Processed = $XAML_Raw.Replace('[$csDate]', $csDate).Replace('$csC', $csC).Replace('[$rustDate]', $rustDate).Replace('$rustC', $rustC)
 
-# --- MANTIK VE FONKSİYONLAR ---
-$reader = (New-Object System.Xml.XmlNodeReader ([xml]$XAML))
+# --- XAML YÜKLEME ---
+[xml]$XAML = $XAML_Processed
+$reader = (New-Object System.Xml.XmlNodeReader $XAML)
 $Form = [Windows.Markup.XamlReader]::Load($reader)
 
+# --- ARAYÜZ ELEMANLARINI TANIMLAMA ---
 $txtStatus = $Form.FindName("txtStatus")
 $pbStatus = $Form.FindName("pbStatus")
 $MainMenu = $Form.FindName("MainMenu"); $PcMenu = $Form.FindName("PcMenu")
 $CsMenu = $Form.FindName("CsMenu"); $PubgMenu = $Form.FindName("PubgMenu")
 $RustMenu = $Form.FindName("RustMenu"); $RustPlayerMenu = $Form.FindName("RustPlayerMenu")
 
+# --- FONKSİYONLAR ---
 function Set-Menu ($targetMenu) {
     @($MainMenu, $PcMenu, $CsMenu, $PubgMenu, $RustMenu, $RustPlayerMenu) | ForEach-Object { $_.Visibility = "Collapsed" }
     $targetMenu.Visibility = "Visible"
@@ -191,23 +194,22 @@ function Run-LocalAction ($scriptName, $displayName) {
     Update-UIStatus "$displayName kontrol ediliyor..." $true
     
     try { 
-        # Uzak dosyayı oku
         $code = Invoke-RestMethod -Uri $fullUrl -UseBasicParsing -ErrorAction Stop
-        
         $scriptBlock = [ScriptBlock]::Create($code)
+        
         Clear-Host
         Write-Host "--- $displayName Çalıştırılıyor ---" -ForegroundColor Magenta
         & $scriptBlock
+        
         Update-UIStatus "Tamamlandı: $displayName" $false 
     } 
     catch { 
-        # Hata Yönetimi (Özellikle 404 için)
         if ($_.Exception.Response.StatusCode -eq "NotFound") {
-            Update-UIStatus "Bu özellik henüz aktif değil." $false
-            [System.Windows.MessageBox]::Show("Bu özellik henüz geliştirme aşamasındadır ve yakında aktif edilecektir.", "Bilgi", "OK", "Information")
+            Update-UIStatus "Özellik henüz aktif değil." $false
+            [System.Windows.MessageBox]::Show("Bu özellik henüz geliştirme aşamasındadır.", "ATA Script", "OK", "Information")
         } else {
-            Update-UIStatus "Bağlantı hatası!" $false 
-            [System.Windows.MessageBox]::Show("Script yüklenirken bir hata oluştu: $($_.Exception.Message)", "Hata", "OK", "Error")
+            Update-UIStatus "Hata: Bağlantı sorunu!" $false 
+            Write-Error $_.Exception.Message
         }
     }
 }
@@ -223,10 +225,11 @@ function Run-RustCfg ($id, $name) {
     } catch { Update-UIStatus "Hata!" $false }
 }
 
-# --- EVENT HANDLERS ---
+# --- BUTON OLAYLARI (EVENT HANDLERS) ---
 $Form.FindName("btnClose").Add_Click({ $Form.Close() })
 $Form.Add_MouseLeftButtonDown({ $this.DragMove() })
 
+# Menü Geçişleri
 $Form.FindName("btnCsNav").Add_Click({ Set-Menu $CsMenu })
 $Form.FindName("btnCsBack").Add_Click({ Set-Menu $MainMenu })
 $Form.FindName("btnRustNav").Add_Click({ Set-Menu $RustMenu })
@@ -238,7 +241,7 @@ $Form.FindName("btnPcBack").Add_Click({ Set-Menu $MainMenu })
 $Form.FindName("btnRustCfgNav").Add_Click({ Set-Menu $RustPlayerMenu })
 $Form.FindName("btnRBack").Add_Click({ Set-Menu $RustMenu })
 
-# Aksiyon Atamaları
+# Aksiyonlar
 $Form.FindName("btnPcTitus").Add_Click({ Run-LocalAction "Titus.ps1" "Titus Tool" })
 $Form.FindName("btnPcActiv").Add_Click({ Run-LocalAction "Activation.ps1" "Activation" })
 $Form.FindName("btnPcDiscord").Add_Click({ Run-LocalAction "DiscordCleanup.ps1" "Discord Cleanup" })
@@ -248,6 +251,7 @@ $Form.FindName("btnPubgCfg").Add_Click({ Run-LocalAction "PubgCfg.ps1" "PUBG CFG
 $Form.FindName("btnPubgLaunch").Add_Click({ Run-LocalAction "PubgLaunch.ps1" "PUBG Launch" })
 $Form.FindName("btnRustLaunch").Add_Click({ Run-LocalAction "RustLaunch.ps1" "Rust Launch" })
 
+# Rust Oyuncu CFGleri
 $Form.FindName("btnR1").Add_Click({ Run-RustCfg "1VWUYc-L5yq6T7ipNNieAA0G9kpOf02gE" "Burak" })
 $Form.FindName("btnR2").Add_Click({ Run-RustCfg "1bWyD709q0tb8R2yUm0_b6_sggO8TQftH" "Buğra" })
 $Form.FindName("btnR3").Add_Click({ Run-RustCfg "1LWxIO5JvwRIqt9-ywIS9kGh6UgTimqhZ" "Emir" })

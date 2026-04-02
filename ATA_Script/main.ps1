@@ -9,7 +9,7 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase, Sys
 # --- GITHUB AYARLARI (BURAYI KENDİ BİLGİLERİNLE DOLDUR) ---
 $GitHubUser = "SirriusV1"
 $GitHubRepo = "Oyun-Cfg"
-$BaseUrl = "https://raw.githubusercontent.com/$GitHubUser/$GitHubRepo/main/Functions"
+$BaseUrl = "https://raw.githubusercontent.com/$GitHubUser/$GitHubRepo/refs/heads/main/ATA_Script/functions"
 
 # --- TARİH RENK SİSTEMİ ---
 function Get-DateColor ([string]$dateStr) {

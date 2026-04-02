@@ -6,7 +6,7 @@ chcp 65001 | Out-Null
 
 Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase, System.Windows.Forms
 
-# --- GITHUB AYARLARI (Lütfen buraları kendi bilgilerine göre güncelle) ---
+# --- GITHUB AYARLARI ---
 $GitHubUser = "SirriusV1"
 $GitHubRepo = "Oyun-Cfg"
 $BaseUrl = "https://raw.githubusercontent.com/$GitHubUser/$GitHubRepo/refs/heads/main/ATA_Script/functions"
@@ -63,6 +63,10 @@ $csC = Get-DateColor $csDate ; $rustC = Get-DateColor $rustDate
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter TargetName="b" Property="Background" Value="#3C1867"/>
                                         </Trigger>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Foreground" Value="#444"/>
+                                            <Setter TargetName="b" Property="Background" Value="#0A0A0A"/>
+                                        </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -76,7 +80,7 @@ $csC = Get-DateColor $csDate ; $rustC = Get-DateColor $rustDate
                             <TextBlock Text="CS" VerticalAlignment="Center"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                                 <TextBlock Text="v1.0.4" Foreground="#888" Margin="0,0,10,0"/>
-                                <TextBlock Text="[$csDate]" Foreground="$csC"/>
+                                <TextBlock Text="$csDate" Foreground="$csC"/>
                             </StackPanel>
                         </DockPanel>
                     </Button>
@@ -85,7 +89,7 @@ $csC = Get-DateColor $csDate ; $rustC = Get-DateColor $rustDate
                             <TextBlock Text="Rust" VerticalAlignment="Center"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                                 <TextBlock Text="v1.0.8" Foreground="#888" Margin="0,0,10,0"/>
-                                <TextBlock Text="[$rustDate]" Foreground="$rustC"/>
+                                <TextBlock Text="$rustDate" Foreground="$rustC"/>
                             </StackPanel>
                         </DockPanel>
                     </Button>
@@ -132,7 +136,7 @@ $csC = Get-DateColor $csDate ; $rustC = Get-DateColor $rustDate
                 <StackPanel Name="PcMenu" Visibility="Collapsed" VerticalAlignment="Center">
                     <TextBlock Text="PC SİSTEM AYARLARI" Foreground="#3C1867" FontSize="18" FontWeight="Bold" Margin="0,0,0,15" HorizontalAlignment="Center"/>
                     <Button Name="btnPcTitus" Content="Chris Titus Windows Tool" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Left" Padding="20,0,0,0"/>
-                    <Button Name="btnPcActiv" Content="Windows Etkinleştirme (MAS)" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Left" Padding="20,0,0,0"/>
+                    <Button Name="btnPcActiv" Content="Windows Etkinleştirme (Yakında)" IsEnabled="False" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Left" Padding="20,0,0,0"/>
                     <Button Name="btnPcDiscord" Content="Discord Cache Temizliği" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Left" Padding="20,0,0,0"/>
                     <Button Name="btnPcBack" Content="Geri Dön" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Center" Background="#222"/>
                 </StackPanel>
@@ -152,8 +156,11 @@ $csC = Get-DateColor $csDate ; $rustC = Get-DateColor $rustDate
 </Window>
 "@
 
+# XAML içindeki değişkenleri PowerShell değişkenleriyle eşleştiriyoruz
+$XAML = $XAML.Replace('$csC', $csC).Replace('$rustC', $rustC).Replace('$csDate', $csDate).Replace('$rustDate', $rustDate)
+
 # --- MANTIK VE FONKSİYONLAR ---
-$reader = (New-Object System.Xml.XmlNodeReader $XAML)
+$reader = (New-Object System.Xml.XmlNodeReader ([xml]$XAML))
 $Form = [Windows.Markup.XamlReader]::Load($reader)
 
 $txtStatus = $Form.FindName("txtStatus")
@@ -179,30 +186,29 @@ function Update-UIStatus ([string]$msg, [bool]$working) {
     [System.Windows.Forms.Application]::DoEvents() 
 }
 
-# --- YENİ NESİL KAPANMAZ ÇALIŞTIRMA MANTIĞI ---
 function Run-LocalAction ($scriptName, $displayName) {
     $fullUrl = "$BaseUrl/$scriptName"
-    Update-UIStatus "$displayName buluttan okunuyor..." $true
+    Update-UIStatus "$displayName kontrol ediliyor..." $true
     
     try { 
-        # Kodu internetten al
-        $code = Invoke-RestMethod -Uri $fullUrl -UseBasicParsing
+        # Uzak dosyayı oku
+        $code = Invoke-RestMethod -Uri $fullUrl -UseBasicParsing -ErrorAction Stop
         
-        # 'exit' komutu ana scripti kapatmasın diye ScriptBlock içinde ve & operatörüyle çağırıyoruz
         $scriptBlock = [ScriptBlock]::Create($code)
-        
-        # Temiz bir ekranla başla ve çalıştır
         Clear-Host
         Write-Host "--- $displayName Çalıştırılıyor ---" -ForegroundColor Magenta
-        
-        # Mevcut oturumda çalıştır ama hataları izole et
         & $scriptBlock
-        
         Update-UIStatus "Tamamlandı: $displayName" $false 
     } 
     catch { 
-        Update-UIStatus "Hata: Script çalıştırılamadı!" $false 
-        Write-Error $_.Exception.Message
+        # Hata Yönetimi (Özellikle 404 için)
+        if ($_.Exception.Response.StatusCode -eq "NotFound") {
+            Update-UIStatus "Bu özellik henüz aktif değil." $false
+            [System.Windows.MessageBox]::Show("Bu özellik henüz geliştirme aşamasındadır ve yakında aktif edilecektir.", "Bilgi", "OK", "Information")
+        } else {
+            Update-UIStatus "Bağlantı hatası!" $false 
+            [System.Windows.MessageBox]::Show("Script yüklenirken bir hata oluştu: $($_.Exception.Message)", "Hata", "OK", "Error")
+        }
     }
 }
 
@@ -211,7 +217,6 @@ function Run-RustCfg ($id, $name) {
     Update-UIStatus "$name CFG indiriliyor..." $true
     try {
         $code = Invoke-RestMethod -Uri $fullUrl -UseBasicParsing
-        # Parametreleri script bloğuna aktararak çalıştırıyoruz
         $scriptBlock = [ScriptBlock]::Create($code)
         & $scriptBlock -fileId $id -playerName $name
         Update-UIStatus "Yüklendi: $name" $false
@@ -233,7 +238,7 @@ $Form.FindName("btnPcBack").Add_Click({ Set-Menu $MainMenu })
 $Form.FindName("btnRustCfgNav").Add_Click({ Set-Menu $RustPlayerMenu })
 $Form.FindName("btnRBack").Add_Click({ Set-Menu $RustMenu })
 
-# Aksiyon Atamaları (GitHub'daki Functions klasöründeki isimlerle birebir aynı olmalı)
+# Aksiyon Atamaları
 $Form.FindName("btnPcTitus").Add_Click({ Run-LocalAction "Titus.ps1" "Titus Tool" })
 $Form.FindName("btnPcActiv").Add_Click({ Run-LocalAction "Activation.ps1" "Activation" })
 $Form.FindName("btnPcDiscord").Add_Click({ Run-LocalAction "DiscordCleanup.ps1" "Discord Cleanup" })

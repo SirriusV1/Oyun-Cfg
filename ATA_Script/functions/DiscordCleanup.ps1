@@ -1,4 +1,4 @@
-﻿# Functions/Invoke-DiscordCleanup.ps1
+# Functions/Invoke-DiscordCleanup.ps1
 Clear-Host
 Write-Host "[>] Discord Cache Temizleme Başlatılıyor..." -ForegroundColor Cyan
 Write-Host "-------------------------------------------" -ForegroundColor Gray

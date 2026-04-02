@@ -1,4 +1,4 @@
-﻿Clear-Host
+Clear-Host
 Write-Host "[>] Rust Başlatma Seçenekleri Hazırlanıyor..." -ForegroundColor Cyan
 Write-Host "----------------------------------------------------" -ForegroundColor Gray
 

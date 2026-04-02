@@ -1,4 +1,4 @@
-﻿# Functions/Invoke-PubgCfg.ps1
+# Functions/Invoke-PubgCfg.ps1
 Clear-Host
 Write-Host "[>] PUBG CFG İndiriliyor..." -ForegroundColor Cyan
 Write-Host "-------------------------------------------" -ForegroundColor Gray

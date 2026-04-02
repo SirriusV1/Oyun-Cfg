@@ -1,4 +1,4 @@
-﻿param($fileId, $playerName)
+param($fileId, $playerName)
 
 Clear-Host
 Write-Host "[>] Rust CFG Yükleniyor: $playerName" -ForegroundColor Cyan

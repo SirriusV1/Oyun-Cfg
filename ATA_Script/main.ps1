@@ -25,7 +25,7 @@ function Get-DateColor ([string]$dateStr) {
 $csDate = "09.01.2024" ; $rustDate = "13.08.2024"
 $csC = Get-DateColor $csDate ; $rustC = Get-DateColor $rustDate
 
-# --- XAML ARAYÜZ TASARIMI (METİN OLARAK TUTUYORUZ) ---
+# --- XAML ARAYÜZ TASARIMI  ---
 $XAML_Raw = @"
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -93,7 +93,7 @@ $XAML_Raw = @"
                             </StackPanel>
                         </DockPanel>
                     </Button>
-                    <Button Name="btnMcNav" Content="Minecraft" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Left" Padding="20,0,0,0"/>
+                    <Button Name="btnMcNav" Content="Minecraft (Yakında)" IsEnabled="False" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Left" Padding="20,0,0,0"/>
                     <Button Name="btnPubgNav" Content="PUBG" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Left" Padding="20,0,0,0"/>
                     <Button Name="btnPcNav" Content="PC Ayarları" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Left" Padding="20,0,0,0" Background="#1A1A1A" BorderBrush="#3C1867"/>
                 </StackPanel>
@@ -147,7 +147,7 @@ $XAML_Raw = @"
                     <ProgressBar Name="pbStatus" Height="3" IsIndeterminate="False" Background="#111" Foreground="#3C1867" BorderThickness="0" Visibility="Hidden" Margin="0,0,0,5"/>
                     <DockPanel>
                         <TextBlock Name="txtStatus" Text="Sistem Hazır." Foreground="#666" FontSize="11" VerticalAlignment="Center"/>
-                        <TextBlock Text="v1.1.2" Foreground="#3C1867" FontWeight="Bold" DockPanel.Dock="Right" HorizontalAlignment="Right"/>
+                        <TextBlock Text="v1.0.0" Foreground="#3C1867" FontWeight="Bold" DockPanel.Dock="Right" HorizontalAlignment="Right"/>
                     </DockPanel>
                 </StackPanel>
             </Grid>

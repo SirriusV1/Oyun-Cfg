@@ -28,7 +28,7 @@ if ($foundPath) {
         Invoke-WebRequest -Uri $fileUrl -OutFile (Join-Path $foundPath $fileName) -UserAgent "Mozilla/5.0" -ErrorAction Stop
         Write-Host "[+] $playerName CFG başarıyla indirildi!" -ForegroundColor Green
         Set-Clipboard -Value "exec ata.cfg"
-        Write-Host "[!] 'exec ata.cfg' komutu panoya kopyalandı." -ForegroundColor Yellow
+        Write-Host "[!] Konsola 'exec ata.cfg' yazmayı unutma!" -ForegroundColor Yellow
     } catch {
         Write-Host "[X] İndirme hatası! Linki veya interneti kontrol edin." -ForegroundColor Red
     }

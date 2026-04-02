@@ -20,6 +20,6 @@ if ($foundPath) {
     try {
         Invoke-WebRequest -Uri $fileUrl -OutFile (Join-Path $foundPath $fileName) -UserAgent "Mozilla/5.0" -ErrorAction Stop
         Write-Host "[+] Başarıyla yüklendi: $foundPath" -ForegroundColor Green
-        Write-Host "[!] Konsola 'exec ata' yazmayı unutma!" -ForegroundColor Yellow
+        Write-Host "[!] Konsola 'exec ata.cfg' yazmayı unutma!" -ForegroundColor Yellow
     } catch { Write-Host "[X] İndirme hatası!" -ForegroundColor Red }
 } else { Write-Host "[X] CS2 Klasörü Bulunamadı!" -ForegroundColor Red }

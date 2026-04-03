@@ -136,6 +136,7 @@ $XAML_Raw = @"
                 <StackPanel Name="PcMenu" Visibility="Collapsed" VerticalAlignment="Center">
                     <TextBlock Text="PC SİSTEM AYARLARI" Foreground="#3C1867" FontSize="18" FontWeight="Bold" Margin="0,0,0,15" HorizontalAlignment="Center"/>
                     <Button Name="btnPcTitus" Content="Chris Titus Windows Tool" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Left" Padding="20,0,0,0"/>
+                    <Button Name="btnPcFixOverlay" Content="Fix ms-gamingoverlay Hatası" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Left" Padding="20,0,0,0"/>
                     <Button Name="btnPcActiv" Content="Windows Etkinleştirme (Yakında)" IsEnabled="False" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Left" Padding="20,0,0,0"/>
                     <Button Name="btnPcDiscord" Content="Discord Cache Temizliği" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Left" Padding="20,0,0,0"/>
                     <Button Name="btnPcBack" Content="Geri Dön" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Center" Background="#222"/>
@@ -243,6 +244,7 @@ $Form.FindName("btnRBack").Add_Click({ Set-Menu $RustMenu })
 
 # Aksiyonlar
 $Form.FindName("btnPcTitus").Add_Click({ Run-LocalAction "Titus.ps1" "Titus Tool" })
+$Form.FindName("btnPcFixOverlay").Add_Click({ Run-LocalAction "FixOverlay.ps1" "Fix ms-gamingoverlay Hatası" })
 $Form.FindName("btnPcActiv").Add_Click({ Run-LocalAction "Activation.ps1" "Activation" })
 $Form.FindName("btnPcDiscord").Add_Click({ Run-LocalAction "DiscordCleanup.ps1" "Discord Cleanup" })
 $Form.FindName("btnCsCfg").Add_Click({ Run-LocalAction "CsCfg.ps1" "CS2 CFG" })

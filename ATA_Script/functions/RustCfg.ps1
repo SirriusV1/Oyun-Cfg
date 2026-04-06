@@ -1,4 +1,4 @@
-param($fileId, $playerName)
+﻿param($fileId, $playerName)
 
 # --- 1. VERİ TABANI VE AYARLAR ---
 $PlayerDatabase = @{

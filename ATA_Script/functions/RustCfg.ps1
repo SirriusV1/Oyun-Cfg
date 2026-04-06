@@ -1,10 +1,12 @@
-param($fileId, $playerName)
+param($playerName) # Sadece oyuncu ismini alıyoruz, link içeride sabit.
 
-# --- 1. UTF-8 VE AYARLAR ---
+# --- 1. AYARLAR VE LİNK ---
+$GlobalFileId = "1u1Ol1tm9SFPUzOrNjMK0jnnpykIZhklv" # Senin Global CFG Linkin
+$fileName = "ata.cfg"
 $OutputEncoding = [System.Text.Encoding]::UTF8
 $Utf8NoBom = New-Object System.Text.Encoding.UTF8Encoding $false
 
-# --- 2. VERİ TABANI ---
+# --- 2. OYUNCU VERİ TABANI ---
 $PlayerDatabase = @{
     "MFA"       = @("76561198151275292")
     "Burak"     = @("76561198272139799")
@@ -32,28 +34,21 @@ $KeyMap = @{
 
 # --- 3. YARDIMCI FONKSİYONLAR ---
 function Get-SteamNick {
-    param([string]$targetID)
+    param([string]$id)
     try {
         $wc = New-Object System.Net.WebClient
         $wc.Encoding = [System.Text.Encoding]::UTF8
-        $page = $wc.DownloadString("https://steamcommunity.com/profiles/$targetID")
+        $page = $wc.DownloadString("https://steamcommunity.com/profiles/$id")
         if ($page -like '*actual_persona_name*') {
             return ($page -split '<span class="actual_persona_name">' | Select-Object -Last 1 | ForEach-Object { ($_ -split '</span>')[0] }).Trim()
         }
     } catch {} return $null
 }
 
-# --- 4. RUST KLASÖRÜNÜ BUL ---
-$fileName = "ata.cfg"
+# --- 4. RUST KLASÖRÜ BUL ---
 $foundPath = $null
-$logicalDrives = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Free -gt 0 }
-
-foreach ($drive in $logicalDrives) {
-    $paths = @(
-        "Program Files (x86)\Steam\steamapps\common\Rust\cfg\",
-        "SteamLibrary\steamapps\common\Rust\cfg\",
-        "Steam\steamapps\common\Rust\cfg\"
-    )
+foreach ($drive in (Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Free -gt 0 })) {
+    $paths = @("Program Files (x86)\Steam\steamapps\common\Rust\cfg\", "SteamLibrary\steamapps\common\Rust\cfg\", "Steam\steamapps\common\Rust\cfg\")
     foreach ($p in $paths) {
         $fullDir = Join-Path $drive.Root $p
         if (Test-Path $fullDir) { $foundPath = $fullDir; break }
@@ -65,37 +60,29 @@ foreach ($drive in $logicalDrives) {
 if ($foundPath) {
     try {
         Clear-Host
-        Write-Host "[>] Rust CFG Hazırlanıyor: $playerName" -ForegroundColor Cyan
-        Write-Host "----------------------------------------------------" -ForegroundColor Gray
+        Write-Host "[>] İşlem Başlıyor: $playerName" -ForegroundColor Cyan
+        
+        # Dosyayı indir
+        $url = "https://docs.google.com/uc?export=download&id=$GlobalFileId"
+        $cfgContent = Invoke-RestMethod -Uri $url -UseBasicParsing
 
-        # 1. Base CFG İndir (Google Drive üzerinden)
-        $fileUrl = "https://docs.google.com/uc?export=download&id=$fileId"
-        $cfgContent = Invoke-RestMethod -Uri $fileUrl -UseBasicParsing
-
+        # EĞER GLOBAL DEĞİLSE MODİFİYE ET
         if ($playerName -ne "Global") {
-            Write-Host "[+] Kişisel ayarlar ve bindlar enjekte ediliyor..." -ForegroundColor Magenta
-
-            # Kişisel Ayarlar (Sensitivity vb.)
-            $personalSection = ""
+            Write-Host "[+] Kişisel bindlar ve ayarlar dikiliyor..." -ForegroundColor Magenta
+            
+            # Kişisel Ayar (Hassasiyet vb.)
+            $pSec = ""
             if ($PersonalConfigs.ContainsKey($playerName)) {
-                $personalSection = "`n# --- $playerName OZEL AYARLARI ---`n"
-                $uSet = $PersonalConfigs[$playerName]
-                foreach ($k in $uSet.Keys) { $personalSection += "$k `"$($uSet[$k])`"`n" }
-                $personalSection += "# ---------------------------------`n"
+                $pSec = "`n# --- OZEL AYARLAR ---`n"
+                foreach ($k in $PersonalConfigs[$playerName].Keys) { $pSec += "$k `"$($PersonalConfigs[$playerName][$k])`"`n" }
             }
 
-            # Kullanıcı Gerçek Adı (Steam'den)
-            $uIDs = $PlayerDatabase[$playerName]
-            $uRealName = if ($uIDs) { Get-SteamNick -targetID $uIDs[0] } else { $playerName }
-            if (-not $uRealName) { $uRealName = $playerName }
-
-            # Dinamik Arkadaş Bindları
-            $dynamicBinds = "`n# --- DINAMIK ARKADAS LISTESI ---`n"
+            # Dinamik Bindlar
+            $binds = "`n# --- DINAMIK BINDLAR ---`n"
             foreach ($item in $PlayerDatabase.GetEnumerator() | Sort-Object Name) {
                 if ($item.Key -eq $playerName) { continue }
-                
                 $fNicks = New-Object System.Collections.Generic.List[string]
-                foreach ($id in $item.Value) { $live = Get-SteamNick -targetID $id; if ($live) { $fNicks.Add($live) } }
+                foreach ($id in $item.Value) { $live = Get-SteamNick -id $id; if ($live) { $fNicks.Add($live) } }
                 if ($fNicks.Count -eq 0) { $fNicks.Add($item.Key) }
 
                 $tprC = ""; $trdC = ""; $clnC = ""
@@ -106,42 +93,28 @@ if ($foundPath) {
 
                 $k = $KeyMap[$item.Key]
                 if ($k) {
-                    $dynamicBinds += "`n# --- $($item.Key) ---`n"
-                    $dynamicBinds += "bind [$($k.tpr)] $($tprC)chat.add 0 0 `"Teleport $($item.Key)!`"`n"
-                    $dynamicBinds += "bind [$($k.trade)] $($trdC)chat.add 0 0 `"Trade $($item.Key)!`"`n"
-                    $dynamicBinds += "bind [$($k.clan)] $($clnC)chat.add 0 0 `"Invite $($item.Key)!`"`n"
+                    $binds += "bind [$($k.tpr)] $($tprC)chat.add 0 0 `"Teleport $($item.Key)!`"`n"
+                    $binds += "bind [$($k.trade)] $($trdC)chat.add 0 0 `"Trade $($item.Key)!`"`n"
+                    $binds += "bind [$($k.clan)] $($clnC)chat.add 0 0 `"Invite $($item.Key)!`"`n"
                 }
             }
 
-            # Enjeksiyon (marker: global.writecfg)
+            # Enjeksiyon
             $marker = 'global.writecfg'
-            if ($cfgContent -contains $marker -or $cfgContent.Contains($marker)) {
-                $cfgContent = $cfgContent.Replace($marker, ($personalSection + $dynamicBinds + "`n" + $marker))
-            } else {
-                # Marker bulunamazsa en sona ekle
-                $cfgContent += ($personalSection + $dynamicBinds)
-            }
+            if ($cfgContent.Contains($marker)) {
+                $cfgContent = $cfgContent.Replace($marker, ($pSec + $binds + "`n" + $marker))
+            } else { $cfgContent += ($pSec + $binds) }
 
-            # İmzayı Güncelle
-            $cfgContent = $cfgContent -replace '~ Global ~', "~ $uRealName ~"
+            # İmza Değişimi
+            $cfgContent = $cfgContent -replace '~ Global ~', "~ $playerName ~"
         }
 
-        # --- DOSYAYI KAYDET ---
+        # KAYDET
         $finalPath = Join-Path $foundPath $fileName
-        # UTF-8 No BOM (Rust için en güvenli kayıt yöntemi)
         [System.IO.File]::WriteAllText($finalPath, $cfgContent, $Utf8NoBom)
 
-        Write-Host "[✓] $playerName için CFG başarıyla kuruldu!" -ForegroundColor Green
-        Write-Host "[>] Konum: $finalPath" -ForegroundColor Gray
-        
+        Write-Host "[✓] Başarıyla yüklendi: $finalPath" -ForegroundColor Green
         Set-Clipboard -Value "exec $fileName"
-        Write-Host "----------------------------------------------------" -ForegroundColor Gray
-        Write-Host "[!] Konsola 'exec $fileName' yazmayı unutma!" -ForegroundColor Yellow
-        Write-Host "[*] Komut panoya kopyalandı." -ForegroundColor Cyan
-
-    } catch {
-        Write-Host "[X] Hata oluştu: $($_.Exception.Message)" -ForegroundColor Red
-    }
-} else {
-    Write-Host "[X] Rust CFG klasörü bulunamadı! Lütfen oyunu bir kez çalıştırın." -ForegroundColor Red
-}
+        Write-Host "[!] Konsola 'exec $fileName' yazın." -ForegroundColor Yellow
+    } catch { Write-Host "[X] Hata: $($_.Exception.Message)" -ForegroundColor Red }
+} else { Write-Host "[X] Rust bulunamadı!" -ForegroundColor Red }

@@ -215,14 +215,14 @@ function Run-LocalAction ($scriptName, $displayName) {
     }
 }
 
-function Run-RustCfg ($id, $name) {
+function Run-RustCfg ($name) {
     $fullUrl = "$BaseUrl/RustCfg.ps1"
     Update-UIStatus "$name CFG indiriliyor..." $true
     try {
         $code = Invoke-RestMethod -Uri $fullUrl -UseBasicParsing
         $scriptBlock = [ScriptBlock]::Create($code)
-        & $scriptBlock -fileId $id -playerName $name
-        Update-UIStatus "Yüklendi: $name" $false
+        & $scriptBlock -playerName $name  # Sadece playerName gönderiyor
+        Update-UIStatus "Hazır: $name" $false
     } catch { Update-UIStatus "Hata!" $false }
 }
 
@@ -254,15 +254,12 @@ $Form.FindName("btnPubgLaunch").Add_Click({ Run-LocalAction "PubgLaunch.ps1" "PU
 $Form.FindName("btnRustLaunch").Add_Click({ Run-LocalAction "RustLaunch.ps1" "Rust Launch" })
 
 # Rust Oyuncu CFGleri
-$GlobalID = "1u1Ol1tm9SFPUzOrNjMK0jnnpykIZhklv"
-
-$Form.FindName("btnR1").Add_Click({ Run-RustCfg $GlobalID "Burak" })
-$Form.FindName("btnR2").Add_Click({ Run-RustCfg $GlobalID "Bugra" })
-$Form.FindName("btnR3").Add_Click({ Run-RustCfg $GlobalID "Emir" })
-$Form.FindName("btnR4").Add_Click({ Run-RustCfg $GlobalID "Cagri" })
-$Form.FindName("btnR5").Add_Click({ Run-RustCfg $GlobalID "MFA" })
-$Form.FindName("btnR6").Add_Click({ Run-RustCfg $GlobalID "Sirrius" })
-$Form.FindName("btnR7").Add_Click({ Run-RustCfg $GlobalID "Arda" })
-$Form.FindName("btnR8").Add_Click({ Run-RustCfg $GlobalID "Global" })
+$Form.FindName("btnR1").Add_Click({ Run-RustCfg "Burak" })
+$Form.FindName("btnR2").Add_Click({ Run-RustCfg "Bugra" })
+$Form.FindName("btnR3").Add_Click({ Run-RustCfg "Emir" })
+$Form.FindName("btnR4").Add_Click({ Run-RustCfg "Cagri" })
+$Form.FindName("btnR5").Add_Click({ Run-RustCfg "MFA" })
+$Form.FindName("btnR6").Add_Click({ Run-RustCfg "Sirrius" })
+$Form.FindName("btnR7").Add_Click({ Run-RustCfg "Global" })
 
 $Form.ShowDialog() | Out-Null

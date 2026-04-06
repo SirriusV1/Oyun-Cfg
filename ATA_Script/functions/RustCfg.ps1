@@ -2,28 +2,28 @@ param($fileId, $playerName)
 
 # --- 1. VERİ TABANI VE AYARLAR ---
 $PlayerDatabase = @{
-    "MFA"      = @("76561198151275292")
-    "SmokeAbi" = @("76561198272139799")
-    "Cacoo"    = @("76561199118365761", "76561198828667093")
-    "QQEVLAT"  = @("76561198152140802")
-    "Sirrius"  = @("76561198325167544") 
-    "Emir"     = @("76561198263732430")
-    "toptanci" = @("76561198119628226")
+    "MFA"       = @("76561198151275292")
+    "Burak"     = @("76561198272139799")
+    "Cagri"     = @("76561199118365761", "76561198828667093")
+    "Bugra"     = @("76561198152140802")
+    "Sirrius"   = @("76561198325167544") 
+    "Emir"      = @("76561198263732430")
+    "Arda"      = @("76561198119628226")
 }
 
 $PersonalConfigs = @{
-    "Sirrius"  = @{ "gc.buffer" = "4096"; "input.sensitivity" = "0.5" }
-    "SmokeAbi" = @{ "gc.buffer" = "2048"; "graphics.itemskins" = "false" }
+    "Sirrius"   = @{ "gc.buffer" = "4096"; "input.sensitivity" = "0.5" }
+    "Burak"     = @{ "gc.buffer" = "2048"; "graphics.itemskins" = "false" }
 }
 
 $KeyMap = @{
-    "MFA"      = @{ tpr="leftcontrol+m"; trade="leftalt+m"; clan="rightcontrol+m" }
-    "SmokeAbi" = @{ tpr="leftcontrol+b"; trade="leftalt+b"; clan="rightcontrol+b" }
-    "Cacoo"    = @{ tpr="leftcontrol+c"; trade="leftalt+c"; clan="rightcontrol+c" }
-    "QQEVLAT"  = @{ tpr="leftcontrol+v"; trade="leftalt+v"; clan="rightcontrol+v" }
-    "Sirrius"  = @{ tpr="leftcontrol+x"; trade="leftalt+x"; clan="rightcontrol+x" }
-    "Emir"     = @{ tpr="leftcontrol+y"; trade="leftalt+y"; clan="rightcontrol+y" }
-    "toptanci" = @{ tpr="leftcontrol+q"; trade="leftalt+q"; clan="rightcontrol+q" }
+    "MFA"       = @{ tpr="leftcontrol+m"; trade="leftalt+m"; clan="rightcontrol+m" }
+    "Burak"     = @{ tpr="leftcontrol+b"; trade="leftalt+b"; clan="rightcontrol+b" }
+    "Cagri"     = @{ tpr="leftcontrol+c"; trade="leftalt+c"; clan="rightcontrol+c" }
+    "Bugra"     = @{ tpr="leftcontrol+v"; trade="leftalt+v"; clan="rightcontrol+v" }
+    "Sirrius"   = @{ tpr="leftcontrol+x"; trade="leftalt+x"; clan="rightcontrol+x" }
+    "Emir"      = @{ tpr="leftcontrol+y"; trade="leftalt+y"; clan="rightcontrol+y" }
+    "Arda"      = @{ tpr="leftcontrol+q"; trade="leftalt+q"; clan="rightcontrol+q" }
 }
 
 # --- 2. YARDIMCI FONKSİYONLAR ---

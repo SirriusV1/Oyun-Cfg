@@ -124,7 +124,7 @@ $XAML_Raw = @"
                     <UniformGrid Columns="2">
                         <Button Name="btnR1" Content="Burak" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Center" Margin="4"/>
                         <Button Name="btnR2" Content="Buğra" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Center" Margin="4"/>
-                        <Button Name="btnR3" Content="Emir" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Center" Margin="4"/>
+                        <Button Name="btnR3" Content="Emir" IsEnabled="False" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Center" Margin="4"/>
                         <Button Name="btnR4" Content="Çağrı" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Center" Margin="4"/>
                         <Button Name="btnR5" Content="MFA" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Center" Margin="4"/>
                         <Button Name="btnR6" Content="Sirrius" Style="{StaticResource BaseBtn}" HorizontalContentAlignment="Center" Margin="4"/>

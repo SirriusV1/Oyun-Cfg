@@ -34,13 +34,15 @@ $PlayerDatabase = @{
     "Cagri"     = @("76561199118365761", "76561198828667093")
     "Bugra"     = @("76561198152140802")
     "Sirrius"   = @("76561198325167544") 
-    "Emir"      = @("76561198263732430")
-    "Arda"      = @("76561198119628226")
 }
 
 $PersonalConfigs = @{
-    "Sirrius"   = @{ "gc.buffer" = "4096"; "input.sensitivity" = "0.5" }
+    "MFA"       = @{ "gc.buffer" = "4096"   }
     "Burak"     = @{ "gc.buffer" = "2048"; "graphics.itemskins" = "false" }
+    "Cagri"     = @{ "gc.buffer" = "4096"   }
+    "Bugra"     = @{ "gc.buffer" = "2048"   }
+    "Sirrius"   = @{ "rockskin" = "11025"; "underwearskin" = "1967073602"; "gc.buffer" = "4096"; "input.sensitivity" = "0.5486275" }
+
 }
 
 $KeyMap = @{
@@ -49,8 +51,6 @@ $KeyMap = @{
     "Cagri"     = @{ tpr="leftcontrol+c"; trade="leftalt+c"; clan="rightcontrol+c" }
     "Bugra"     = @{ tpr="leftcontrol+v"; trade="leftalt+v"; clan="rightcontrol+v" }
     "Sirrius"   = @{ tpr="leftcontrol+x"; trade="leftalt+x"; clan="rightcontrol+x" }
-    "Emir"      = @{ tpr="leftcontrol+y"; trade="leftalt+y"; clan="rightcontrol+y" }
-    "Arda"      = @{ tpr="leftcontrol+q"; trade="leftalt+q"; clan="rightcontrol+q" }
 }
 
 # --- 3. STEAM'DEN RUMUZ ÇEKME FONKSİYONU ---

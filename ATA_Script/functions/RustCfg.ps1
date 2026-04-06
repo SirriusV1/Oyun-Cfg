@@ -53,7 +53,7 @@ $KeyMap = @{
     "Arda"      = @{ tpr="leftcontrol+q"; trade="leftalt+q"; clan="rightcontrol+q" }
 }
 
-# --- 3. STEAM'DEN RUMUZ ÇEKME ---
+# --- 3. STEAM'DEN RUMUZ ÇEKME FONKSİYONU ---
 function Get-SteamNick {
     param([string]$targetID)
     if ($targetID.StartsWith("765611980000") -or [string]::IsNullOrWhiteSpace($targetID)) { return $null }
@@ -70,9 +70,13 @@ function Get-SteamNick {
 # --- 4. GLOBAL DOSYAYI İNDİRME VE BİRLEŞTİRME ---
 try {
     Write-Host "[+] Global Base indiriliyor..." -ForegroundColor Cyan
-    # İndirme için doğrudan text'i değişkene alıyoruz
+    
+    # Karakter bozulmasını önlemek için WebClient + UTF8 kullanıyoruz
+    $webClient = New-Object System.Net.WebClient
+    $webClient.Encoding = [System.Text.Encoding]::UTF8
     $globalDriveId = "1u1Ol1tm9SFPUzOrNjMK0jnnpykIZhklv"
-    $cfgContent = Invoke-RestMethod -Uri "https://drive.google.com/uc?export=download&id=$globalDriveId" -UseBasicParsing
+    $globalUrl = "https://drive.google.com/uc?export=download&id=$globalDriveId"
+    $cfgContent = $webClient.DownloadString($globalUrl)
 
     # Eğer seçilen "Global" değilse dinamik kişiselleştirmeleri yap
     if ($playerName -ne "Global") {
@@ -133,9 +137,12 @@ try {
         $cfgContent = $cfgContent -replace '~ Global ~', "~ $userRealName ~"
     }
 
-    # --- 5. KAYDETME İŞLEMİ ---
+    # --- 5. KAYDETME İŞLEMİ (UTF-8 No BOM) ---
     $savePath = Join-Path $foundPath $fileName
-    $cfgContent | Out-File -FilePath $savePath -Encoding utf8 -Force
+    
+    # Rust'ın sevdiği BOM içermeyen saf UTF-8 formatında kaydediyoruz
+    $Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+    [System.IO.File]::WriteAllText($savePath, $cfgContent, $Utf8NoBom)
     
     Write-Host "`n[+] $playerName CFG basariyla olusturuldu ve kaydedildi!" -ForegroundColor Green
     if ($userRealName -and $playerName -ne "Global") { 
@@ -146,6 +153,5 @@ try {
     Write-Host "[!] Konsola 'exec ata.cfg' yazmayi unutma! (Panoya Kopyalandi)" -ForegroundColor Yellow
 
 } catch {
-    Write-Host "[X] İndirme/Düzenleme hatası! İnterneti kontrol edin veya Google API sınırını aşmış olabilirsiniz." -ForegroundColor Red
-    Write-Error $_
+    Write-Host "[X] Hata: $($_.Exception.Message)" -ForegroundColor Red
 }

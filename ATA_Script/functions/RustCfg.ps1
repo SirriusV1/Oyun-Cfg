@@ -37,11 +37,11 @@ $PlayerDatabase = @{
 }
 
 $PersonalConfigs = @{
-    "MFA"       = @{ "gc.buffer" = "4096"   }
-    "Burak"     = @{ "gc.buffer" = "2048"; "graphics.itemskins" = "false" }
-    "Cagri"     = @{ "gc.buffer" = "4096"   }
-    "Bugra"     = @{ "gc.buffer" = "2048"   }
-    "Sirrius"   = @{ "rockskin" = "11025"; "underwearskin" = "1967073602"; "gc.buffer" = "4096"; "input.sensitivity" = "0.5486275" }
+    "MFA"       = @{ "gc.buffer" = "4096"; "global.language" = "en"   }
+    "Burak"     = @{ "gc.buffer" = "2048"; "global.language" = "tr"   }
+    "Cagri"     = @{ "gc.buffer" = "4096"; "global.language" = "tr"   }
+    "Bugra"     = @{ "gc.buffer" = "2048"; "global.language" = "tr"   }
+    "Sirrius"   = @{ "gc.buffer" = "4096"; "input.sensitivity" = "0.5486275"; "global.language" = "tr"; "rockskin" = "11025"; "underwearskin" = "1967073602" }
 
 }
 

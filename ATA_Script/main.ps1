@@ -217,13 +217,22 @@ function Run-LocalAction ($scriptName, $displayName) {
 
 function Run-RustCfg ($name) {
     $fullUrl = "$BaseUrl/RustCfg.ps1"
-    Update-UIStatus "$name CFG indiriliyor..." $true
+    Update-UIStatus "$name CFG indiriliyor ve hazırlanıyor..." $true
     try {
         $code = Invoke-RestMethod -Uri $fullUrl -UseBasicParsing
         $scriptBlock = [ScriptBlock]::Create($code)
-        & $scriptBlock -playerName $name  # Sadece playerName gönderiyor
-        Update-UIStatus "Hazır: $name" $false
-    } catch { Update-UIStatus "Hata!" $false }
+        
+        Clear-Host
+        Write-Host "--- $name CFG Çalıştırılıyor ---" -ForegroundColor Magenta
+        
+        # Artık fileId göndermiyoruz, sadece playerName
+        & $scriptBlock -playerName $name
+        
+        Update-UIStatus "Yüklendi: $name" $false
+    } catch { 
+        Update-UIStatus "Hata: Bağlantı sorunu!" $false 
+        Write-Error $_.Exception.Message
+    }
 }
 
 # --- BUTON OLAYLARI (EVENT HANDLERS) ---

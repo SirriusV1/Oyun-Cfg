@@ -1,6 +1,12 @@
-﻿param($fileId, $playerName)
+param($fileId, $playerName)
 
-# --- 1. VERİ TABANI VE AYARLAR ---
+# --- 1. KARAKTER KODLAMA AYARLARI (Encoding Fix) ---
+$OutputEncoding = [System.Text.Encoding]::UTF8
+$Utf8NoBom = New-Object System.Text.Encoding.UTF8Encoding $false
+$wc = New-Object System.Net.WebClient
+$wc.Encoding = [System.Text.Encoding]::UTF8
+
+# --- 2. VERİ TABANI ---
 $PlayerDatabase = @{
     "MFA"       = @("76561198151275292")
     "Burak"     = @("76561198272139799")
@@ -26,12 +32,11 @@ $KeyMap = @{
     "Arda"      = @{ tpr="leftcontrol+q"; trade="leftalt+q"; clan="rightcontrol+q" }
 }
 
-# --- 2. YARDIMCI FONKSİYONLAR ---
+# --- 3. YARDIMCI FONKSİYONLAR ---
 function Get-SteamNick {
     param([string]$id)
+    if ($id.StartsWith("765611980000") -or [string]::IsNullOrWhiteSpace($id)) { return $null }
     try {
-        $wc = New-Object System.Net.WebClient
-        $wc.Encoding = [System.Text.Encoding]::UTF8
         $page = $wc.DownloadString("https://steamcommunity.com/profiles/$id")
         if ($page -like '*actual_persona_name*') {
             return ($page -split '<span class="actual_persona_name">' | Select-Object -Last 1 | ForEach-Object { ($_ -split '</span>')[0] }).Trim()
@@ -39,22 +44,17 @@ function Get-SteamNick {
     } catch {} return $null
 }
 
-# --- 3. BAŞLANGIÇ BİLGİLENDİRMESİ ---
+# --- 4. BAŞLANGIÇ VE TARAMA ---
 Clear-Host
 Write-Host "[>] Rust CFG Hazırlanıyor: $playerName" -ForegroundColor Cyan
 Write-Host "----------------------------------------------------" -ForegroundColor Gray
 
-# --- 4. RUST KLASÖRÜNÜ TARAMA ---
 $fileName = "ata.cfg"
 $logicalDrives = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Free -gt 0 }
 $foundPath = $null
 
 foreach ($drive in $logicalDrives) {
-    $paths = @(
-        "Program Files (x86)\Steam\steamapps\common\Rust\cfg\",
-        "SteamLibrary\steamapps\common\Rust\cfg\",
-        "Steam\steamapps\common\Rust\cfg\"
-    )
+    $paths = @("Program Files (x86)\Steam\steamapps\common\Rust\cfg\", "SteamLibrary\steamapps\common\Rust\cfg\", "Steam\steamapps\common\Rust\cfg\")
     foreach ($p in $paths) {
         $fullDir = Join-Path $drive.Root $p
         if (Test-Path $fullDir) { $foundPath = $fullDir; break }
@@ -65,15 +65,14 @@ foreach ($drive in $logicalDrives) {
 # --- 5. ANA İŞLEM ---
 if ($foundPath) {
     try {
-        # Global Dosyayı İndir
+        # Global Dosyayı İndir (Encoding korumalı)
         $fileUrl = "https://docs.google.com/uc?export=download&id=$fileId"
-        $cfgContent = Invoke-RestMethod -Uri $fileUrl -UseBasicParsing
+        $cfgContent = $wc.DownloadString($fileUrl)
 
-        # --- MODİFİKASYON MANTIĞI ---
         if ($playerName -ne "Global") {
-            Write-Host "[+] Kişisel ayarlar ve bindlar enjekte ediliyor..." -ForegroundColor Magenta
+            Write-Host "[+] Kişisel ayarlar ve bindlar işleniyor..." -ForegroundColor Magenta
             
-            # Özel Ayarlar (Sensitivity, GC vb.)
+            # Özel Ayarlar
             $personalSection = ""
             if ($PersonalConfigs.ContainsKey($playerName)) {
                 $personalSection = "`n# --- $playerName OZEL AYARLARI ---`n"
@@ -82,11 +81,12 @@ if ($foundPath) {
                 $personalSection += "# ---------------------------------`n"
             }
 
-            # Arkadaş Bindları ve İsim Çekme
+            # Kullanıcı Bilgisi
             $uIDs = $PlayerDatabase[$playerName]
             $uRealName = if ($uIDs) { Get-SteamNick -id $uIDs[0] } else { $playerName }
             if (-not $uRealName) { $uRealName = $playerName }
 
+            # Dinamik Bindlar
             $dynamicBinds = "`n# --- DINAMIK ARKADAS LISTESI ---`n"
             foreach ($item in $PlayerDatabase.GetEnumerator() | Sort-Object Name) {
                 if ($item.Key -eq $playerName) { continue }
@@ -101,35 +101,35 @@ if ($foundPath) {
                     $clnC += "chat.teamsay `"/clan invite $n`";chat.teamsay `"/clan promote $n`";"
                 }
                 $k = $KeyMap[$item.Key]
-                $dynamicBinds += "`n# --- $($item.Key) ---`nbind [$($k.tpr)] $($tprC)chat.add 0 0 `"Teleport $($item.Key)!`"`nbind [$($k.trade)] $($trdC)chat.add 0 0 `"Trade $($item.Key)!`"`nbind [$($k.clan)] $($clnC)chat.add 0 0 `"Invite $($item.Key)!`"`n"
+                if ($k) {
+                    $dynamicBinds += "`n# --- $($item.Key) ---`nbind [$($k.tpr)] $($tprC)chat.add 0 0 `"Teleport $($item.Key)!`"`nbind [$($k.trade)] $($trdC)chat.add 0 0 `"Trade $($item.Key)!`"`nbind [$($k.clan)] $($clnC)chat.add 0 0 `"Invite $($item.Key)!`"`n"
+                }
             }
 
             # Enjeksiyon
             $marker = 'global.writecfg'
-            $regex = New-Object Regex([Regex]::Escape($marker))
-            $cfgContent = $regex.Replace($cfgContent, ($personalSection + $dynamicBinds + "`n" + $marker), 1)
+            if ($cfgContent -match $marker) {
+                $regex = New-Object Regex([Regex]::Escape($marker))
+                $cfgContent = $regex.Replace($cfgContent, ($personalSection + $dynamicBinds + "`n" + $marker), 1)
+            }
             
-            # İmzayı güncelle (Kişinin Steam adını yazar)
+            # İmza Değişimi
             $cfgContent = $cfgContent -replace '~ Global ~', "~ $uRealName ~"
         }
 
-        # --- DOSYAYI KAYDETME ---
+        # --- GÜVENLİ KAYIT (UTF-8 No BOM) ---
         $finalPath = Join-Path $foundPath $fileName
-        $cfgContent | Out-File -FilePath $finalPath -Encoding utf8 -Force
+        [System.IO.File]::WriteAllText($finalPath, $cfgContent, $Utf8NoBom)
 
-        Write-Host "[+] $playerName CFG başarıyla indirildi ve kuruldu!" -ForegroundColor Green
-        Write-Host "[>] Konum: $finalPath" -ForegroundColor Gray
-        
-        # --- PANOYA KOPYALAMA ---
+        Write-Host "[+] $playerName için $fileName başarıyla kuruldu!" -ForegroundColor Green
         Set-Clipboard -Value "exec $fileName"
         Write-Host "----------------------------------------------------" -ForegroundColor Gray
         Write-Host "[!] Konsola 'exec $fileName' yazmayı unutma!" -ForegroundColor Yellow
-        Write-Host "[*] Komut panoya otomatik kopyalandı." -ForegroundColor Cyan
+        Write-Host "[*] Komut panoya kopyalandı." -ForegroundColor Cyan
 
     } catch {
-        Write-Host "[X] İndirme veya Yazma hatası! İnterneti kontrol edin." -ForegroundColor Red
-        Write-Host "[!] Hata Detayı: $($_.Exception.Message)" -ForegroundColor DarkRed
+        Write-Host "[X] Hata: $($_.Exception.Message)" -ForegroundColor Red
     }
 } else {
-    Write-Host "[X] Rust klasörü bulunamadı! Lütfen oyunu bir kez çalıştırın veya doğru yüklendiğinden emin olun." -ForegroundColor Red
+    Write-Host "[X] Rust klasörü bulunamadı!" -ForegroundColor Red
 }

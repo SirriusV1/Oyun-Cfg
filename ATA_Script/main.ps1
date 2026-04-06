@@ -254,15 +254,12 @@ $Form.FindName("btnPubgLaunch").Add_Click({ Run-LocalAction "PubgLaunch.ps1" "PU
 $Form.FindName("btnRustLaunch").Add_Click({ Run-LocalAction "RustLaunch.ps1" "Rust Launch" })
 
 # Rust Oyuncu CFGleri
-# Artık hepsi tek bir Global ID kullanıyor, sadece isim değişiyor.
-$GlobalID = "1u1Ol1tm9SFPUzOrNjMK0jnnpykIZhklv"
-
-$Form.FindName("btnR1").Add_Click({ Run-RustCfg $GlobalID "Burak" })
-$Form.FindName("btnR2").Add_Click({ Run-RustCfg $GlobalID "Bugra" })
-$Form.FindName("btnR3").Add_Click({ Run-RustCfg $GlobalID "Emir" })
-$Form.FindName("btnR4").Add_Click({ Run-RustCfg $GlobalID "Cagri" })
-$Form.FindName("btnR5").Add_Click({ Run-RustCfg $GlobalID "MFA" })
-$Form.FindName("btnR6").Add_Click({ Run-RustCfg $GlobalID "Sirrius" })
-$Form.FindName("btnR7").Add_Click({ Run-RustCfg $GlobalID "Global" })
+$Form.FindName("btnR1").Add_Click({ Run-RustCfg "1VWUYc-L5yq6T7ipNNieAA0G9kpOf02gE" "Burak" })
+$Form.FindName("btnR2").Add_Click({ Run-RustCfg "1bWyD709q0tb8R2yUm0_b6_sggO8TQftH" "Buğra" })
+$Form.FindName("btnR3").Add_Click({ Run-RustCfg "1LWxIO5JvwRIqt9-ywIS9kGh6UgTimqhZ" "Emir" })
+$Form.FindName("btnR4").Add_Click({ Run-RustCfg "1b3rAzOlDQVa8LoIn8Een8-FpcxYQrKLA" "Çağrı" })
+$Form.FindName("btnR5").Add_Click({ Run-RustCfg "1zmcK4soNCz4T2ZEvxXoPESSUN2G0S_xe" "MFA" })
+$Form.FindName("btnR6").Add_Click({ Run-RustCfg "1L3FmXtfaD3OCOF3_4Ra7IdaO8-n_tO_J" "Sirrius" })
+$Form.FindName("btnR7").Add_Click({ Run-RustCfg "1u1Ol1tm9SFPUzOrNjMK0jnnpykIZhklv" "Global" })
 
 $Form.ShowDialog() | Out-Null

@@ -22,7 +22,7 @@ function Get-DateColor ([string]$dateStr) {
         return "#e74c3c"
     } catch { return "#555" }
 }
-$csDate = "09.01.2024" ; $rustDate = "13.08.2024"
+$csDate = "09.01.2024" ; $rustDate = "07.04.2026"
 $csC = Get-DateColor $csDate ; $rustC = Get-DateColor $rustDate
 
 # --- XAML ARAYÜZ TASARIMI  ---

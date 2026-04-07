@@ -88,7 +88,7 @@ $XAML_Raw = @"
                         <DockPanel Width="380">
                             <TextBlock Text="Rust" VerticalAlignment="Center"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                <TextBlock Text="v1.0.8" Foreground="#888" Margin="0,0,10,0"/>
+                                <TextBlock Text="v1.0.9" Foreground="#888" Margin="0,0,10,0"/>
                                 <TextBlock Text="[$rustDate]" Foreground="$rustC"/>
                             </StackPanel>
                         </DockPanel>
